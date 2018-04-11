@@ -1,0 +1,64 @@
+#!/bin/bash
+#
+#  curl commands to reload the data from the previous tutorial
+#
+#
+
+set -e
+
+curl -X POST \
+  'http://localhost:1026/v2/op/update' \
+  -H 'Content-Type: application/json' \
+  -g -d '{
+  "actionType": "APPEND",
+  "entities": [
+    {
+    	"type": "STORE",
+    	"id": "shop1",
+    	"address": {
+        	"type": "PostalAddress",
+        	"value": {
+            	"streetAddress": "Bornholmer Straße 65",
+            	"addressRegion": "Berlin",
+            	"addressLocality": "Prenzlauer Berg",
+            	"postalCode": "10439"
+	        }
+	    },
+	    "location": {
+	        "type": "geo:json",
+	        "value": {
+	           "type": "Point",
+	           "coordinates": [13.3986, 52.5547]
+	        }
+	    },
+    	"name": {
+        	"type": "Text",
+        	"value": "Bose Brucke Einkauf"
+    	}
+    },
+    {
+    	"type": "STORE",
+        "id": "shop2",
+	    "address": {
+	        "type": "PostalAddress",
+	        "value": {
+	            "streetAddress": "Friedrichstraße 44",
+	            "addressRegion": "Berlin",
+	            "addressLocality": "Kreuzberg",
+	            "postalCode": "10969"
+	        }
+	    },
+	    "location": {
+	        "type": "geo:json",
+	        "value": {
+	             "type": "Point",
+	             "coordinates": [13.3903, 52.5075]
+	        }
+	    },
+	    "name": {
+	        "type": "Text",
+	        "value": "Checkpoint Markt"
+	    }
+    }
+  ]
+}'
