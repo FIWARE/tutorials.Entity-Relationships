@@ -106,7 +106,7 @@ services for the application. This means all container sevices can be brought up
 
  **Postman** is a testing framework for REST APIs. The tool can be downloaded from [here](www.getpostman.com). 
  
-The text in this tutorial uses `cUrl` commands to interact with the Orion Context Broker server, however a [Postman collection](https://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/FIWARE%20Getting%20Started.postman_collection.json)  of commands is also available within this GitHub repository. The entire tutorial is also available directly as [Postman documentation](https://documenter.getpostman.com/view/513743/fiware-entity-relationships/RVu8g6is).
+The text in this tutorial uses `cUrl` commands to interact with the Orion Context Broker server, however a [Postman collection](https://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/FIWARE%20Getting%20Started.postman_collection.json)  of commands is also available within this GitHub repository. The entire tutorial is also available directly as [Postman documentation](http://fiware.github.io/tutorials.Entity-Relationships/).
 
 
 
