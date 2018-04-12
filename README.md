@@ -32,20 +32,20 @@ For a simple stock management system, we will only need four types of entity. Th
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/entities.png)
 
-* A **Store** is a real world bricks and mortar building. Stores would have properties such as:
+* A store is a real world bricks and mortar building. **Store** entities would have properties such as:
   + A name of the store e.g. "Checkpoint Markt"
   + An address "Friedrichstraße 44, 10969 Kreuzberg, Berlin"
   + A phyiscal location  e.g. *52.5075 N, 13.3903 E*
-* A **Shelf** is a real world device to hold objects which we wish to sell. Each shelf would have properties such as:
+* A shelf is a real world device to hold objects which we wish to sell. Each **Shelf** entity would have properties such as:
   + A name of the shelf e.g. "Wall Unit"
   + A phyiscal location  e.g. *52.5075 N, 13.3903 E*
   + A maximum capacity
   + An association to the store in which the shelf is present
-* A **Product** is defined as something that we sell - it is conceptural object. Products would have properties such as:
+* A product is defined as something that we sell - it is conceptural object. **Product** entities would have properties such as:
   + A name of the product e.g. "Vodka"
   + A price e.g. 13.99 Euros
   + A size e.g. Small
-* An **Inventory Item** is another conceptural entity, used to assocate products, stores, shelves and physical objects. It would have properties such as:
+* An inventory item is another conceptural entity, used to assocate products, stores, shelves and physical objects. **Inventory Item** entities would have properties such as:
   + An assocation to the product being sold
   + An association to the store in which the product is being sold
   + An association to the shelf where the product is being displayed
@@ -54,6 +54,19 @@ For a simple stock management system, we will only need four types of entity. Th
 
 
 As you can see, each of the entities defined above contain some properties which are liable to change. A product could change its price, stock could be sold and the shelf count of stock could be reduced and so on.
+
+
+> **Note** this tutorial uses the following typographic styling :
+> 
+> * Entity types have been made **bold text** 
+> * Data attributes are written in `monospace text`  
+> * Items in the real world use plain text
+>
+> Therefore a store in the real world  is represented in the context data by a **Store** 
+> entity, and a real world shelf found in a store is represented in the context data by 
+> a **Shelf** entity which has a `store` attribute.
+>
+
 
 
 # Application Overview
@@ -116,12 +129,11 @@ This command will also import seed data from the previous Store Finder tutorial 
 
 ## Creating Several Entities at Once
 
-In the previous tutorial, we created each `STORE` entity individually, 
+In the previous tutorial, we created each **Store** entity individually, 
 
 Lets create five shelf units at the same time. This request uses the convenience batch processing endpoint to create five shelf entities. Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.
 
-To differenciate `SHELF` Entities from `STORE` Entities, each shelf has been assigned `type=SHELF`. Note that in this tutorial, the values of each entity type have been capitalized help to distinguish types from other data.
-
+To differenciate **Shelf** Entities from **Store** Entities, each shelf has been assigned `type=Shelf`. 
 Real-world properties such as `name` and `location` have been addded as properties to each shelf.
 
 #### Request:
@@ -137,62 +149,62 @@ curl -X POST \
   "actionType":"APPEND",
   "entities":[
     {
-      "id":"unit001", "type":"SHELF",
+      "id":"unit001", "type":"Shelf",
       "location":{
         "type":"geo:json", "value":{ "type":"Point","coordinates":[13.3986112, 52.554699]}
       },
       "name":{
         "type":"Text", "value":"Corner Unit"
       },
-      "max_capacity":{
+      "maxCapacity":{
         "type":"Integer", "value":50
       }
     },
     {
-      "id":"unit002", "type":"SHELF",
+      "id":"unit002", "type":"Shelf",
       "location":{
         "type":"geo:json","value":{"type":"Point","coordinates":[13.3987221, 52.5546640]}
       },
       "name":{
         "type":"Text", "value":"Wall Unit 1"
       },
-      "max_capacity":{
+      "maxCapacity":{
         "type":"Integer", "value":100
       }
     },
     {
-      "id":"unit003", "type":"SHELF",
+      "id":"unit003", "type":"Shelf",
       "location":{
         "type":"geo:json", "value":{"type":"Point","coordinates":[13.3987221, 52.5546640]}
       },
       "name":{
         "type":"Text", "value":"Wall Unit 2"
       },
-      "max_capacity":{
+      "maxCapacity":{
         "type":"Integer", "value":100
       }
     },
     {
-      "id":"unit004", "type":"SHELF",
+      "id":"unit004", "type":"Shelf",
       "location":{
         "type":"geo:json", "value":{"type":"Point","coordinates":[13.390311, 52.507522]}
       },
       "name":{
         "type":"Text", "value":"Corner Unit"
       },
-      "max_capacity":{
+      "maxCapacity":{
         "type":"Integer", "value":50
       }
     },
     {
-      "id":"unit005", "type":"SHELF",
+      "id":"unit005", "type":"Shelf",
       "location":{
         "type":"geo:json","value":{"type":"Point","coordinates":[13.390309, 52.50751]}
       },
       "name":{
         "type":"Text", "value":"Long Wall Unit"
       },
-      "max_capacity":{
+      "maxCapacity":{
         "type":"Integer", "value":200
       }
     }
@@ -201,7 +213,7 @@ curl -X POST \
 ```
 
 
-Similarly, we can create a series of `PRODUCT` entities by using the `type=PRODUCT`.
+Similarly, we can create a series of **Product** entities by using the `type=Product`.
 
 #### Request:
 
@@ -216,7 +228,7 @@ curl -X POST \
   "actionType":"APPEND",
   "entities":[
     {
-      "id":"prod001", "type":"PRODUCT",
+      "id":"prod001", "type":"Product",
       "name":{
         "type":"Text", "value":"Beer"
       },
@@ -228,7 +240,7 @@ curl -X POST \
       }
     },
     {
-      "id":"prod002", "type":"PRODUCT",
+      "id":"prod002", "type":"Product",
       "name":{
         "type":"Text", "value":"Red Wine"
       },
@@ -240,7 +252,7 @@ curl -X POST \
       }
     },
     {
-      "id":"prod003", "type":"PRODUCT",
+      "id":"prod003", "type":"Product",
       "name":{
         "type":"Text", "value":"White Wine"
       },
@@ -252,7 +264,7 @@ curl -X POST \
       }
     },
     {
-      "id":"prod004", "type":"PRODUCT",
+      "id":"prod004", "type":"Product",
       "name":{
         "type":"Text", "value":"Vodka"
       },
@@ -267,13 +279,13 @@ curl -X POST \
 }'
 ```
 
-Shelf information can be requested by making a GET request on the `entities` endpoint. For example to return the context data of the `SHELF` entity with the `id=unit001`.
+Shelf information can be requested by making a GET request on the `/v2/entities` endpoint. For example to return the context data of the **Shelf** entity with the `id=unit001`.
 
 #### Request:
 
 ```bash
 curl -X GET \
-  'http://localhost:1026/v2/entities/unit001/?type=SHELF&options=keyValues'
+  'http://localhost:1026/v2/entities/unit001/?type=Shelf&options=keyValues'
 ```
 
 #### Response:
@@ -281,7 +293,7 @@ curl -X GET \
 ```json
 {
     "id": "unit001",
-    "type": "SHELF",
+    "type": "Shelf",
     "location": {
         "type": "Point",
         "coordinates": [
@@ -289,18 +301,18 @@ curl -X GET \
             52.554699
         ]
     },
-    "max_capacity": 50,
+    "maxCapacity": 50,
     "name": "Corner Unit"
 }
 ```
 
-As you can see there are currently three additional property attributes present `location`, `max_capacity` and `name`
+As you can see there are currently three additional property attributes present `location`, `maxCapacity` and `name`
 
 ## Creating a one-to-many Relationship
 
-In databases, foreign keys are often used to designate a one-to-many relationship - for example every shelf is found in a single store and a single store can hold many shelving units. In order to remember this information we need to add an association relationship similar to a foreign key. Batch processing can again be used to amend the existing the `SHELF` entities to add a `store` attribute holding the relationship to each shelf.
+In databases, foreign keys are often used to designate a one-to-many relationship - for example every shelf is found in a single store and a single store can hold many shelving units. In order to remember this information we need to add an association relationship similar to a foreign key. Batch processing can again be used to amend the existing the **Shelf** entities to add a `store` attribute holding the relationship to each shelf.
 
-The value of the `store` attribute corresponds to a URN associated to a `STORE` entity itself. 
+The value of the `store` attribute corresponds to a URN associated to a **Store** entity itself. 
 
 The URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`
 
@@ -316,38 +328,38 @@ curl -X POST \
   "actionType":"APPEND",
   "entities":[
     {
-      "id":"unit001", "type":"SHELF",
+      "id":"unit001", "type":"Shelf",
       "store": { 
         "type": "Relationship",
-        "value": "urn:ngsi-ld:STORE:shop1"
+        "value": "urn:ngsi-ld:Store:shop1"
       }
     },
     {
-      "id":"unit002", "type":"SHELF",
+      "id":"unit002", "type":"Shelf",
       "store": { 
         "type": "Relationship",
-        "value": "urn:ngsi-ld:STORE:shop1"
+        "value": "urn:ngsi-ld:Store:shop1"
       }
     },
     {
-      "id":"unit003", "type":"SHELF",
+      "id":"unit003", "type":"Shelf",
       "store": { 
         "type": "Relationship",
-        "value": "urn:ngsi-ld:STORE:shop1"
+        "value": "urn:ngsi-ld:Store:shop1"
       }
     },
     {
-      "id":"unit004", "type":"SHELF",
+      "id":"unit004", "type":"Shelf",
       "store": { 
         "type": "Relationship",
-        "value": "urn:ngsi-ld:STORE:shop2"
+        "value": "urn:ngsi-ld:Store:shop2"
       }
     },
     {
-      "id":"unit005", "type":"SHELF",
+      "id":"unit005", "type":"Shelf",
       "store": { 
         "type": "Relationship",
-        "value": "urn:ngsi-ld:STORE:shop2"
+        "value": "urn:ngsi-ld:Store:shop2"
       }
     }
   ]
@@ -360,7 +372,7 @@ Now when the shelf information is requested again, the response has changed and 
 
 ```bash
 curl -X GET \
-  'http://localhost:1026/v2/entities/unit001/?type=SHELF&options=keyValues'
+  'http://localhost:1026/v2/entities/unit001/?type=Shelf&options=keyValues'
 ```
 
 #### Response:
@@ -370,7 +382,7 @@ The updated response including the `store` attribute is shown below:
 ```json
 {
     "id": "unit001",
-    "type": "SHELF",
+    "type": "Shelf",
     "location": {
         "type": "Point",
         "coordinates": [
@@ -378,9 +390,9 @@ The updated response including the `store` attribute is shown below:
             52.554699
         ]
     },
-    "max_capacity": 50,
+    "maxCapacity": 50,
     "name": "Corner Unit",
-    "store": "urn:ngsi-ld:STORE:shop1"
+    "store": "urn:ngsi-ld:Store:shop1"
 }
 ```
 
@@ -389,24 +401,24 @@ The updated response including the `store` attribute is shown below:
 
 ### Reading from Child Entity to Parent Entity
 
-We can also make a request to retrieve the `store` attribute relationship information from a known `SHELF` entity by using the `options=values` setting
+We can also make a request to retrieve the `store` attribute relationship information from a known **Shelf** entity by using the `options=values` setting
 
 #### Request:
 
 ```bash
 curl -X GET \
-  'http://localhost:1026/v2/entities/unit001/?type=SHELF&options=values&attrs=store
+  'http://localhost:1026/v2/entities/unit001/?type=Shelf&options=values&attrs=store
 ```
 
 #### Response:
 
 ```json
 [
-    "urn:ngsi-ld:STORE:shop1"
+    "urn:ngsi-ld:Store:shop1"
 ]
 ```
 
-This can be interpreted as "I am related to the `STORE` entity with the `id=shop`"
+This can be interpreted as "I am related to the **Store** entity with the `id=shop`"
 
 ### Reading from Parent Entity to Child Entity
 
@@ -416,10 +428,10 @@ Reading from a parent to a child can be done using the  `options=count` setting
 
 ```bash
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=store==urn:ngsi-ld:STORE:shop1&options=count&attrs=type&type=SHELF' 
+  'http://localhost:1026/v2/entities/?q=store==urn:ngsi-ld:Store:shop1&options=count&attrs=type&type=Shelf' 
 ```
 
-This request is asking for the `id` of all SHELF entities associated to the URN `urn:ngsi-ld:STORE:shop1`, the response is a JSON array as shown.
+This request is asking for the `id` of all **Shelf** entities associated to the URN `urn:ngsi-ld:Store:shop1`, the response is a JSON array as shown.
 
 #### Response:
 
@@ -427,15 +439,15 @@ This request is asking for the `id` of all SHELF entities associated to the URN 
 [
     {
         "id": "unit001",
-        "type": "SHELF"
+        "type": "Shelf"
     },
     {
         "id": "unit002",
-        "type": "SHELF"
+        "type": "Shelf"
     },
     {
         "id": "unit003",
-        "type": "SHELF"
+        "type": "Shelf"
     }
 ]
 ```
@@ -446,7 +458,7 @@ In plain English, this can be interpreted as "There are three shelves in `shop1`
 
 ```bash
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=store==urn:ngsi-ld:STORE:shop1&type=SHELF&options=values&attrs=name'
+  'http://localhost:1026/v2/entities/?q=store==urn:ngsi-ld:Store:shop1&type=Shelf&options=values&attrs=name'
 ```
 
 Can be interpreted as request for *Give me the names of all shelves in `shop1`*.
@@ -472,10 +484,10 @@ Can be interpreted as request for *Give me the names of all shelves in `shop1`*.
 
 Bridge Tables are often used to relate many-to-many relationships. For example, every store will sell a different range of products, and each product is sold in many different stores. 
 
-In order to hold the context information to "place a product onto a shelf in a given store" we will need to create a new data entity `INVENTORY_ITEM` which exists to associate data from other entities. It has a foreign key relationship to 
-the STORE, SHELF and PRODUCT entities and therefore requires relationship attributes called `store`, `shelf` and `product`.
+In order to hold the context information to "place a product onto a shelf in a given store" we will need to create a new data entity **InventoryItem** which exists to associate data from other entities. It has a foreign key relationship to 
+the **Store**, **Shelf** and **Product** entities and therefore requires relationship attributes called `store`, `shelf` and `product`.
 
-Assigning a product to a shelf is simply done by creating an entity holding the relationship information and any other additional properties (such as `stock_count` and `shelf_count`)
+Assigning a product to a shelf is simply done by creating an entity holding the relationship information and any other additional properties (such as `stockCount` and `shelfCount`)
 
 #### Request:
 
@@ -486,23 +498,23 @@ curl -X POST \
   -H 'Content-Type: application/json' \
   -H 'Postman-Token: 0588ef62-6b5c-4d1b-8066-172d63b516fd' \
   -d '{
-    "id": "0000001", "type": "INVENTORY_ITEM",
+    "id": "0000001", "type": "InventoryItem",
     "store": { 
         "type": "Relationship",
-        "value": "urn:ngsi-ld:STORE:shop1"
+        "value": "urn:ngsi-ld:Store:shop1"
     },
     "shelf": { 
         "type": "Relationship",
-        "value": "urn:ngsi-ld:SHELF:unit001"
+        "value": "urn:ngsi-ld:Shelf:unit001"
     },
     "product": { 
         "type": "Relationship",
-        "value": "urn:ngsi-ld:PRODUCT:prod001"
+        "value": "urn:ngsi-ld:Product:prod001"
     },
-    "stock_count":{
+    "stockCount":{
         "type":"Integer", "value": 10000
     },
-    "shelf_count":{
+    "shelfCount":{
         "type":"Float", "value": 50
     }
 }'
@@ -514,13 +526,13 @@ curl -X POST \
 
 When reading from a bridge table entity, the `type` of the entity must be known.
 
-After creating at least one `INVENTORY_ITEM` we can query *Which products are sold in `shop1`?* by making the following request
+After creating at least one **InventoryItem** entity we can query *Which products are sold in `shop1`?* by making the following request
 
 #### Request:
 
 ```bash
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=product==urn:ngsi-ld:PRODUCT:prod001&options=values&attrs=store&type=INVENTORY_ITEM' 
+  'http://localhost:1026/v2/entities/?q=product==urn:ngsi-ld:Product:prod001&options=values&attrs=store&type=InventoryItem' 
 ```
 
 #### Response:
@@ -528,7 +540,7 @@ curl -X GET \
 ```json
 [
     [
-        "urn:ngsi-ld:STORE:shop1"
+        "urn:ngsi-ld:Store:shop1"
     ]
 ]
 ```
@@ -540,7 +552,7 @@ Similarly we can request *Which stores are selling `prod001`?* by altering the r
 
 ```bash
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=product==urn:ngsi-ld:PRODUCT:prod001&options=values&attrs=store&type=INVENTORY_ITEM' 
+  'http://localhost:1026/v2/entities/?q=product==urn:ngsi-ld:Product:prod001&options=values&attrs=store&type=InventoryItem' 
 ```
 
 #### Response:
@@ -548,7 +560,7 @@ curl -X GET \
 ```json
 [
     [
-        "urn:ngsi-ld:PRODUCT:prod001"
+        "urn:ngsi-ld:Product:prod001"
     ]
 ]
 ```
@@ -557,7 +569,7 @@ curl -X GET \
 
 ## Data Integrity
 
-Context data relationships should only be set up and maintained between entities that exist - in other words the URN `urn:ngsi-ld:<entity-type>:<entity-id>` should link to another existing entity within the context. Therefore we must take care when deleting an entity that no dangling references remain. Imagine `shop1` is deleted - what should happen to the associated the `SHELF` entities?
+Context data relationships should only be set up and maintained between entities that exist - in other words the URN `urn:ngsi-ld:<entity-type>:<entity-id>` should link to another existing entity within the context. Therefore we must take care when deleting an entity that no dangling references remain. Imagine `shop1` is deleted - what should happen to the associated the **Shelf** entities?
 
 It is possible to make a request to see if any remaining entity relationship exists prior to deletion by making a request as follows
 
@@ -565,31 +577,31 @@ It is possible to make a request to see if any remaining entity relationship exi
 
 ```bash
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=store==urn:ngsi-ld:STORE:shop1&options=count&attrs=type'
+  'http://localhost:1026/v2/entities/?q=store==urn:ngsi-ld:Store:shop1&options=count&attrs=type'
 ```
 
 
 #### Request:
 
-The response lists a series of `SHELF` and `INVENTORY_ITEM` entities - there are no `PRODUCT` entities since there is no direct relationship between product and store.
+The response lists a series of **Shelf** and **InventoryItem** entities - there are no **Product** entities since there is no direct relationship between product and store.
 
 ```json
 [
     {
         "id": "unit001",
-        "type": "SHELF"
+        "type": "Shelf"
     },
     {
         "id": "unit002",
-        "type": "SHELF"
+        "type": "Shelf"
     },
     {
         "id": "unit003",
-        "type": "SHELF"
+        "type": "Shelf"
     },
     {
         "id": "0000001",
-        "type": "INVENTORY_ITEM"
+        "type": "InventoryItem"
     }
 ]
 ```

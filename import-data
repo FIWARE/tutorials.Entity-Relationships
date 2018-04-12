@@ -13,7 +13,7 @@ curl -X POST \
   "actionType": "APPEND",
   "entities": [
     {
-    	"type": "STORE",
+    	"type": "Store",
     	"id": "shop1",
     	"address": {
         	"type": "PostalAddress",
@@ -37,7 +37,7 @@ curl -X POST \
     	}
     },
     {
-    	"type": "STORE",
+    	"type": "Store",
         "id": "shop2",
 	    "address": {
 	        "type": "PostalAddress",

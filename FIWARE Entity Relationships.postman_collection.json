@@ -18,7 +18,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"actionType\": \"APPEND\",\n  \"entities\": [\n    {\n    \t\"type\": \"STORE\",\n    \t\"id\": \"shop1\",\n    \t\"address\": {\n        \"type\": \"PostalAddress\",\n        \"value\": {\n            \"streetAddress\": \"Bornholmer Straße 65\",\n            \"addressRegion\": \"Berlin\",\n            \"addressLocality\": \"Prenzlauer Berg\",\n            \"postalCode\": \"10439\"\n\t        }\n\t    },\n\t    \"location\": {\n\t        \"type\": \"geo:json\",\n\t        \"value\": {\n\t           \"type\": \"Point\",\n\t           \"coordinates\": [13.3986, 52.5547]\n\t        }\n\t    },\n    \t\"name\": {\n        \t\"type\": \"Text\",\n        \t\"value\": \"Bose Brucke Einkauf\"\n    \t}\n    },\n    {\n    \t\"type\": \"STORE\",\n        \"id\": \"shop2\",\n\t    \"address\": {\n\t        \"type\": \"PostalAddress\",\n\t        \"value\": {\n\t            \"streetAddress\": \"Friedrichstraße 44\",\n\t            \"addressRegion\": \"Berlin\",\n\t            \"addressLocality\": \"Kreuzberg\",\n\t            \"postalCode\": \"10969\"\n\t        }\n\t    },\n\t    \"location\": {\n\t        \"type\": \"geo:json\",\n\t        \"value\": {\n\t             \"type\": \"Point\",\n\t             \"coordinates\": [13.3903, 52.5075]\n\t        }\n\t    },\n\t    \"name\": {\n\t        \"type\": \"Text\",\n\t        \"value\": \"Checkpoint Markt\"\n\t    }\n    }\n  ]\n}"
+					"raw": "{\n  \"actionType\": \"APPEND\",\n  \"entities\": [\n    {\n    \t\"type\": \"Store\",\n    \t\"id\": \"shop1\",\n    \t\"address\": {\n        \"type\": \"PostalAddress\",\n        \"value\": {\n            \"streetAddress\": \"Bornholmer Straße 65\",\n            \"addressRegion\": \"Berlin\",\n            \"addressLocality\": \"Prenzlauer Berg\",\n            \"postalCode\": \"10439\"\n\t        }\n\t    },\n\t    \"location\": {\n\t        \"type\": \"geo:json\",\n\t        \"value\": {\n\t           \"type\": \"Point\",\n\t           \"coordinates\": [13.3986, 52.5547]\n\t        }\n\t    },\n    \t\"name\": {\n        \t\"type\": \"Text\",\n        \t\"value\": \"Bose Brucke Einkauf\"\n    \t}\n    },\n    {\n    \t\"type\": \"Store\",\n        \"id\": \"shop2\",\n\t    \"address\": {\n\t        \"type\": \"PostalAddress\",\n\t        \"value\": {\n\t            \"streetAddress\": \"Friedrichstraße 44\",\n\t            \"addressRegion\": \"Berlin\",\n\t            \"addressLocality\": \"Kreuzberg\",\n\t            \"postalCode\": \"10969\"\n\t        }\n\t    },\n\t    \"location\": {\n\t        \"type\": \"geo:json\",\n\t        \"value\": {\n\t             \"type\": \"Point\",\n\t             \"coordinates\": [13.3903, 52.5075]\n\t        }\n\t    },\n\t    \"name\": {\n\t        \"type\": \"Text\",\n\t        \"value\": \"Checkpoint Markt\"\n\t    }\n    }\n  ]\n}"
 				},
 				"url": {
 					"raw": "http://{{orion}}/v2/op/update",
@@ -32,7 +32,7 @@
 						"update"
 					]
 				},
-				"description": "This example uses the convenience batch processing endpoint to re-create the two stores from the previous tutorial.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nAs you can see each store in the payload has been given a unique `id` and assigned `type=STORE`. \n\n(**Note** the values of each entity `type` has been capitalized help to distinguish them from other data.)"
+				"description": "This example uses the convenience batch processing endpoint to re-create the two stores from the previous tutorial.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nAs you can see each store in the payload has been given a unique `id` and assigned `type=Store`. \n\n(**Note** the values of each entity `type` has been capitalized help to distinguish them from other data.)"
 			},
 			"response": []
 		},
@@ -48,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"unit001\", \"type\":\"SHELF\",\n      \"location\":{\n        \"type\":\"geo:json\", \"value\":{ \"type\":\"Point\",\"coordinates\":[13.3986112, 52.554699]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Corner Unit\"\n      },\n      \"max_capacity\":{\n        \"type\":\"Integer\", \"value\":50\n      }\n    },\n    {\n      \"id\":\"unit002\", \"type\":\"SHELF\",\n      \"location\":{\n        \"type\":\"geo:json\",\"value\":{\"type\":\"Point\",\"coordinates\":[13.3987221, 52.5546640]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Wall Unit 1\"\n      },\n      \"max_capacity\":{\n        \"type\":\"Integer\", \"value\":100\n      }\n    },\n    {\n      \"id\":\"unit003\", \"type\":\"SHELF\",\n      \"location\":{\n        \"type\":\"geo:json\", \"value\":{\"type\":\"Point\",\"coordinates\":[13.3987221, 52.5546640]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Wall Unit 2\"\n      },\n      \"max_capacity\":{\n        \"type\":\"Integer\", \"value\":100\n      }\n    },\n    {\n      \"id\":\"unit004\", \"type\":\"SHELF\",\n      \"location\":{\n        \"type\":\"geo:json\", \"value\":{\"type\":\"Point\",\"coordinates\":[13.390311, 52.507522]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Corner Unit\"\n      },\n      \"max_capacity\":{\n        \"type\":\"Integer\", \"value\":50\n      }\n    },\n    {\n      \"id\":\"unit005\", \"type\":\"SHELF\",\n      \"location\":{\n        \"type\":\"geo:json\",\"value\":{\"type\":\"Point\",\"coordinates\":[13.390309, 52.50751]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Long Wall Unit\"\n      },\n      \"max_capacity\":{\n        \"type\":\"Integer\", \"value\":200\n      }\n    }\n  ]\n}"
+					"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"unit001\", \"type\":\"Shelf\",\n      \"location\":{\n        \"type\":\"geo:json\", \"value\":{ \"type\":\"Point\",\"coordinates\":[13.3986112, 52.554699]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Corner Unit\"\n      },\n      \"maxCapacity\":{\n        \"type\":\"Integer\", \"value\":50\n      }\n    },\n    {\n      \"id\":\"unit002\", \"type\":\"Shelf\",\n      \"location\":{\n        \"type\":\"geo:json\",\"value\":{\"type\":\"Point\",\"coordinates\":[13.3987221, 52.5546640]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Wall Unit 1\"\n      },\n      \"maxCapacity\":{\n        \"type\":\"Integer\", \"value\":100\n      }\n    },\n    {\n      \"id\":\"unit003\", \"type\":\"Shelf\",\n      \"location\":{\n        \"type\":\"geo:json\", \"value\":{\"type\":\"Point\",\"coordinates\":[13.3987221, 52.5546640]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Wall Unit 2\"\n      },\n      \"maxCapacity\":{\n        \"type\":\"Integer\", \"value\":100\n      }\n    },\n    {\n      \"id\":\"unit004\", \"type\":\"Shelf\",\n      \"location\":{\n        \"type\":\"geo:json\", \"value\":{\"type\":\"Point\",\"coordinates\":[13.390311, 52.507522]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Corner Unit\"\n      },\n      \"maxCapacity\":{\n        \"type\":\"Integer\", \"value\":50\n      }\n    },\n    {\n      \"id\":\"unit005\", \"type\":\"Shelf\",\n      \"location\":{\n        \"type\":\"geo:json\",\"value\":{\"type\":\"Point\",\"coordinates\":[13.390309, 52.50751]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Long Wall Unit\"\n      },\n      \"maxCapacity\":{\n        \"type\":\"Integer\", \"value\":200\n      }\n    }\n  ]\n}"
 				},
 				"url": {
 					"raw": "http://{{orion}}/v2/op/update",
@@ -62,7 +62,7 @@
 						"update"
 					]
 				},
-				"description": "This example uses the convenience batch processing endpoint to create the five shelf entities.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nTo differenciate Shelf Entities from Store Entities, each shelf has been assigned `type=SHELF`.\n\nReal-world properties such as `name` and `location` have been addded as properties to each shelf."
+				"description": "This example uses the convenience batch processing endpoint to create the five shelf entities.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nTo differenciate Shelf Entities from Store Entities, each shelf has been assigned `type=Shelf`.\n\nReal-world properties such as `name` and `location` have been addded as properties to each shelf."
 			},
 			"response": []
 		},
@@ -78,7 +78,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"prod001\", \"type\":\"PRODUCT\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Beer\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"S\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 99\n      }\n    },\n    {\n      \"id\":\"prod002\", \"type\":\"PRODUCT\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Red Wine\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"M\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 1099\n      }\n    },\n    {\n      \"id\":\"prod003\", \"type\":\"PRODUCT\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"White Wine\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"M\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 1499\n      }\n    },\n    {\n      \"id\":\"prod004\", \"type\":\"PRODUCT\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Vodka\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"XL\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 5000\n      }\n    }\n  ]\n}"
+					"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"prod001\", \"type\":\"Product\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Beer\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"S\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 99\n      }\n    },\n    {\n      \"id\":\"prod002\", \"type\":\"Product\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Red Wine\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"M\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 1099\n      }\n    },\n    {\n      \"id\":\"prod003\", \"type\":\"Product\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"White Wine\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"M\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 1499\n      }\n    },\n    {\n      \"id\":\"prod004\", \"type\":\"Product\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Vodka\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"XL\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 5000\n      }\n    }\n  ]\n}"
 				},
 				"url": {
 					"raw": "http://{{orion}}/v2/op/update",
@@ -92,7 +92,7 @@
 						"update"
 					]
 				},
-				"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` and has been assigned `type=PRODUCT`."
+				"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` and has been assigned `type=Product`."
 			},
 			"response": []
 		},
@@ -106,7 +106,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/unit001/?type=SHELF&options=keyValues",
+					"raw": "http://{{orion}}/v2/entities/unit001/?type=Shelf&options=keyValues",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
@@ -120,7 +120,7 @@
 					"query": [
 						{
 							"key": "type",
-							"value": "SHELF",
+							"value": "Shelf",
 							"description": "Entity type"
 						},
 						{
@@ -130,7 +130,7 @@
 						}
 					]
 				},
-				"description": "This example returns the context data of the `SHELF` entity with the `id=unit001`.\n\nThere are currently three additional property attributes present `location`, `max_capacity` and `name`"
+				"description": "This example returns the context data of the `Shelf` entity with the `id=unit001`.\n\nThere are currently three additional property attributes present `location`, `maxCapacity` and `name`"
 			},
 			"response": [
 				{
@@ -144,7 +144,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://{{orion}}/v2/entities/unit001/?type=SHELF&options=keyValues",
+							"raw": "http://{{orion}}/v2/entities/unit001/?type=Shelf&options=keyValues",
 							"protocol": "http",
 							"host": [
 								"{{orion}}"
@@ -158,7 +158,7 @@
 							"query": [
 								{
 									"key": "type",
-									"value": "SHELF"
+									"value": "Shelf"
 								},
 								{
 									"key": "options",
@@ -203,7 +203,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\"id\":\"unit001\",\"type\":\"SHELF\",\"location\":{\"type\":\"Point\",\"coordinates\":[13.398611200,52.554699]},\"max_capacity\":50,\"name\":\"Corner Unit\"}"
+					"body": "{\"id\":\"unit001\",\"type\":\"Shelf\",\"location\":{\"type\":\"Point\",\"coordinates\":[13.398611200,52.554699]},\"maxCapacity\":50,\"name\":\"Corner Unit\"}"
 				}
 			]
 		},
@@ -219,7 +219,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"unit001\", \"type\":\"SHELF\",\n      \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:STORE:shop1\"\n      }\n    },\n    {\n      \"id\":\"unit002\", \"type\":\"SHELF\",\n      \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:STORE:shop1\"\n      }\n    },\n    {\n      \"id\":\"unit003\", \"type\":\"SHELF\",\n      \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:STORE:shop1\"\n      }\n    },\n    {\n      \"id\":\"unit004\", \"type\":\"SHELF\",\n      \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:STORE:shop2\"\n      }\n    },\n    {\n      \"id\":\"unit005\", \"type\":\"SHELF\",\n      \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:STORE:shop2\"\n      }\n    }\n  ]\n}"
+					"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"unit001\", \"type\":\"Shelf\",\n      \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:shop1\"\n      }\n    },\n    {\n      \"id\":\"unit002\", \"type\":\"Shelf\",\n      \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:shop1\"\n      }\n    },\n    {\n      \"id\":\"unit003\", \"type\":\"Shelf\",\n      \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:shop1\"\n      }\n    },\n    {\n      \"id\":\"unit004\", \"type\":\"Shelf\",\n      \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:shop2\"\n      }\n    },\n    {\n      \"id\":\"unit005\", \"type\":\"Shelf\",\n      \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:shop2\"\n      }\n    }\n  ]\n}"
 				},
 				"url": {
 					"raw": "http://{{orion}}/v2/op/update",
@@ -233,7 +233,7 @@
 						"update"
 					]
 				},
-				"description": "This example uses batch processing to amend the existing the SHELF entities to add a `store` relationship to each Shelf. \n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nThe value corresponds to a URN associated to a STORE entity"
+				"description": "This example uses batch processing to amend the existing the Shelf entities to add a `store` relationship to each Shelf. \n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nThe value corresponds to a URN associated to a Store entity"
 			},
 			"response": []
 		},
@@ -247,7 +247,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/unit001/?type=SHELF&options=keyValues",
+					"raw": "http://{{orion}}/v2/entities/unit001/?type=Shelf&options=keyValues",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
@@ -261,7 +261,7 @@
 					"query": [
 						{
 							"key": "type",
-							"value": "SHELF",
+							"value": "Shelf",
 							"description": "Entity type"
 						},
 						{
@@ -271,7 +271,7 @@
 						}
 					]
 				},
-				"description": "This example returns the context data of the `SHELF` entity with the `id=unit001`.\n\nThe response now includes a new property `store`, which has been added in the previous step."
+				"description": "This example returns the context data of the `Shelf` entity with the `id=unit001`.\n\nThe response now includes a new property `store`, which has been added in the previous step."
 			},
 			"response": [
 				{
@@ -285,7 +285,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://{{orion}}/v2/entities/unit001/?type=SHELF&options=keyValues",
+							"raw": "http://{{orion}}/v2/entities/unit001/?type=Shelf&options=keyValues",
 							"protocol": "http",
 							"host": [
 								"{{orion}}"
@@ -299,7 +299,7 @@
 							"query": [
 								{
 									"key": "type",
-									"value": "SHELF"
+									"value": "Shelf"
 								},
 								{
 									"key": "options",
@@ -344,7 +344,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\"id\":\"unit001\",\"type\":\"SHELF\",\"location\":{\"type\":\"Point\",\"coordinates\":[13.398611200,52.554699]},\"max_capacity\":50,\"name\":\"Corner Unit\",\"store\":\"urn:ngsi-ld:STORE:shop1\"}"
+					"body": "{\"id\":\"unit001\",\"type\":\"Shelf\",\"location\":{\"type\":\"Point\",\"coordinates\":[13.398611200,52.554699]},\"maxCapacity\":50,\"name\":\"Corner Unit\",\"store\":\"urn:ngsi-ld:Store:shop1\"}"
 				}
 			]
 		},
@@ -358,7 +358,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/unit001/?type=SHELF&options=values&attrs=store",
+					"raw": "http://{{orion}}/v2/entities/unit001/?type=Shelf&options=values&attrs=store",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
@@ -372,7 +372,7 @@
 					"query": [
 						{
 							"key": "type",
-							"value": "SHELF",
+							"value": "Shelf",
 							"description": "Entity type"
 						},
 						{
@@ -387,7 +387,7 @@
 						}
 					]
 				},
-				"description": "This example returns the `store` associated with a given `SHELF` unit. \n\nIf the `id` and `type` of a data entity are known, a specific field can be requested by combining the `options=values` parameter and the `attrs` parameter. \n\nThe URN returned has a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`, it  is therefore possible to parse the associated entity `type` and `id`"
+				"description": "This example returns the `store` associated with a given `Shelf` unit. \n\nIf the `id` and `type` of a data entity are known, a specific field can be requested by combining the `options=values` parameter and the `attrs` parameter. \n\nThe URN returned has a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`, it  is therefore possible to parse the associated entity `type` and `id`"
 			},
 			"response": []
 		},
@@ -401,7 +401,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/?q=store==urn:ngsi-ld:STORE:shop1&type=SHELF&options=values&attrs=name",
+					"raw": "http://{{orion}}/v2/entities/?q=store==urn:ngsi-ld:Store:shop1&type=Shelf&options=values&attrs=name",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
@@ -414,11 +414,11 @@
 					"query": [
 						{
 							"key": "q",
-							"value": "store==urn:ngsi-ld:STORE:shop1"
+							"value": "store==urn:ngsi-ld:Store:shop1"
 						},
 						{
 							"key": "type",
-							"value": "SHELF",
+							"value": "Shelf",
 							"description": "Entity type"
 						},
 						{
@@ -433,7 +433,7 @@
 						}
 					]
 				},
-				"description": "This example returns the `name` of all `SHELF` entities associated with the `shop1`.\n\nThe value of the query parameter `q` holds a URN of the form `urn:ngsi-ld:<entity-type>:<entity-id>` which corresponds to the the Relationship URN in order to filter the information returned."
+				"description": "This example returns the `name` of all `Shelf` entities associated with the `shop1`.\n\nThe value of the query parameter `q` holds a URN of the form `urn:ngsi-ld:<entity-type>:<entity-id>` which corresponds to the the Relationship URN in order to filter the information returned."
 			},
 			"response": []
 		},
@@ -449,7 +449,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"0000001\", \"type\": \"INVENTORY_ITEM\",\n    \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:STORE:shop1\"\n    },\n    \"shelf\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:SHELF:unit001\"\n    },\n    \"product\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:PRODUCT:prod001\"\n    },\n    \"stock_count\":{\n        \"type\":\"Integer\", \"value\": 10000\n    },\n    \"shelf_count\":{\n        \"type\":\"Float\", \"value\": 50\n    }\n}"
+					"raw": "{\n    \"id\": \"0000001\", \"type\": \"InventoryItem\",\n    \"store\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:shop1\"\n    },\n    \"shelf\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Shelf:unit001\"\n    },\n    \"product\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Product:prod001\"\n    },\n    \"stock_count\":{\n        \"type\":\"Integer\", \"value\": 10000\n    },\n    \"shelf_count\":{\n        \"type\":\"Float\", \"value\": 50\n    }\n}"
 				},
 				"url": {
 					"raw": "http://{{orion}}/v2/entities/",
@@ -463,7 +463,7 @@
 						""
 					]
 				},
-				"description": "The INVENTORY_ITEM entity exists to associate data from other entities.  It has a foreign key relationship to the STORE, SHELF and PRODUCT entities and therefore requires relationship attributes called `store`, `shelf` and `product`.\n\nAssigning a product to a shelf is simply a  create an entity holding the relationship information and any other additional properties."
+				"description": "The InventoryItem entity exists to associate data from other entities.  It has a foreign key relationship to the Store, Shelf and Product entities and therefore requires relationship attributes called `store`, `shelf` and `product`.\n\nAssigning a product to a shelf is simply a  create an entity holding the relationship information and any other additional properties."
 			},
 			"response": []
 		},
@@ -477,7 +477,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/?q=product==urn:ngsi-ld:PRODUCT:prod001&options=values&attrs=store&type=INVENTORY_ITEM",
+					"raw": "http://{{orion}}/v2/entities/?q=product==urn:ngsi-ld:Product:prod001&options=values&attrs=store&type=InventoryItem",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
@@ -490,7 +490,7 @@
 					"query": [
 						{
 							"key": "q",
-							"value": "product==urn:ngsi-ld:PRODUCT:prod001"
+							"value": "product==urn:ngsi-ld:Product:prod001"
 						},
 						{
 							"key": "options",
@@ -504,7 +504,7 @@
 						},
 						{
 							"key": "type",
-							"value": "INVENTORY_ITEM",
+							"value": "InventoryItem",
 							"description": "Entity type"
 						}
 					]
@@ -520,10 +520,10 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"actionType\": \"APPEND\",\n  \"entities\": [\n    {\n    \"id\": \"7770\",\n    \"type\": \"Shelf\",\n    \"store\": { \n      \"type\": \"Relationship\",\n      \"value\": \"urn:ngsi-ld:Store:store1\"\n    },\n    \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n           \"type\": \"Point\",\n           \"coordinates\": [13.3986112, 52.554699]\n        }\n    },\n    \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Corner Unit\"\n    },\n    \"max_capacity\": {\n        \"type\": \"Integer\",\n        \"value\": 50\n    }\n},\n\n {\n      \"id\": \"7771\",\n      \"type\": \"Shelf\",\n      \"store\": {\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:store1\"\n      },\n      \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n          \"type\": \"Point\",\n          \"coordinates\": [\n            13.3987221,\n            52.5546640\n          ]\n        }\n      },\n      \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Wall Unit 1\"\n      },\n      \"max_capacity\": {\n        \"type\": \"Integer\",\n        \"value\": 100\n      }\n    },\n    \n    {\n      \"id\": \"7772\",\n      \"type\": \"Shelf\",\n      \"store\": {\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:store1\"\n      },\n      \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n          \"type\": \"Point\",\n          \"coordinates\": [\n            13.3987221,\n            52.5546640\n          ]\n        }\n      },\n      \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Wall Unit 2\"\n      },\n      \"max_capacity\": {\n        \"type\": \"Integer\",\n        \"value\": 100\n      }\n    }\n    \n    \n\n\n\n\n  ]\n}"
+					"raw": "{\n  \"actionType\": \"APPEND\",\n  \"entities\": [\n    {\n    \"id\": \"7770\",\n    \"type\": \"Shelf\",\n    \"store\": { \n      \"type\": \"Relationship\",\n      \"value\": \"urn:ngsi-ld:Store:store1\"\n    },\n    \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n           \"type\": \"Point\",\n           \"coordinates\": [13.3986112, 52.554699]\n        }\n    },\n    \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Corner Unit\"\n    },\n    \"maxCapacity\": {\n        \"type\": \"Integer\",\n        \"value\": 50\n    }\n},\n\n {\n      \"id\": \"7771\",\n      \"type\": \"Shelf\",\n      \"store\": {\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:store1\"\n      },\n      \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n          \"type\": \"Point\",\n          \"coordinates\": [\n            13.3987221,\n            52.5546640\n          ]\n        }\n      },\n      \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Wall Unit 1\"\n      },\n      \"maxCapacity\": {\n        \"type\": \"Integer\",\n        \"value\": 100\n      }\n    },\n    \n    {\n      \"id\": \"7772\",\n      \"type\": \"Shelf\",\n      \"store\": {\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:store1\"\n      },\n      \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n          \"type\": \"Point\",\n          \"coordinates\": [\n            13.3987221,\n            52.5546640\n          ]\n        }\n      },\n      \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Wall Unit 2\"\n      },\n      \"maxCapacity\": {\n        \"type\": \"Integer\",\n        \"value\": 100\n      }\n    }\n    \n    \n\n\n\n\n  ]\n}"
 				},
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/?q=store==urn:ngsi-ld:STORE:shop1&options=count&attrs=type",
+					"raw": "http://{{orion}}/v2/entities/?q=store==urn:ngsi-ld:Store:shop1&options=count&attrs=type",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
@@ -536,7 +536,7 @@
 					"query": [
 						{
 							"key": "q",
-							"value": "store==urn:ngsi-ld:STORE:shop1"
+							"value": "store==urn:ngsi-ld:Store:shop1"
 						},
 						{
 							"key": "options",
@@ -550,7 +550,7 @@
 						}
 					]
 				},
-				"description": "This example returns the key of all entities directly associated with the `shop1`.\n\nThe response lists a series of SHELF and INVENTORY_ITEM entities - there are no products since there is no direct relationship between product and store.\n\nIf this request returns an empty array, the entity has no associates."
+				"description": "This example returns the key of all entities directly associated with the `shop1`.\n\nThe response lists a series of Shelf and InventoryItem entities - there are no products since there is no direct relationship between product and store.\n\nIf this request returns an empty array, the entity has no associates."
 			},
 			"response": []
 		}
