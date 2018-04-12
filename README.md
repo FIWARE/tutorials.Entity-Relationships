@@ -1,6 +1,6 @@
 This tutorial teaches FIWARE users about batch commands and entity relationships.
 
-#Contents
+# Contents
 
 - [Understanding Entities and Relationships](#understanding-entities-and-relationships)
   * [Entities within a stock management system](#entities-within-a-stock-management-system)
