@@ -374,7 +374,7 @@ Now when the shelf information is requested again, the response has changed and 
 
 ```bash
 curl -X GET \
-  'http://localhost:1026/v2/entities/unit001/?type=Shelf&options=keyValues'
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=keyValues'
 ```
 
 #### Response:
@@ -383,7 +383,7 @@ The updated response including the `refStore` attribute is shown below:
 
 ```json
 {
-    "id": "unit001",
+    "id": "urn:ngsi-ld:Shelf:unit001",
     "type": "Shelf",
     "location": {
         "type": "Point",
@@ -409,7 +409,7 @@ We can also make a request to retrieve the `refStore` attribute relationship inf
 
 ```bash
 curl -X GET \
-  'http://localhost:1026/v2/entities/unit001/?type=Shelf&options=values&attrs=refStore
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=values&attrs=refStore
 ```
 
 #### Response:
