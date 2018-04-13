@@ -14,7 +14,7 @@ curl -X POST \
   "entities": [
     {
     	"type": "Store",
-    	"id": "shop1",
+    	"id": "urn:ngsi-ld:Store:001",
     	"address": {
         	"type": "PostalAddress",
         	"value": {
@@ -33,12 +33,12 @@ curl -X POST \
 	    },
     	"name": {
         	"type": "Text",
-        	"value": "Bose Brucke Einkauf"
+        	"value": "Bösebrücke Einkauf"
     	}
     },
     {
     	"type": "Store",
-        "id": "shop2",
+        "id": "urn:ngsi-ld:Store:002",
 	    "address": {
 	        "type": "PostalAddress",
 	        "value": {
