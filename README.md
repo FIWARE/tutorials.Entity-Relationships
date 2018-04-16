@@ -1,16 +1,22 @@
 This tutorial teaches FIWARE users about batch commands and entity relationships.
 
+This tutorial builds on the data created in the previous [store finder example](https://github.com/Fiware/tutorials.Getting-Started) and creates and associates a series of related data entities to create a simple stock management system.
+
+The tutorial is also available as [Postman documentation](http://fiware.github.io/tutorials.Entity-Relationships/).
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/0671934f64958d3200b3)
+ 
+
 # Contents
 
 - [Understanding Entities and Relationships](#understanding-entities-and-relationships)
   * [Entities within a stock management system](#entities-within-a-stock-management-system)
-- [Application Overview](#application-overview)
-  * [Architecture](#architecture)
-  * [Prerequisites](#prerequisites)
-    + [Docker and Docker Compose](#docker-and-docker-compose)
-    + [Cygwin for Windows](#cygwin-for-windows)
-    + [Postman (Optional)](#postman-optional)
-  * [Starting the containers](#starting-the-containers)
+- [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
+  * [Docker and Docker Compose](#docker-and-docker-compose)
+  * [Cygwin for Windows](#cygwin-for-windows)
+- [Start Up](#start-up)
+- [Creating and Associating Data Entities](#creating-and-associating-data-entities)
   * [Creating Several Entities at Once](#creating-several-entities-at-once)
   * [Creating a one-to-many Relationship](#creating-a-one-to-many-relationship)
   * [Reading a Foreign Key Relationship](#reading-a-foreign-key-relationship)
@@ -22,11 +28,9 @@ This tutorial teaches FIWARE users about batch commands and entity relationships
 
 # Understanding Entities and Relationships
 
-This tutorial builds on the data created in the previous store finder example and creates and associates a series of related data entities to create a simple stock management system.
+Within the FIWARE platform, an entity represents the state of a physical or conceptural object which exists in the real world.
 
 ## Entities within a stock management system
-
-Within the FIWARE platform, an entity represents the state of a physical or conceptural object which exists in the real world.
 
 For a simple stock management system, we will only need four types of entity. The relationship between our entities is defined as shown:
 
@@ -68,12 +72,9 @@ As you can see, each of the entities defined above contain some properties which
 >
 
 
+# Architecture
 
-# Application Overview
-
-## Architecture
-
-This application will only make use of one FIWARE component - the [Orion Context Broker](https://catalogue.fiware.org/enablers/publishsubscribe-context-broker-orion-context-broker). Usage of the Orion Context Broker is sufficient for an application to qualify as “Powered by FIWARE”.
+This application will only make use of one FIWARE component - the [Orion Context Broker](https://catalogue.fiware.org/enablers/publishsubscribe-context-broker-orion-context-broker). Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.
 
 Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep persistence of the context data it holds. Therefore, the architecture will consist of two elements:
 
@@ -84,9 +85,9 @@ Since all interactions between the two elements are initiated by HTTP requests, 
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/architecture.png)
 
-## Prerequisites
+# Prerequisites
 
-### Docker and Docker Compose 
+## Docker and Docker Compose 
 
 To keep things simple both components will be run using [Docker](https://www.docker.com). **Docker** is a container technology which allows to different components isolated into their respective environments. 
 
@@ -97,35 +98,30 @@ To keep things simple both components will be run using [Docker](https://www.doc
 **Docker Compose** is a tool for defining and running multi-container Docker applications. A [YAML file](https://raw.githubusercontent.com/Fiware/tutorials.Entity-Relationships/master/docker-compose.yml) is used configure the required
 services for the application. This means all container sevices can be brought up in a single commmand. Docker Compose is installed by default as part of Docker for Windows and  Docker for Mac, however Linux users will need to follow the instructions found [here](https://docs.docker.com/compose/install/)
 
-### Cygwin for Windows
+## Cygwin for Windows
 
-**Cygwin** is a collection of GNU and Open Source tools which provide functionality similar to a Linux distribution on Windows. Windows users should download the tool from [here](www.cygwin.com). 
-
-
-### Postman (Optional)
-
- **Postman** is a testing framework for REST APIs. The tool can be downloaded from [here](www.getpostman.com). 
- 
-The text in this tutorial uses `cUrl` commands to interact with the Orion Context Broker server, however a [Postman collection](https://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/FIWARE%20Getting%20Started.postman_collection.json)  of commands is also available within this GitHub repository. The entire tutorial is also available directly as [Postman documentation](http://fiware.github.io/tutorials.Entity-Relationships/).
+We will start up our services using a simple Bash script. Windows users should download [cygwin](www.cygwin.com) to provide a command line functionality similar to a Linux distribution on Windows.
 
 
+# Start Up
 
-## Starting the containers
-
-All services can be initialised from the command line by running the bash script provided within the repository:
+All services can be initialised from the command line by running the [services](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/services) Bash script provided within the repository:
 
 ```bash
 ./services start
 ``` 
 
-This command will also import seed data from the previous Store Finder tutorial on startup.
+This command will also import seed data from the previous [Store Finder tutorial](https://github.com/Fiware/tutorials.Getting-Started) on startup.
 
 >**Note:** If you want to clean up and start over again you can do so with the following command:
 >
 >```bash
->services stop
+>./services stop
 >``` 
 >
+
+
+#  Creating and Associating Data Entities
 
 ## Creating Several Entities at Once
 
