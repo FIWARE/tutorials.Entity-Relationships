@@ -2,7 +2,7 @@ This tutorial teaches FIWARE users about batch commands and entity relationships
 
 This tutorial builds on the data created in the previous [store finder example](https://github.com/Fiware/tutorials.Getting-Started) and creates and associates a series of related data entities to create a simple stock management system.
 
-The tutorial is also available as [Postman documentation](http://fiware.github.io/tutorials.Entity-Relationships/).
+The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as [Postman documentation](http://fiware.github.io/tutorials.Entity-Relationships/).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/0671934f64958d3200b3)
  
@@ -78,7 +78,7 @@ This application will only make use of one FIWARE component - the [Orion Context
 
 Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep persistence of the context data it holds. Therefore, the architecture will consist of two elements:
 
-* The Orion Context Broker server which will receive requests using NGSI
+* The Orion Context Broker server which will receive requests using [NGSI](http://fiware.github.io/specifications/ngsiv2/latest/)
 * The underlying MongoDB database associated to the Orion Context Broker server
 
 Since all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and run from exposed ports. 
