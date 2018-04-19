@@ -107,7 +107,7 @@ We will start up our services using a simple Bash script. Windows users should d
 
 All services can be initialised from the command line by running the [services](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/services) Bash script provided within the repository:
 
-```bash
+```console
 ./services start
 ``` 
 
@@ -115,7 +115,7 @@ This command will also import seed data from the previous [Store Finder tutorial
 
 >**Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
+>```console
 >./services stop
 >``` 
 >
@@ -134,7 +134,7 @@ Real-world properties such as `name` and `location` have been addded as properti
 
 #### Request:
 
-```bash
+```console
 curl -X POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
@@ -213,7 +213,7 @@ Similarly, we can create a series of **Product** entities by using the `type=Pro
 
 #### Request:
 
-```bash
+```console
 curl -X POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
@@ -281,7 +281,7 @@ Shelf information can be requested by making a GET request on the `/v2/entities`
 
 #### Request:
 
-```bash
+```console
 curl -X GET \
   'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=keyValues'
 ```
@@ -318,7 +318,7 @@ The URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`
 
 The following request associates three shelves to `urn:ngsi-ld:Store:001` and two shelves to `urn:ngsi-ld:Store:002`
 
-```bash
+```console
 curl -X POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
@@ -368,7 +368,7 @@ Now when the shelf information is requested again, the response has changed and 
 
 #### Request:
 
-```bash
+```console
 curl -X GET \
   'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=keyValues'
 ```
@@ -403,7 +403,7 @@ We can also make a request to retrieve the `refStore` attribute relationship inf
 
 #### Request:
 
-```bash
+```console
 curl -X GET \
   'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=values&attrs=refStore
 ```
@@ -424,7 +424,7 @@ Reading from a parent to a child can be done using the  `options=count` setting
 
 #### Request:
 
-```bash
+```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type&type=Shelf' 
 ```
@@ -454,7 +454,7 @@ In plain English, this can be interpreted as "There are three shelves in `urn:ng
 
 #### Request:
 
-```bash
+```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&type=Shelf&options=values&attrs=name'
 ```
@@ -489,7 +489,7 @@ Assigning a product to a shelf is simply done by creating an entity holding the 
 
 #### Request:
 
-```bash
+```console
 curl -X POST \
   'http://localhost:1026/v2/entities/' \
   -H 'Cache-Control: no-cache' \
@@ -528,7 +528,7 @@ After creating at least one **InventoryItem** entity we can query *Which product
 
 #### Request:
 
-```bash
+```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem' 
 ```
@@ -548,7 +548,7 @@ Similarly we can request *Which stores are selling `urn:ngsi-ld:Product:001`?* b
 
 #### Request:
 
-```bash
+```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=values&attrs=refProduct&type=InventoryItem' 
 ```
@@ -573,7 +573,7 @@ It is possible to make a request to see if any remaining entity relationship exi
 
 #### Request:
 
-```bash
+```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type'
 ```
