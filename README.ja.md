@@ -1,7 +1,6 @@
 このチュートリアルでは、FIWARE ユーザにバッチコマンドとエンティティのリレーションシップについて説明しています。
 
-このチュートリアルでは、以前の[ストア・ファインダの例](https://github.com/Fiware/tutorials.Get
-ting-Started)で作成されたデータを基にして、一連の関連するデータ・エンティティを作成して関連付けて、単純な在庫管理システムを作成します。
+このチュートリアルでは、以前の[ストア・ファインダの例](https://github.com/Fiware/tutorials.Getting-Started)で作成されたデータを基にして、一連の関連するデータ・エンティティを作成して関連付けて、単純な在庫管理システムを作成します。
 
 このチュートリアルでは、[cUrl](https://ec.haxx.se/) コマンドを使用していますが、[Postman documentation](http://fiware.github.io/tutorials.Entity-Relationships/) も利用できます。
 
@@ -80,8 +79,7 @@ in"
 
 現在、Orion Context Broker はオープンソースの [MongoDB](https://www.mongodb.com/) 技術を利用して、コンテキスト・データの永続性を維持しています。したがって、アーキテクチャは2つの要素で構成されます :
 
-* [NGSI](http://fiware.github.io/specifica
-tions/ngsiv2/latest/) を使用してリクエストを受信する Orion Context Broker サーバ
+* [NGSI](http://fiware.github.io/specifications/ngsiv2/latest/) を使用してリクエストを受信する Orion Context Broker サーバ
 * Orion Context Broker サーバに関連付けられている MongoDB データベース
 
 2つの要素間のすべての対話は HTTP リクエストによって開始されるため、エンティティはコンテナ化され、公開されたポートから実行されます。
@@ -111,8 +109,7 @@ tions/ngsiv2/latest/) を使用してリクエストを受信する Orion Contex
 <a name="start-up"></a>
 # 起動
 
-リポジトリ内で Bash スクリプトが提供する [services](https://github.com/Fiware/tutorials.Ent
-ity-Relationships/blob/master/services) を実行することにより、コマンドラインからすべてのサービスを初期化することができます :
+リポジトリ内で Bash スクリプトが提供する [services](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/services) を実行することにより、コマンドラインからすべてのサービスを初期化することができます :
 
 ```console
 ./services start
@@ -318,8 +315,7 @@ curl -X GET \
 <a name="creating-a-one-to-many-relationship"></a>
 ## 1対多のリレーションシップの作成
 
-データベースでは、外部キーは1対多のリレーションシップを指定するためによく使用されます。たとえば、すべての棚が1つのストアにあり、1つのストアには多くの棚ユニットがあります。この情報を記憶するためには、外部キーと同様のアソシエーション・リレーションシップを追加する必要があります。バッチ処理を再び使用して、既存の **Shelf** エンティティを修正して、各棚にリレーションシップを保持する `refStore` 属性を追加することができます。[リンクト・データ](http://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-link
-ed-data) に関するFIWARE データ・モデリング・ガイドラインによると、エンティティ属性が他のエンティティへのリンクとして使用される場合、プレフィックス `ref` と ターゲットのリンクト・エンティティ・タイプの名前を付けて名前を付ける必要があります。
+データベースでは、外部キーは1対多のリレーションシップを指定するためによく使用されます。たとえば、すべての棚が1つのストアにあり、1つのストアには多くの棚ユニットがあります。この情報を記憶するためには、外部キーと同様のアソシエーション・リレーションシップを追加する必要があります。バッチ処理を再び使用して、既存の **Shelf** エンティティを修正して、各棚にリレーションシップを保持する `refStore` 属性を追加することができます。[リンクト・データ](http://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data) に関するFIWARE データ・モデリング・ガイドラインによると、エンティティ属性が他のエンティティへのリンクとして使用される場合、プレフィックス `ref` と ターゲットのリンクト・エンティティ・タイプの名前を付けて名前を付ける必要があります。
 
 `refStore` 属性値は、**Store** エンティティ自体に関連付けられた URN に対応します。
 
