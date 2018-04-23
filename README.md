@@ -5,6 +5,8 @@ This tutorial builds on the data created in the previous [store finder example](
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as [Postman documentation](http://fiware.github.io/tutorials.Entity-Relationships/).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/0671934f64958d3200b3)
+
+* このチュートリアルは[日本語](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/README.ja.md)でもご覧いただけます。
  
 
 # Contents
