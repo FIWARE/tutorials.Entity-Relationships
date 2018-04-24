@@ -333,35 +333,35 @@ curl -X POST \
   "actionType":"APPEND",
   "entities":[
     {
-      "id":"unit001", "type":"Shelf",
+      "id":"urn:ngsi-ld:Shelf:unit001", "type":"Shelf",
       "refStore": { 
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:001"
       }
     },
     {
-      "id":"unit002", "type":"Shelf",
+      "id":"urn:ngsi-ld:Shelf:unit002", "type":"Shelf",
       "refStore": { 
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:001"
       }
     },
     {
-      "id":"unit003", "type":"Shelf",
+      "id":"urn:ngsi-ld:Shelf:unit003", "type":"Shelf",
       "refStore": { 
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:001"
       }
     },
     {
-      "id":"unit004", "type":"Shelf",
+      "id":"urn:ngsi-ld:Shelf:unit004", "type":"Shelf",
       "refStore": { 
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:002"
       }
     },
     {
-      "id":"unit005", "type":"Shelf",
+      "id":"urn:ngsi-ld:Shelf:unit005", "type":"Shelf",
       "refStore": { 
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:002"
