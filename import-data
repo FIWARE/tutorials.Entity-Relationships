@@ -6,8 +6,15 @@
 
 set -e
 
+
+curl () {
+	docker run --network fiware_default --rm appropriate/curl -s \
+		"$@"
+}
+
+
 curl -X POST \
-  'http://localhost:1026/v2/op/update' \
+  'http://orion:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -g -d '{
   "actionType": "APPEND",
