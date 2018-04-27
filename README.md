@@ -1,4 +1,4 @@
-![FIWARE Banner](https://fiware.github.io/tutorials.Entity-Relationships/img/Fiware.png)
+![FIWARE Banner](https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png)
 
 This tutorial teaches FIWARE users about batch commands and entity relationships.
 
@@ -117,7 +117,7 @@ All services can be initialised from the command line by running the [services](
 
 This command will also import seed data from the previous [Store Finder tutorial](https://github.com/Fiware/tutorials.Getting-Started) on startup.
 
->**Note:** If you want to clean up and start over again you can do so with the following command:
+>:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
 >```console
 >./services stop

@@ -1,4 +1,4 @@
-![FIWARE Banner](https://fiware.github.io/tutorials.Entity-Relationships/img/Fiware.png)
+![FIWARE Banner](https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png)
 
 このチュートリアルでは、FIWARE ユーザにバッチコマンドとエンティティのリレーションシップについて説明しています。
 
