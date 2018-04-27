@@ -1,3 +1,5 @@
+![FIWARE Banner](https://fiware.github.io/tutorials.Entity-Relationships/img/Fiware.png)
+
 This tutorial teaches FIWARE users about batch commands and entity relationships.
 
 This tutorial builds on the data created in the previous [store finder example](https://github.com/Fiware/tutorials.Getting-Started) and creates and associates a series of related data entities to create a simple stock management system.
@@ -132,7 +134,7 @@ In the previous tutorial, we created each **Store** entity individually,
 Lets create five shelf units at the same time. This request uses the convenience batch processing endpoint to create five shelf entities. Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.
 
 To differenciate **Shelf** Entities from **Store** Entities, each shelf has been assigned `type=Shelf`. 
-Real-world properties such as `name` and `location` have been addded as properties to each shelf.
+Real-world properties such as `name` and `location` have been added as properties to each shelf.
 
 #### Request:
 
@@ -141,9 +143,6 @@ curl -X POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
-  "actionType":"APPEND",
-  "entities":[
-{
   "actionType":"APPEND",
   "entities":[
     {
@@ -220,9 +219,6 @@ curl -X POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
-  "actionType":"APPEND",
-  "entities":[
-{
   "actionType":"APPEND",
   "entities":[
     {
@@ -407,7 +403,7 @@ We can also make a request to retrieve the `refStore` attribute relationship inf
 
 ```console
 curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=values&attrs=refStore
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=values&attrs=refStore'
 ```
 
 #### Response:

@@ -1,3 +1,5 @@
+![FIWARE Banner](https://fiware.github.io/tutorials.Entity-Relationships/img/Fiware.png)
+
 このチュートリアルでは、FIWARE ユーザにバッチコマンドとエンティティのリレーションシップについて説明しています。
 
 このチュートリアルでは、以前の[ストア・ファインダの例](https://github.com/Fiware/tutorials.Getting-Started)で作成されたデータを基にして、一連の関連するデータ・エンティティを作成して関連付けて、単純な在庫管理システムを作成します。
@@ -146,9 +148,6 @@ curl -X POST \
   -d '{
   "actionType":"APPEND",
   "entities":[
-{
-  "actionType":"APPEND",
-  "entities":[
     {
       "id":"urn:ngsi-ld:Shelf:unit001", "type":"Shelf",
       "location":{
@@ -223,9 +222,6 @@ curl -X POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
-  "actionType":"APPEND",
-  "entities":[
-{
   "actionType":"APPEND",
   "entities":[
     {
@@ -414,7 +410,7 @@ curl -X GET \
 
 ```console
 curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=values&attrs=refStore
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=values&attrs=refStore'
 ```
 
 #### レスポンス :
