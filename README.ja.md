@@ -105,7 +105,7 @@ in"
 <a name="cygwin-for-windows"></a>
 ## Cygwin for Windows
 
-シンプルな Bash スクリプトを使用してサービスを開始します。Windows ユーザは [cygwin](www.cygwin.com) をダウンロードして、Windows の Linux ディストリビューションに似たコマンドライン機能を提供する必要があります。
+シンプルな Bash スクリプトを使用してサービスを開始します。Windows ユーザは [cygwin](http://www.cygwin.com/) をダウンロードして、Windows の Linux ディストリビューションに似たコマンドライン機能を提供する必要があります。
 
 
 <a name="start-up"></a>
