@@ -1,5 +1,7 @@
 ![FIWARE Banner](https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png)
 
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+
 このチュートリアルでは、FIWARE ユーザにバッチコマンドとエンティティのリレーションシップについて説明しています。
 
 このチュートリアルでは、以前の[ストア・ファインダの例](https://github.com/Fiware/tutorials.Getting-Started)で作成されたデータを基にして、一連の関連するデータ・エンティティを作成して関連付けて、単純な在庫管理システムを作成します。

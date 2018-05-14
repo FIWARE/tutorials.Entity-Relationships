@@ -1,5 +1,7 @@
 ![FIWARE Banner](https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png)
 
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+
 This tutorial teaches FIWARE users about batch commands and entity relationships.
 
 This tutorial builds on the data created in the previous [store finder example](https://github.com/Fiware/tutorials.Getting-Started) and creates and associates a series of related data entities to create a simple stock management system.
