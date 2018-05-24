@@ -80,11 +80,11 @@ As you can see, each of the entities defined above contain some properties which
 
 # Architecture
 
-This application will only make use of one FIWARE component - the [Orion Context Broker](https://catalogue.fiware.org/enablers/publishsubscribe-context-broker-orion-context-broker). Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.
+This application will only make use of one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.
 
 Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep persistence of the context data it holds. Therefore, the architecture will consist of two elements:
 
-* The Orion Context Broker server which will receive requests using [NGSI](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json)
+* The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/)which will receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 * The underlying MongoDB database associated to the Orion Context Broker server
 
 Since all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and run from exposed ports. 
