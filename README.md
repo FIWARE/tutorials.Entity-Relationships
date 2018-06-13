@@ -34,7 +34,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 # Understanding Entities and Relationships
 
-Within the FIWARE platform, an entity represents the state of a physical or conceptural object which exists in the real world.
+Within the FIWARE platform, the context of an entity represents the state of a physical or conceptural object which exists in the real world.
 
 ## Entities within a stock management system
 
@@ -125,7 +125,7 @@ The necessary configuration information can be seen in the services section of t
 ```
 
 Both containers are residing on the same network - the Orion Context Broker is listening on Port `1026` 
-and MongoDB is listening on the default port `271071`. Both containers are also exposing the same ports
+and MongoDB is listening on the default port `27071`. Both containers are also exposing the same ports
 externally - this is purely for the tutorial access - so that cUrl or Postman can access them without
 being part of the same network. The command line initialization should be self explanatory.
 
@@ -346,7 +346,7 @@ As you can see there are currently three additional property attributes present 
 
 ## Creating a one-to-many Relationship
 
-In databases, foreign keys are often used to designate a one-to-many relationship - for example every shelf is found in a single store and a single store can hold many shelving units. In order to remember this information we need to add an association relationship similar to a foreign key. Batch processing can again be used to amend the existing the **Shelf** entities to add a `refStore` attribute holding the relationship to each shelf.  According to the FIWARE Data Modelling Guidelines on [linked data](http://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data), when an entity attribute is used as a link to other entities  it should be named with the prefix `ref` plus the name of the target (linked) entity type. 
+In databases, foreign keys are often used to designate a one-to-many relationship - for example every shelf is found in a single store and a single store can hold many shelving units. In order to remember this information we need to add an association relationship similar to a foreign key. Batch processing can again be used to amend the existing the **Shelf** entities to add a `refStore` attribute holding the relationship to each store.  According to the FIWARE Data Modelling Guidelines on [linked data](http://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data), when an entity attribute is used as a link to other entities  it should be named with the prefix `ref` plus the name of the target (linked) entity type. 
 
 The value of the `refStore` attribute corresponds to a URN associated to a **Store** entity itself. 
 
