@@ -180,7 +180,7 @@ in"
 #### リクエスト :
 
 ```console
-curl -X POST \
+curl -iX POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -256,7 +256,7 @@ curl -X POST \
 #### リクエスト :
 
 ```console
-curl -X POST \
+curl -iX POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -360,7 +360,7 @@ URN は標準フォーマットに従います : `urn:ngsi-ld:<entity-type>:<ent
 次のリクエストは、3つの棚を `urn:ngsi-ld:Store:001` に、2つの棚を `urn:ngsi-ld:Store:002` に関連付けます。
 
 ```console
-curl -X POST \
+curl -iX POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -536,7 +536,7 @@ curl -X GET \
 #### リクエスト :
 
 ```console
-curl -X POST \
+curl -iX POST \
   'http://localhost:1026/v2/entities/' \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \

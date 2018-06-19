@@ -179,7 +179,7 @@ Real-world properties such as `name` and `location` have been added as propertie
 #### :one: Request:
 
 ```console
-curl -X POST \
+curl -iX POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -255,7 +255,7 @@ Similarly, we can create a series of **Product** entities by using the `type=Pro
 #### :two: Request:
 
 ```console
-curl -X POST \
+curl -iX POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -357,7 +357,7 @@ The URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`
 The following request associates three shelves to `urn:ngsi-ld:Store:001` and two shelves to `urn:ngsi-ld:Store:002`
 
 ```console
-curl -X POST \
+curl -iX POST \
   'http://localhost:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -528,7 +528,7 @@ Assigning a product to a shelf is simply done by creating an entity holding the 
 #### :nine: Request:
 
 ```console
-curl -X POST \
+curl -iX POST \
   'http://localhost:1026/v2/entities/' \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
