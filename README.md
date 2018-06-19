@@ -564,7 +564,7 @@ When reading from a bridge table entity, the `type` of the entity must be known.
 
 After creating at least one **InventoryItem** entity we can query *Which products are sold in `urn:ngsi-ld:Store:001`?* by making the following request
 
-#### :one: :zero: Request:
+#### :one::zero: Request:
 
 ```console
 curl -X GET \
@@ -584,7 +584,7 @@ curl -X GET \
 
 Similarly we can request *Which stores are selling `urn:ngsi-ld:Product:001`?* by altering the request as shown: 
 
-#### :one: :one: Request:
+#### :one::one: Request:
 
 ```console
 curl -X GET \
@@ -609,7 +609,7 @@ Context data relationships should only be set up and maintained between entities
 
 It is possible to make a request to see if any remaining entity relationship exists prior to deletion by making a request as follows
 
-#### :one: :two: Request:
+#### :one::two: Request:
 
 ```console
 curl -X GET \
@@ -617,7 +617,7 @@ curl -X GET \
 ```
 
 
-#### :one: :three: Request:
+#### :one::three: Request:
 
 The response lists a series of **Shelf** and **InventoryItem** entities - there are no **Product** entities since there is no direct relationship between product and store.
 
