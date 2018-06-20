@@ -149,9 +149,12 @@ We will start up our services using a simple Bash script. Windows users should d
 
 # Start Up
 
-All services can be initialised from the command line by running the [services](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/services) Bash script provided within the repository:
+All services can be initialised from the command line by running the [services](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/services) Bash script provided within the repository. Please clone the repository and create the necessary images by running the commands as shown:
 
 ```console
+git clone git@github.com:Fiware/tutorials.Entity-Relationships.git
+cd tutorials.Entity-Relationships
+
 ./services start
 ``` 
 
