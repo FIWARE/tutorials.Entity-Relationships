@@ -2,9 +2,7 @@
 
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
 
-このチュートリアルでは、FIWARE ユーザにバッチコマンドとエンティティのリレーションシップについて説明しています。
-
-チュートリアルでは、以前の[ストア・ファインダの例](https://github.com/Fiware/tutorials.Getting-Started)で作成されたデータを基にして、一連の関連するデータ・エンティティを作成して関連付けて、単純な在庫管理システムを作成します。
+このチュートリアルでは、FIWARE ユーザにバッチコマンドとエンティティのリレーションシップについて説明しています。チュートリアルでは、以前の[ストア・ファインダの例](https://github.com/Fiware/tutorials.Getting-Started)で作成されたデータを基にして、一連の関連するデータ・エンティティを作成して関連付けて、単純な在庫管理システムを作成します。
 
 このチュートリアルでは、[cUrl](https://ec.haxx.se/) コマンドを使用していますが、[Postman documentation](http://fiware.github.io/tutorials.Entity-Relationships/) も利用できます。
 
@@ -149,9 +147,12 @@ in"
 <a name="start-up"></a>
 # 起動
 
-リポジトリ内で Bash スクリプトが提供する [services](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/services) を実行することにより、コマンドラインからすべてのサービスを初期化することができます :
+リポジトリ内で Bash スクリプトが提供する [services](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/services) を実行することにより、コマンドラインからすべてのサービスを初期化することができます。リポジトリを複製し、以下のコマンドを実行して必要なイメージを作成してください :
 
 ```console
+git clone git@github.com:Fiware/tutorials.Entity-Relationships.git
+cd tutorials.Entity-Relationships
+
 ./services start
 ``` 
 
@@ -177,7 +178,7 @@ in"
 
 **Store** エンティティから **Shelf** エンティティを区別するために、各棚が `type=Shelf` に割り当てられています。'name' と 'location' のような実世界のプロパティが各棚にプロパティとして追加されました。
 
-#### リクエスト :
+#### :one: リクエスト :
 
 ```console
 curl -iX POST \
@@ -253,7 +254,7 @@ curl -iX POST \
 
 同様に、`type=Product` を使用して一連の **Product** エンティティを作成できます。
 
-#### リクエスト :
+#### :two: リクエスト :
 
 ```console
 curl -iX POST \
@@ -318,7 +319,7 @@ curl -iX POST \
 
 棚情報は、`/v2/entities` エンドポイントで GET リクエストを行うことでリクエストできます。たとえば、`id=urn:ngsi-ld:Shelf:unit001` を使用すると、その **Shelf** エンティティのコンテキスト・データが得られます :
 
-#### リクエスト :
+#### :three: リクエスト :
 
 ```console
 curl -X GET \
@@ -355,7 +356,7 @@ curl -X GET \
 
 URN は標準フォーマットに従います : `urn:ngsi-ld:<entity-type>:<entity-id>`
 
-#### リクエスト :
+#### :four: リクエスト :
 
 次のリクエストは、3つの棚を `urn:ngsi-ld:Store:001` に、2つの棚を `urn:ngsi-ld:Store:002` に関連付けます。
 
@@ -407,7 +408,7 @@ curl -iX POST \
 
 ここで棚情報が再度リクエストされると、レスポンスが変更され、前の手順で追加された新しい `refStore` 属性が含まれます。
 
-#### リクエスト :
+#### :five: リクエスト :
 
 ```console
 curl -X GET \
@@ -444,7 +445,7 @@ curl -X GET \
 
 また、`options=values` 設定を使用して、既知の棚エンティティから `refStore` 属性のリレーションシップ情報を取得するようリクエストすることもできます :
 
-#### リクエスト :
+#### :six: リクエスト :
 
 ```console
 curl -X GET \
@@ -466,7 +467,7 @@ curl -X GET \
 
 親から子への読み込みは、`options=count` 設定を使用して行うことができます :
 
-#### リクエスト :
+#### :seven: リクエスト :
 
 ```console
 curl -X GET \
@@ -496,7 +497,7 @@ curl -X GET \
 
 普通の英語では、これは"`urn:ngsi-ld:Store:001` の中に3つの棚があります"と解釈することができます。リクエストを変更して、`options=values` と `attrs` パラメータを使用して、関連する関連エンティティの特定のプロパティを返すことができます。例えば、次のようなリクエストです : 
 
-#### リクエスト :
+#### :eight: リクエスト :
 
 ```console
 curl -X GET \
@@ -533,7 +534,7 @@ curl -X GET \
 
 製品を棚に割り当てることは、単にリレーションシップ情報と、`stockCount` と `shelfCount` のようなその他の追加プロパティを保持するエンティティを作成することによって行われます。
 
-#### リクエスト :
+#### :nine: リクエスト :
 
 ```console
 curl -iX POST \
@@ -572,7 +573,7 @@ curl -iX POST \
 
 少なくとも1つの **InventoryItem** エンティティを作成した後、次のリクエストを行うことで、*"`urn:ngsi-ld:Store:001` の中にどの製品が販売されているか？"* をクエリすることができます。
 
-#### リクエスト :
+#### :one::zero: リクエスト :
 
 ```console
 curl -X GET \
@@ -592,7 +593,7 @@ curl -X GET \
 
 同様に、次のようにリクエストを変更することで、どのストアで `urn:ngsi-ld:Product:001` が売れているのかを知ることができます :
 
-#### リクエスト :
+#### :one::one: リクエスト :
 
 ```console
 curl -X GET \
@@ -618,7 +619,7 @@ curl -X GET \
 
 以下のようにリクエストすることにより、削除前に残っているエンティティのリレーションシップが存在するかどうかを確認するリクエストを出すことができます :
 
-#### リクエスト :
+#### :one::two: リクエスト :
 
 ```console
 curl -X GET \
@@ -626,7 +627,7 @@ curl -X GET \
 ```
 
 
-#### リクエスト :
+#### :one::three: リクエスト :
 
 このレスポンスには一連の **Shelf** と **InventoryItem** エンティティがリストされています。製品とストアの間に直接のリレーションシップがないため、**Product** エンティティはありません。
 
@@ -656,7 +657,7 @@ curl -X GET \
 <a name="next-steps"></a>
 # 次のステップ
 
-アドバンス機能を追加するアプリをもっと複雑にする方法を知りたいですか？ このシリーズの他のチュートリアルを読むことで、学ぶことができます。
+高度な機能を追加することで、アプリケーションに複雑さを加える方法を知りたいですか？このシリーズの他のチュートリアルを読むことで見つけることができます :
 
 &nbsp; 101. [Getting Started](https://github.com/Fiware/tutorials.Getting-Started)<br/>
 &nbsp; 102. [Entity Relationships](https://github.com/Fiware/tutorials.Entity-Relationships)<br/>
