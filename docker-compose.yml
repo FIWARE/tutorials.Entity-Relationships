@@ -5,12 +5,14 @@ services:
     hostname: mongo-db
     container_name: db-mongo
     expose:
-        - "27017"
+      - "27017"
     ports:
-        - "27017:27017"
+      - "27017:27017"
     networks:
-        - default
+      - default
     command: --bind_ip_all --smallfiles
+    volumes:
+      - mongo-db:/data
 
   orion:
     image: fiware/orion:latest
@@ -28,3 +30,6 @@ services:
 
 networks:
   default:
+
+volumes:
+  mongo-db:
