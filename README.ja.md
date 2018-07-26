@@ -10,7 +10,7 @@
 このチュートリアルでは、[cUrl](https://ec.haxx.se/) コマンドを使用していますが、[Postman documentation](http://fiware.github.io/tutorials.Entity-Relationships/) も利用できます。
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/0671934f64958d3200b3)
- 
+
 
 # コンテンツ
 
@@ -70,7 +70,7 @@ in"
 
 
 > **注** このチュートリアルでは、次の表記スタイルを使用しています :
-> 
+>
 > * エンティティタイプは**太字**です
 > * データ属性は  `monospace text` に記述されています
 > * 現実世界のアイテムはプレーン・テキストを使用します
@@ -141,6 +141,15 @@ in"
 
 **Docker Compose** は、マルチコンテナ Docker アプリケーションを定義して実行するためのツールです。[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-compose.yml) ファイルは、アプリケーションのために必要なサービスを構成するために使用します。つまり、すべてのコンテナ・サービスは1つのコマンドで呼び出すことができます。Docker Compose は、デフォルトで Docker for Windows とD ocker for Mac の一部としてインストールされますが、Linux ユーザは[ここ](https://docs.docker.com/compose/install/)に記載されている手順に従う必要があります。
 
+次のコマンドを使用して、現在の **Docker** バージョンと **Docker Compose** バージョンを確認できます :
+
+```console
+docker-compose -v
+docker version
+```
+
+Docker バージョン 18.03 以降と Docker Compose 1.21 以上を使用していることを確認し、必要に応じてアップグレードしてください。
+
 <a name="cygwin-for-windows"></a>
 ## Cygwin for Windows
 
@@ -157,7 +166,7 @@ git clone git@github.com:Fiware/tutorials.Entity-Relationships.git
 cd tutorials.Entity-Relationships
 
 ./services start
-``` 
+```
 
 このコマンドは、起動時に以前の[ストア・ファインダのチュートリアル](https://github.com/Fiware/tutorials.Getting-Started)のシード・データもインポートします。
 
@@ -165,7 +174,7 @@ cd tutorials.Entity-Relationships
 >
 ```console
 ./services stop
-``` 
+```
 >
 
 
@@ -372,35 +381,35 @@ curl -iX POST \
   "entities":[
     {
       "id":"urn:ngsi-ld:Shelf:unit001", "type":"Shelf",
-      "refStore": { 
+      "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:001"
       }
     },
     {
       "id":"urn:ngsi-ld:Shelf:unit002", "type":"Shelf",
-      "refStore": { 
+      "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:001"
       }
     },
     {
       "id":"urn:ngsi-ld:Shelf:unit003", "type":"Shelf",
-      "refStore": { 
+      "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:001"
       }
     },
     {
       "id":"urn:ngsi-ld:Shelf:unit004", "type":"Shelf",
-      "refStore": { 
+      "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:002"
       }
     },
     {
       "id":"urn:ngsi-ld:Shelf:unit005", "type":"Shelf",
-      "refStore": { 
+      "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:002"
       }
@@ -474,7 +483,7 @@ curl -X GET \
 
 ```console
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type&type=Shelf' 
+  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type&type=Shelf'
 ```
 
 このリクエストは、URN `urn:ngsi-ld:Store:001` に関連付けられているすべての **Shelf** エンティティの `id` をリクエストしています。レスポンスは、次に示されているように JSON 配列です。
@@ -498,7 +507,7 @@ curl -X GET \
 ]
 ```
 
-普通の英語では、これは"`urn:ngsi-ld:Store:001` の中に3つの棚があります"と解釈することができます。リクエストを変更して、`options=values` と `attrs` パラメータを使用して、関連する関連エンティティの特定のプロパティを返すことができます。例えば、次のようなリクエストです : 
+普通の英語では、これは"`urn:ngsi-ld:Store:001` の中に3つの棚があります"と解釈することができます。リクエストを変更して、`options=values` と `attrs` パラメータを使用して、関連する関連エンティティの特定のプロパティを返すことができます。例えば、次のようなリクエストです :
 
 #### :eight: リクエスト :
 
@@ -547,15 +556,15 @@ curl -iX POST \
   -H 'Postman-Token: 0588ef62-6b5c-4d1b-8066-172d63b516fd' \
   -d '{
     "id": "urn:ngsi-ld:InventoryItem:001", "type": "InventoryItem",
-    "refStore": { 
+    "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:001"
     },
-    "refShelf": { 
+    "refShelf": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Shelf:unit001"
     },
-    "refProduct": { 
+    "refProduct": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Product:001"
     },
@@ -580,7 +589,7 @@ curl -iX POST \
 
 ```console
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem' 
+  'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem'
 ```
 
 #### レスポンス :
@@ -600,7 +609,7 @@ curl -X GET \
 
 ```console
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=values&attrs=refProduct&type=InventoryItem' 
+  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=values&attrs=refProduct&type=InventoryItem'
 ```
 
 #### レスポンス :
