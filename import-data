@@ -17,7 +17,7 @@ curl -X POST \
   'http://orion:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -g -d '{
-  "actionType": "APPEND",
+  "actionType": "append",
   "entities": [
     {
     	"type": "Store",
