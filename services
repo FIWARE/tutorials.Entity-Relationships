@@ -35,6 +35,7 @@ case "${command}" in
 		docker pull mongo:3.6
 		echo "Obtaining Latest Orion Image"
 		docker pull fiware/orion
+		;;
 	*)
 		echo "Command not Found."
 		echo "usage: services [create|start|stop]"
