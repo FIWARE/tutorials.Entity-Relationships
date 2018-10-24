@@ -3,7 +3,7 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.Entity-Relationships.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 This tutorial teaches FIWARE users about batch commands and entity relationships.
 The tutorial builds on the data created in the previous [store finder example](https://github.com/Fiware/tutorials.Getting-Started) and creates and associates a series of related data entities to create a simple stock management system.
@@ -59,7 +59,7 @@ For a simple stock management system, we will only need four types of entity. Th
   + A price e.g. 13.99 Euros
   + A size e.g. Small
 * An inventory item is another conceptural entity, used to assocate products, stores, shelves and physical objects. **Inventory Item** entities would have properties such as:
-  + An assocation to the product being sold
+  + An association to the product being sold
   + An association to the store in which the product is being sold
   + An association to the shelf where the product is being displayed
   + A stock count of the quantity of the product available in the warehouse
@@ -130,7 +130,7 @@ The necessary configuration information can be seen in the services section of t
 Both containers are residing on the same network - the Orion Context Broker is listening on Port `1026`
 and MongoDB is listening on the default port `27071`. Both containers are also exposing the same ports
 externally - this is purely for the tutorial access - so that cUrl or Postman can access them without
-being part of the same network. The command line initialization should be self explanatory.
+being part of the same network. The command-line initialization should be self explanatory.
 
 # Prerequisites
 
@@ -156,12 +156,12 @@ Please ensure that you are using Docker version 18.03 or higher and Docker Compo
 
 ## Cygwin for Windows
 
-We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/) to provide a command line functionality similar to a Linux distribution on Windows.
+We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/) to provide a command-line functionality similar to a Linux distribution on Windows.
 
 
 # Start Up
 
-All services can be initialised from the command line by running the [services](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/services) Bash script provided within the repository. Please clone the repository and create the necessary images by running the commands as shown:
+All services can be initialised from the command-line by running the [services](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/services) Bash script provided within the repository. Please clone the repository and create the necessary images by running the commands as shown:
 
 ```console
 git clone git@github.com:Fiware/tutorials.Entity-Relationships.git
