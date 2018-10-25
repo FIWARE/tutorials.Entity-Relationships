@@ -9,7 +9,7 @@
 
 このチュートリアルでは、FIWARE ユーザにバッチコマンドとエンティティのリレーションシップについて説明しています。チュートリアルでは、以前の[ストア・ファインダの例](https://github.com/Fiware/tutorials.Getting-Started)で作成されたデータを基にして、一連の関連するデータ・エンティティを作成して関連付けて、単純な在庫管理システムを作成します。
 
-このチュートリアルでは、[cUrl](https://ec.haxx.se/) コマンドを使用していますが、[Postman documentation](http://fiware.github.io/tutorials.Entity-Relationships/) も利用できます。
+このチュートリアルでは、[cUrl](https://ec.haxx.se/) コマンドを使用していますが、[Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/) も利用できます。
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/0671934f64958d3200b3)
 
@@ -364,7 +364,7 @@ curl -X GET \
 <a name="creating-a-one-to-many-relationship"></a>
 ## 1対多のリレーションシップの作成
 
-データベースでは、外部キーは1対多のリレーションシップを指定するためによく使用されます。たとえば、すべての棚が1つのストアにあり、1つのストアには多くの棚ユニットがあります。この情報を記憶するためには、外部キーと同様のアソシエーション・リレーションシップを追加する必要があります。バッチ処理を再び使用して、既存の **Shelf** エンティティを修正して、各ストアにリレーションシップを保持する `refStore` 属性を追加することができます。[リンクト・データ](http://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data) に関するFIWARE データ・モデリング・ガイドラインによると、エンティティ属性が他のエンティティへのリンクとして使用される場合、プレフィックス `ref` と ターゲットのリンクト・エンティティ・タイプの名前を付けて名前を付ける必要があります。
+データベースでは、外部キーは1対多のリレーションシップを指定するためによく使用されます。たとえば、すべての棚が1つのストアにあり、1つのストアには多くの棚ユニットがあります。この情報を記憶するためには、外部キーと同様のアソシエーション・リレーションシップを追加する必要があります。バッチ処理を再び使用して、既存の **Shelf** エンティティを修正して、各ストアにリレーションシップを保持する `refStore` 属性を追加することができます。[リンクト・データ](https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data) に関するFIWARE データ・モデリング・ガイドラインによると、エンティティ属性が他のエンティティへのリンクとして使用される場合、プレフィックス `ref` と ターゲットのリンクト・エンティティ・タイプの名前を付けて名前を付ける必要があります。
 
 `refStore` 属性値は、**Store** エンティティ自体に関連付けられた URN に対応します。
 
