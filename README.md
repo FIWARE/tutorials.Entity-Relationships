@@ -23,7 +23,10 @@ available as
     は[日本語](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/README.ja.md)で
     もご覧いただけます。
 
-# Contents
+## Contents
+
+<details>
+<summary><strong>Details</strong></summary>
 
 -   [Understanding Entities and Relationships](#understanding-entities-and-relationships)
     -   [Entities within a stock management system](#entities-within-a-stock-management-system)
@@ -42,6 +45,8 @@ available as
     -   [Reading from a bridge table](#reading-from-a-bridge-table)
     -   [Data Integrity](#data-integrity)
 -   [Next Steps](#next-steps)
+
+</details>
 
 # Understanding Entities and Relationships
 

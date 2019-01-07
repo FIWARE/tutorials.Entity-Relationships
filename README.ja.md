@@ -21,6 +21,9 @@
 
 # コンテンツ
 
+<details>
+<summary>詳細 <b>(クリックして拡大)</b></summary>
+
 -   [エンティティとリレーションシップの理解](#understanding-entities-and-relationships)
     -   [在庫システム内のエンティティ](#entities-within-a-stock-management-system)
 -   [アーキテクチャ](#architecture)
@@ -38,6 +41,8 @@
     -   [ブリッジ・テーブルからの読み込み](#reading-from-a-bridge-table)
     -   [データの整合性](#data-integrity)
 -   [次のステップ](#next-steps)
+
+</details>
 
 <a name="understanding-entities-and-relationships"></a>
 
