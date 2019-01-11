@@ -17,7 +17,7 @@
 、[Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/)
 も利用できます。
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/0671934f64958d3200b3)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0671934f64958d3200b3)
 
 # コンテンツ
 
