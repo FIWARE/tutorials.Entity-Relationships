@@ -647,13 +647,13 @@ products are sold in `urn:ngsi-ld:Store:001`?_ by making the following request
 
 ```console
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem'
+  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=values&attrs=refProduct&type=InventoryItem'
 ```
 
 #### Response:
 
 ```json
-[["urn:ngsi-ld:Store:001"]]
+[["urn:ngsi-ld:Product:prod001"]]
 ```
 
 Similarly we can request _Which stores are selling `urn:ngsi-ld:Product:001`?_
@@ -663,13 +663,13 @@ by altering the request as shown:
 
 ```console
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=values&attrs=refProduct&type=InventoryItem'
+  'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem'
 ```
 
 #### Response:
 
 ```json
-[["urn:ngsi-ld:Product:prod001"]]
+[["urn:ngsi-ld:Store:001"]]
 ```
 
 ## Data Integrity

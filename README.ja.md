@@ -687,13 +687,13 @@ curl -iX POST \
 
 ```console
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem'
+  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=values&attrs=refProduct&type=InventoryItem'
 ```
 
 #### レスポンス :
 
 ```json
-[["urn:ngsi-ld:Store:001"]]
+[["urn:ngsi-ld:Product:prod001"]]
 ```
 
 同様に、次のようにリクエストを変更することで、どのストアで
@@ -703,13 +703,13 @@ curl -X GET \
 
 ```console
 curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=values&attrs=refProduct&type=InventoryItem'
+  'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem'
 ```
 
 #### レスポンス :
 
 ```json
-[["urn:ngsi-ld:Product:prod001"]]
+[["urn:ngsi-ld:Store:001"]]
 ```
 
 <a name="data-integrity"></a>
