@@ -7,6 +7,8 @@
 <br/>
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
+<!-- prettier-ignore -->
+
 このチュートリアルでは、FIWARE ユーザにバッチコマンドとエンティティのリレーショ
 ンシップについて説明しています。チュートリアルでは、以前
 の[ストア・ファインダの例](https://github.com/Fiware/tutorials.Getting-Started)で
