@@ -403,7 +403,7 @@ curl -iX POST \
 ```
 
 どちらの場合も、NGSI-LD
-[ドラフト勧告](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)に
+[ドラフト勧告](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)に
 従って各エンティティ `id` をエンコードしました。提案は、それぞれの `id` が 標準
 フォーマットに従った URN というものです :
 `urn:ngsi-ld:<entity-type>:<entity-id>`。これは、システム内のすべての `id` がユ
