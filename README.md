@@ -186,7 +186,7 @@ All services can be initialised from the command-line by running the
 the repository. Please clone the repository and create the necessary images by running the commands as shown:
 
 ```console
-git clone git@github.com:Fiware/tutorials.Entity-Relationships.git
+git clone git@github.com:FIWARE/tutorials.Entity-Relationships.git
 cd tutorials.Entity-Relationships
 
 ./services start
