@@ -11,7 +11,7 @@
 
 このチュートリアルでは、FIWARE ユーザにバッチコマンドとエンティティのリレーショ
 ンシップについて説明しています。チュートリアルでは、以前
-の[ストア・ファインダの例](https://github.com/Fiware/tutorials.Getting-Started)で
+の[ストア・ファインダの例](https://github.com/FIWARE/tutorials.Getting-Started)で
 作成されたデータを基にして、一連の関連するデータ・エンティティを作成して関連付け
 て、単純な在庫管理システムを作成します。
 
@@ -221,7 +221,7 @@ Docker バージョン 18.03 以降と Docker Compose 1.21 以上を使用して
 # 起動
 
 リポジトリ内で Bash スクリプトが提供する
-[services](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/services)
+[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/services)
 を実行することにより、コマンドラインからすべてのサービスを初期化することができま
 す。リポジトリを複製し、以下のコマンドを実行して必要なイメージを作成してください
 :
@@ -234,7 +234,7 @@ cd tutorials.Entity-Relationships
 ```
 
 このコマンドは、起動時に以前
-の[ストア・ファインダのチュートリアル](https://github.com/Fiware/tutorials.Getting-Started)の
+の[ストア・ファインダのチュートリアル](https://github.com/FIWARE/tutorials.Getting-Started)の
 シード・データもインポートします。
 
 > **注** : クリーンアップをやり直したい場合は、次のコマンドを使用して再起動する

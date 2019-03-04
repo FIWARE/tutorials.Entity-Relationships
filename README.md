@@ -7,7 +7,7 @@
 <br/> [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
 This tutorial teaches FIWARE users about batch commands and entity relationships. The tutorial builds on the data
-created in the previous [store finder example](https://github.com/Fiware/tutorials.Getting-Started) and creates and
+created in the previous [store finder example](https://github.com/FIWARE/tutorials.Getting-Started) and creates and
 associates a series of related data entities to create a simple stock management system.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
@@ -15,7 +15,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0671934f64958d3200b3)
 
--   このチュートリアルは[日本語](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/README.ja.md)でも
+-   このチュートリアルは[日本語](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/README.ja.md)でも
     ご覧いただけます。
 
 ## Contents
@@ -182,7 +182,7 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 # Start Up
 
 All services can be initialised from the command-line by running the
-[services](https://github.com/Fiware/tutorials.Entity-Relationships/blob/master/services) Bash script provided within
+[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/services) Bash script provided within
 the repository. Please clone the repository and create the necessary images by running the commands as shown:
 
 ```console
@@ -193,7 +193,7 @@ cd tutorials.Entity-Relationships
 ```
 
 This command will also import seed data from the previous
-[Store Finder tutorial](https://github.com/Fiware/tutorials.Getting-Started) on startup.
+[Store Finder tutorial](https://github.com/FIWARE/tutorials.Getting-Started) on startup.
 
 > :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
