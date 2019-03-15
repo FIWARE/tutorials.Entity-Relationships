@@ -568,9 +568,7 @@ additional properties (such as `stockCount` and `shelfCount`)
 ```console
 curl -iX POST \
   'http://localhost:1026/v2/entities' \
-  -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
-  -H 'Postman-Token: 0588ef62-6b5c-4d1b-8066-172d63b516fd' \
   -d '{
     "id": "urn:ngsi-ld:InventoryItem:001", "type": "InventoryItem",
     "refStore": {
