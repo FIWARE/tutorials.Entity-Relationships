@@ -12,6 +12,12 @@ loadData () {
 	echo ""
 }
 
+displayServices () {
+	echo ""
+	docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" --filter name=fiware-*
+	echo ""
+}
+
 stoppingContainers () {
 	echo "Stopping containers"
 	docker-compose --log-level ERROR -p fiware down -v --remove-orphans
@@ -35,6 +41,7 @@ case "${command}" in
 		echo ""
 		docker-compose --log-level ERROR -p fiware up -d --remove-orphans
 		loadData
+		displayServices
 		;;
 	"stop")
 		stoppingContainers
