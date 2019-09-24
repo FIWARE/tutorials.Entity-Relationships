@@ -9,37 +9,38 @@ skinparam object {
 object Product
 
 Product : id 
-Product : name 
-Product : price 
-Product : size 
+Product : ~name 
+Product : ~price 
+Product : ~size 
 
 
 object InventoryItem
 
 InventoryItem : id 
-InventoryItem : refProduct 
-InventoryItem : refStore 
-InventoryItem : refShelf 
-InventoryItem : stockCount 
-InventoryItem : shelfCount 
+InventoryItem : -refProduct 
+InventoryItem : -refStore 
+InventoryItem : -refShelf 
+InventoryItem : ~stockCount 
+InventoryItem : ~shelfCount 
 
 
 object Store
 
 Store : id 
-Store : name 
-Store : address 
-Store : location
+Store : ~name 
+Store : ~address 
+Store : ~location
 
 object Shelf
 
 Shelf : id 
-Shelf : refStore 
-Shelf : location 
-Shelf : maxCapacity
+Shelf : -refStore 
+Shelf : ~location 
+Shelf : ~maxCapacity
 
 Store "1" *-- "*" Shelf : contains >
 InventoryItem "*" -o " 1" Shelf : < holds
 Product "0..*" - "0..*" Store
 (Product, Store) .. InventoryItem : associates
+
 @enduml
