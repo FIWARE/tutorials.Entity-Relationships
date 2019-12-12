@@ -63,10 +63,12 @@ FIWARE プラットフォーム内では、エンティティのコンテキス�
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/entities.png)
 
 -   **Store** : ストアは実世界のレンガとモルタルの建物です。ストアには次のような
-    プロパティがあります : + name : ストアの名前。例えば、"Checkpoint Markt" +
-    address : ストアの住所。例えば、"Friedrichstraße 44, 10969 Kreuzberg, Berl
-    in" + location : ストアの物理的なローケーション。例えば、_52.5075 N, 13.3903
-    E_
+    プロパティがあります :
+    -   name : ストアの名前。例えば、"Checkpoint Markt"
+    -   address : ストアの住所。例えば、"Friedrichstraße 44, 10969 Kreuzberg,
+        Berlin"
+    -   location : ストアの物理的なローケーション。例えば、_52.5075 N, 13.3903
+        E_
 -   **Shelf** : 棚は販売したいオブジェクトを保持するための、現実世界のデバイスで
     す。各棚には次のようなプロパティがあります :
     -   name : 棚の名前。例えば、"Wall Unit"
@@ -161,7 +163,7 @@ mongo-db:
 ```
 
 両方のコンテナが同じネットワークに常駐しています。Orion Context Broker はポート
-`1026` でリッスンしており、MongoDB はデフォルト・ポート `27071` でリッスンしてい
+`1026` でリッスンしており、MongoDB はデフォルト・ポート `27017` でリッスンしてい
 ます。 どちらのコンテナも同じポートを外部に公開しています。これはチュートリアル
 のアクセス専用です。これにより、cUrl または Postman は同じネットワークに参加する
 ことなくアクセスできます。 コマンドラインの初期化は、一目瞭然でなければなりませ
