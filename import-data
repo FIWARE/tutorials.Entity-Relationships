@@ -6,17 +6,10 @@
 
 set -e
 
-
-curl () {
-	docker run --network fiware_default --rm appropriate/curl -s \
-		"$@"
-	printf "."
-}
-
 printf "⏳ Loading context data "
 
 
-curl -X POST \
+curl -s -o /dev/null -X POST \
   'http://orion:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -g -d '{
