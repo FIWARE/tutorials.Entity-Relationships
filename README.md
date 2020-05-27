@@ -144,39 +144,32 @@ La inicialización línea de comandos es autoexplicativa.
 
 ## Docker y Docker Compose
 
-To keep things simple both components will be run using [Docker](https://www.docker.com). **Docker** is a container
-technology which allows to different components isolated into their respective environments.
+Para mantener las cosas simples ambos componentes se ejecutarán usando [Docker](https://www.docker.com). **Docker** es una tecnología de contenedor que permite aislar diferentes componentes en sus respectivos entornos.
+-   Para instalar Docker en Windows siga las instrucciones [aquí](https://docs.docker.com/docker-for-windows/)
+-   Para instalar Docker en Mac siga las instrucciones [aquí](https://docs.docker.com/docker-for-mac/)
+-   Para instalar Docker en Linux siga las instrucciones [aquí](https://docs.docker.com/install/)
 
--   To install Docker on Windows follow the instructions [here](https://docs.docker.com/docker-for-windows/)
--   To install Docker on Mac follow the instructions [here](https://docs.docker.com/docker-for-mac/)
--   To install Docker on Linux follow the instructions [here](https://docs.docker.com/install/)
+**Docker Compose** es una herramienta para definir y ejecutar aplicaciones Docker multi-contenedores. Un
+[archivo YAML](https://raw.githubusercontent.com/Fiware/tutorials.Entity-Relationships/master/docker-compose.yml) se utiliza para configurar los servicios necesarios para la aplicación. Esto significa que todos los servicios de los contenedores pueden ser ejecutados en un solo comando. Docker Compose está instalado por defecto como parte de Docker para Windows y Docker para Mac, sin embargo los usuarios de Linux tendrán que seguir las instrucciones que se encuentran [aquí](https://docs.docker.com/compose/install/)
 
-**Docker Compose** is a tool for defining and running multi-container Docker applications. A
-[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.Entity-Relationships/master/docker-compose.yml) is used
-configure the required services for the application. This means all container services can be brought up in a single
-command. Docker Compose is installed by default as part of Docker for Windows and Docker for Mac, however Linux users
-will need to follow the instructions found [here](https://docs.docker.com/compose/install/)
-
-You can check your current **Docker** and **Docker Compose** versions using the following commands:
+Puede comprobar sus versiones actuales de **Docker** y **Docker Compose** usando los siguientes comandos:
 
 ```console
 docker-compose -v
 docker version
 ```
 
-Please ensure that you are using Docker version 18.03 or higher and Docker Compose 1.21 or higher and upgrade if
-necessary.
+Por favor, asegúrese de que esté usando la versión 18.03 o superior de Docker y la versión 1.21 o superior de Docker Compose y actualice si es necesario.
 
 ## Cygwin para Windows
 
-We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/)
-to provide a command-line functionality similar to a Linux distribution on Windows.
+Iniciaremos nuestros servicios usando un simple script de Bash. Los usuarios de Windows deben descargar [cygwin](http://www.cygwin.com/)
+para proporcionar una funcionalidad de línea de comandos similar a la de una distribución de Linux en Windows.
 
 # Inicio
 
-All services can be initialised from the command-line by running the
-[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/services) Bash script provided within
-the repository. Please clone the repository and create the necessary images by running the commands as shown:
+Todos los servicios pueden ser inicializados desde la línea de comando ejecutando el script Bash proporcionado en el repositorio
+[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/services). Por favor, clone el repositorio y cree las imágenes necesarias ejecutando los comandos como se muestra:
 
 ```console
 git clone https://github.com/FIWARE/tutorials.Entity-Relationships.git
@@ -185,10 +178,11 @@ cd tutorials.Entity-Relationships
 ./services start
 ```
 
-This command will also import seed data from the previous
-[Store Finder tutorial](https://github.com/FIWARE/tutorials.Getting-Started) on startup.
+Este comando también importará datos iniciales del ejemplo anterior
+[Tutorial del Buscador de Tiendas](https://github.com/FIWARE/tutorials.Getting-Started/blob/master/README.es.md).
 
-> :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+
+> :information_source: **Nota:** Si quiere limpiar y empezar de nuevo puedes hacerlo con el siguiente comando:
 >
 > ```console
 > ./services stop
