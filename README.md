@@ -62,7 +62,7 @@ Para un sistema simple de gestión de inventarios, sólo necesitaremos cuatro ti
     -   Una ubicación física, por ejemplo: _52.5075 N, 13.3903 E_
     -   Una capacidad máxima
     -   Una asociación a la store (tienda) a la que pertenece
--   Un producto (product) es algo que deseamos vendemos - es un objeto conceptual. Entidades **Product** pueden tener propiedades como:
+-   Un producto (product) es algo que se desea vender - es un objeto conceptual. Entidades **Product** pueden tener propiedades como:
     -   Nombre del producto, por ejemplo "Vodka"
     -   Su precio, por ejemplo: 13.99 Euros
     -   Un tamaño, por ejemplo: Pequeño
@@ -88,25 +88,23 @@ cambiar su precio, se podrían vender las existencias y reducir el número de ex
 
 # Arquitectura
 
-This application will only make use of one FIWARE component - the
-[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker is sufficient
-for an application to qualify as _“Powered by FIWARE”_.
+Esta aplicación sólo hará uso de un componente FIWARE - el
+[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) (Corredor de Contexto de Orión). El uso del Orion Context Broker es suficiente
+para una aplicación para calificar como _"Powered by FIWARE"_.
 
-Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep
-persistence of the context data it holds. Therefore, the architecture will consist of two elements:
+Actualmente, el Orion Context Broker depende de la tecnología de código abierto [MongoDB](https://www.mongodb.com/) para mantener
+la persistencia de los datos de contexto que contiene. Por lo tanto, la arquitectura consistirá en dos elementos:
 
--   The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using
+-   El [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) recibirá las solicitudes utilizando
     [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
--   The underlying [MongoDB](https://www.mongodb.com/) database :
-    -   Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and
-        registrations
+-   La base de datos subyacente [MongoDB](https://www.mongodb.com/):
+    -   Utilizado por el Orion Context Broker para guardar información de datos de contexto como entidades de datos, suscripciones e inscripciones
 
-Since all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and
-run from exposed ports.
+Dado que todas las interacciones entre los dos elementos se inician mediante solicitudes HTTP, las entidades pueden ser aisladas en contenedores y corridas desde puertos expuestos.
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/architecture.png)
 
-The necessary configuration information can be seen in the services section of the associated `docker-compose.yml` file:
+La información de configuración necesaria se puede ver en la sección de servicios del archivo asociado `docker-compose.yml`:
 
 ```yaml
 orion:
@@ -138,10 +136,9 @@ mongo-db:
     command: --bind_ip_all --smallfiles
 ```
 
-Both containers are residing on the same network - the Orion Context Broker is listening on Port `1026` and MongoDB is
-listening on the default port `27017`. Both containers are also exposing the same ports externally - this is purely for
-the tutorial access - so that cUrl or Postman can access them without being part of the same network. The command-line
-initialization should be self explanatory.
+Ambos contenedores residen en la misma red - Orion Context Broker escucha en el puerto `1026` y MongoDB lo hace por defecto en el puerto `27017`. Ambos contenedores también están exponiendo los mismos puertos externamente - esto es puramente para
+el acceso al tutorial - para que cUrl o Postman puedan acceder a ellos sin ser parte de la misma red.  
+La inicialización línea de comandos es autoexplicativa.
 
 # Pre requisitos
 
