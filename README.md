@@ -6,49 +6,48 @@
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/) <br/>
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
-This tutorial teaches FIWARE users about batch commands and entity relationships. The tutorial builds on the data
-created in the previous [store finder example](https://github.com/FIWARE/tutorials.Getting-Started) and creates and
-associates a series of related data entities to create a simple stock management system.
+Este tutorial enseña a los usuarios de FIWARE acerca de los comandos por lotes (batch processing) y las relaciones de entidad. El tutorial se basa en los datos creados en el anterior [ejemplo del buscador de tiendas](https://github.com/FIWARE/tutorials.Getting-Started/blob/master/README.es.md), agrega y
+asocia una serie de entidades de datos relacionadas para crear un sistema sencillo de gestión inventarios.
 
-The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
-[Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/).
+A lo largo de este tutorial se utilizan comandos [cUrl](https://ec.haxx.se/), pero también está disponible como
+[documentación de Postman](https://fiware.github.io/tutorials.Entity-Relationships/).
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0671934f64958d3200b3)
+[![Ejecutar en Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0671934f64958d3200b3)
 
 -   このチュートリアルは[日本語](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/README.ja.md)でも
-    ご覧いただけます。
+    ご覧いただけます。<br/>🇪n This tutorial is also available in [english](README.md)
 
-## Contents
+## Contenido
 
 <details>
-<summary><strong>Details</strong></summary>
+<summary><strong>Detalle</strong></summary>
 
--   [Understanding Entities and Relationships](#understanding-entities-and-relationships)
-    -   [Entities within a stock management system](#entities-within-a-stock-management-system)
--   [Architecture](#architecture)
--   [Prerequisites](#prerequisites)
-    -   [Docker and Docker Compose](#docker-and-docker-compose)
-    -   [Cygwin for Windows](#cygwin-for-windows)
--   [Start Up](#start-up)
--   [Creating and Associating Data Entities](#creating-and-associating-data-entities)
-    -   [Creating Several Entities at Once](#creating-several-entities-at-once)
-    -   [Creating a one-to-many Relationship](#creating-a-one-to-many-relationship)
-    -   [Reading a Foreign Key Relationship](#reading-a-foreign-key-relationship)
-        -   [Reading from Child Entity to Parent Entity](#reading-from-child-entity-to-parent-entity)
-        -   [Reading from Parent Entity to Child Entity](#reading-from-parent-entity-to-child-entity)
-    -   [Creating many-to-many Relationships](#creating-many-to-many-relationships)
-    -   [Reading from a bridge table](#reading-from-a-bridge-table)
-    -   [Data Integrity](#data-integrity)
--   [Next Steps](#next-steps)
+-   [Comprensión de entidades y relaciones](#comprension-de-entidades-y-relaciones)
+    -   [Entidades en un sistema de gestión de inventarios](#entidades-en-un-sistema-de-gestion-de-inventarios)
+-   [Arquitectura](#arquitectura)
+-   [Pre requisitos](#pre-requisitos)
+    -   [Docker y Docker Compose](#docker-y-docker-compose)
+    -   [Cygwin para Windows](#cygwin-para-windows)
+-   [Inicio](#inicio)
+-   [Creación y asociación de entidades de datos](#creacion-y-asociacion-de-entidades-de-datos)
+    -   [Creación de varias entidades a la vez](#creacion-de-varias-entidades-a-la-vez)
+    -   [Creación de una Relación de uno-a-muchos](#creacion-de-una-relacion-de-uno-a-muchos)
+    -   [Lectura de una Relación de Clave Foránea](#lectura-de-una-relacion-de-clave-foranea)
+        -   [Lectura desde la Entidad Hijo a la Entidad Padre](#lectura-desde-la-entidad-hijo-a-la-entidad-padre)
+        -   [Lectura desde la Entidad Padre a la Entidad Hijo](#lectura-desde-la-entidad-padre-a-la-entidad-hijo)
+    -   [Creando Relaciones de muchos-a-muchos](#creando-relaciones-de-muchos-a-muchos)
+    -   [Leyendo desde una tabla puente](#leyendo-desde-una-tabla-puente)
+    -   [Integridad de los datos](#Integridad-de-los-datos)
+-   [Próximos pasos](#proximos-pasos)
 
 </details>
 
-# Understanding Entities and Relationships
+# Comprensión de entidades y relaciones
 
-Within the FIWARE platform, the context of an entity represents the state of a physical or conceptural object which
-exists in the real world.
+En la plataforma FIWARE, el contexto de una entidad representa el estado de un objeto físico o conceptual que
+existe en el mundo real.
 
-## Entities within a stock management system
+## Entidades en un sistema de gestión de inventarios
 
 For a simple stock management system, we will only need four types of entity. The relationship between our entities is
 defined as shown:
@@ -90,7 +89,7 @@ change its price, stock could be sold and the shelf count of stock could be redu
 > Therefore a store in the real world is represented in the context data by a **Store** entity, and a real world shelf
 > found in a store is represented in the context data by a **Shelf** entity which has a `refStore` attribute.
 
-# Architecture
+# Arquitectura
 
 This application will only make use of one FIWARE component - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker is sufficient
@@ -147,9 +146,9 @@ listening on the default port `27017`. Both containers are also exposing the sam
 the tutorial access - so that cUrl or Postman can access them without being part of the same network. The command-line
 initialization should be self explanatory.
 
-# Prerequisites
+# Pre requisitos
 
-## Docker and Docker Compose
+## Docker y Docker Compose
 
 To keep things simple both components will be run using [Docker](https://www.docker.com). **Docker** is a container
 technology which allows to different components isolated into their respective environments.
@@ -174,12 +173,12 @@ docker version
 Please ensure that you are using Docker version 18.03 or higher and Docker Compose 1.21 or higher and upgrade if
 necessary.
 
-## Cygwin for Windows
+## Cygwin para Windows
 
 We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/)
 to provide a command-line functionality similar to a Linux distribution on Windows.
 
-# Start Up
+# Inicio
 
 All services can be initialised from the command-line by running the
 [services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/services) Bash script provided within
@@ -201,9 +200,9 @@ This command will also import seed data from the previous
 > ./services stop
 > ```
 
-# Creating and Associating Data Entities
+# Creación y asociación de entidades de datos
 
-## Creating Several Entities at Once
+## Creación de varias entidades a la vez
 
 In the previous tutorial, we created each **Store** entity individually,
 
@@ -383,7 +382,7 @@ curl -X GET \
 
 As you can see there are currently three additional property attributes present `location`, `maxCapacity` and `name`
 
-## Creating a one-to-many Relationship
+## Creación de una Relación de uno-a-muchos
 
 In databases, foreign keys are often used to designate a one-to-many relationship - for example every shelf is found in
 a single store and a single store can hold many shelving units. In order to remember this information we need to add an
@@ -476,9 +475,9 @@ The updated response including the `refStore` attribute is shown below:
 }
 ```
 
-## Reading a Foreign Key Relationship
+## Lectura de una Relación de Clave Foránea
 
-### Reading from Child Entity to Parent Entity
+### Lectura desde la Entidad Hijo a la Entidad Padre
 
 We can also make a request to retrieve the `refStore` attribute relationship information from a known **Shelf** entity
 by using the `options=values` setting
@@ -498,7 +497,7 @@ curl -X GET \
 
 This can be interpreted as "I am related to the **Store** entity with the `id=urn:ngsi-ld:Store:001`"
 
-### Reading from Parent Entity to Child Entity
+### Lectura desde la Entidad Padre a la Entidad Hijo
 
 Reading from a parent to a child can be done using the `options=count` setting
 
@@ -550,7 +549,7 @@ Can be interpreted as request for _Give me the names of all shelves in `urn:ngsi
 [["Corner Unit"], ["Wall Unit 1"], ["Wall Unit 2"]]
 ```
 
-## Creating many-to-many Relationships
+## Creando Relaciones de muchos-a-muchos
 
 Bridge Tables are often used to relate many-to-many relationships. For example, every store will sell a different range
 of products, and each product is sold in many different stores.
@@ -592,7 +591,7 @@ curl -iX POST \
 }'
 ```
 
-## Reading from a bridge table
+## Leyendo desde una tabla puente
 
 When reading from a bridge table entity, the `type` of the entity must be known.
 
@@ -627,7 +626,7 @@ curl -X GET \
 [["urn:ngsi-ld:Store:001"]]
 ```
 
-## Data Integrity
+## Integridad de los datos
 
 Context data relationships should only be set up and maintained between entities that exist - in other words the URN
 `urn:ngsi-ld:<entity-type>:<entity-id>` should link to another existing entity within the context. Therefore we must
@@ -672,13 +671,13 @@ is no direct relationship between product and store.
 
 If this request returns an empty array, the entity has no associates.
 
-# Next Steps
+# Próximos pasos
 
 Want to learn how to add more complexity to your application by adding advanced features? You can find out by reading
 the other [tutorials in this series](https://fiware-tutorials.rtfd.io)
 
 ---
 
-## License
+## Licencia
 
 [MIT](LICENSE) © 2018-2020 FIWARE Foundation e.V.
