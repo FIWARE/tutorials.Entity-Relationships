@@ -49,45 +49,42 @@ existe en el mundo real.
 
 ## Entidades en un sistema de gestión de inventarios
 
-For a simple stock management system, we will only need four types of entity. The relationship between our entities is
-defined as shown:
+Para un sistema simple de gestión de inventarios, sólo necesitaremos cuatro tipos de entidades. La relación entre nuestras entidades se define a continuación:
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/entities.png)
 
--   A store is a real world bricks and mortar building. **Store** entities would have properties such as:
-    -   A name of the store e.g. "Checkpoint Markt"
-    -   An address "Friedrichstraße 44, 10969 Kreuzberg, Berlin"
-    -   A phyiscal location e.g. _52.5075 N, 13.3903 E_
--   A shelf is a real world device to hold objects which we wish to sell. Each **Shelf** entity would have properties
-    such as:
-    -   A name of the shelf e.g. "Wall Unit"
-    -   A phyiscal location e.g. _52.5075 N, 13.3903 E_
-    -   A maximum capacity
-    -   An association to the store in which the shelf is present
--   A product is defined as something that we sell - it is conceptural object. **Product** entities would have
-    properties such as:
-    -   A name of the product e.g. "Vodka"
-    -   A price e.g. 13.99 Euros
-    -   A size e.g. Small
--   An inventory item is another conceptural entity, used to assocate products, stores, shelves and physical objects.
-    **Inventory Item** entities would have properties such as:
-    -   An association to the product being sold
-    -   An association to the store in which the product is being sold
-    -   An association to the shelf where the product is being displayed
-    -   A stock count of the quantity of the product available in the warehouse
-    -   A stock count of the quantity of the product available on the shelf
+-   Una tinda (store) es un edificio concreto (de ladrillos) del mundo real. Entidades **Store** pueden tener propiedades como:
+    -   Nombre de la tienda, por ejemplo: "Checkpoint Markt"
+    -   Una dirección, por ejemplo: "Friedrichstraße 44, 10969 Kreuzberg, Berlin"
+    -   Una ubicación física, por ejemplo: _52.5075 N, 13.3903 E_
+-   Un estante (shelf) es una entidad del mundo real para guardar los objetos que queremos vender. Cada entidad **Shelf** puede tener propiedades como:
+    -   Nombre del estante, por ejemplo: "Wall Unit"
+    -   Una ubicación física, por ejemplo: _52.5075 N, 13.3903 E_
+    -   Una capacidad máxima
+    -   Una asociación a la store (tienda) a la que pertenece
+-   Un producto (product) es algo que deseamos vendemos - es un objeto conceptual. Entidades **Product** pueden tener propiedades como:
+    -   Nombre del producto, por ejemplo "Vodka"
+    -   Su precio, por ejemplo: 13.99 Euros
+    -   Un tamaño, por ejemplo: Pequeño
+-   Un artículo de inventario (inventory) es otra entidad conceptual, utilizada para asociar productos, tiendas, estantes y objetos físicos.
+    Entidades **Inventory Item** pueden tener propiedades como:
+    -   Una asociación con el producto que se vende
+    -   Una asociación a la tienda en la que se vende el producto
+    -   Una asociación con el estante donde se exhibe el producto
+    -   Un recuento de la cantidad de producto disponible en el almacén
+    -   Un recuento de la cantidad de producto disponible en el estante
 
-As you can see, each of the entities defined above contain some properties which are liable to change. A product could
-change its price, stock could be sold and the shelf count of stock could be reduced and so on.
+Como puede ver, cada una de las entidades definidas anteriormente contienen propiedades que pueden cambiar. Un producto podría
+cambiar su precio, se podrían vender las existencias y reducir el número de existencias en las estanterías, etc.
 
-> **Note** this tutorial uses the following typographic styling :
+> **Nota** este tutorial utiliza el siguiente estilo tipográfico:
 >
-> -   Entity types have been made **bold text**
-> -   Data attributes are written in `monospace text`
-> -   Items in the real world use plain text
+> -   Los tipos de entidades se se escriben con **texto en negrita**
+> -   Los atributos de los datos se escriben en `texto de espaciado fijo`
+> -   Los artículos en el mundo real es escriben en texto simple, sin estilo
 >
-> Therefore a store in the real world is represented in the context data by a **Store** entity, and a real world shelf
-> found in a store is represented in the context data by a **Shelf** entity which has a `refStore` attribute.
+> Por lo tanto, una tienda en el mundo real está representada en los datos de contexto por una entidad **Store**, y un estante del mundo
+> real encontrado en una tienda está representado por una entidad **Estante** con un atributo `refStore`.
 
 # Arquitectura
 
