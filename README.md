@@ -138,7 +138,7 @@ mongo-db:
 
 Ambos contenedores residen en la misma red - Orion Context Broker escucha en el puerto `1026` y MongoDB lo hace por defecto en el puerto `27017`. Ambos contenedores también están exponiendo los mismos puertos externamente - esto es puramente para
 el acceso al tutorial - para que cUrl o Postman puedan acceder a ellos sin ser parte de la misma red.  
-La inicialización línea de comandos es autoexplicativa.
+La inicialización por línea de comandos es autoexplicativa.
 
 # Pre requisitos
 
@@ -192,15 +192,15 @@ Este comando también importará datos iniciales del ejemplo anterior
 
 ## Creación de varias entidades a la vez
 
-In the previous tutorial, we created each **Store** entity individually,
+En el tutorial anterior, creamos cada entidad de **Store** individualmente.
 
 Lets create five shelf units at the same time. This request uses the convenience batch processing endpoint to create
 five shelf entities. Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes -
 `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an
 array of entities we wish to update.
+Vamos a crear cinco unidades de estantes al mismo tiempo. Esta solicitud utiliza el endpoint del procesamiento por lotes para crear cinco entidades de estantes. El procesamiento por lotes utiliza el endpoint "v2/op/update" con un payload con dos atributos - `actionType=APPEND` significa que sobrescribiremos las entidades existentes si existiesen, mientras que el atributo `entities` contiene un conjunto de entidades que deseamos actualizar.
 
-To differenciate **Shelf** Entities from **Store** Entities, each shelf has been assigned `type=Shelf`. Real-world
-properties such as `name` and `location` have been added as properties to each shelf.
+Para diferenciar las entidades **Shelf** de las entidades **Store**, a cada estante se le ha asignado "tipo=Shelf". Propiedades como "nombre" y "ubicación" han sido añadidas como propiedades a cada estante.
 
 #### :one: Request:
 
@@ -275,7 +275,7 @@ curl -iX POST \
 }'
 ```
 
-Similarly, we can create a series of **Product** entities by using the `type=Product`.
+De manera similar, podemos crear una serie de entidades **Product** utilizando el `tipo=Product`.
 
 #### :two: Request:
 
@@ -338,13 +338,10 @@ curl -iX POST \
 }'
 ```
 
-In both cases we have encoded each entity `id` according to the NGSI-LD
-[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf) - the proposal
-is that each `id` is a URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This will mean that every
-`id` in the system will be unique.
+En ambos casos hemos codificado cada entidad `id` de acuerdo con NGSI-LD
+[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf) - la propuesta es que cada `id` es una URN y sigue un formato estándar: `urna:ngsi-ld:<tipo de entidad>:<identidad-id>`.Esto significará que cada `ID` en el sistema será único.
 
-Shelf information can be requested by making a GET request on the `/v2/entities` endpoint. For example to return the
-context data of the **Shelf** entity with the `id=urn:ngsi-ld:Shelf:unit001`.
+La información de Shelf puede ser solicitada haciendo una petición GET en el punto final de `v2/entities`. Por ejemplo, para devolver los datos de contexto de la entidad **Shelf** con el `id=urn:ngsi-ld:Shelf:unit001`.
 
 #### :three: Request:
 
@@ -368,26 +365,21 @@ curl -X GET \
 }
 ```
 
-As you can see there are currently three additional property attributes present `location`, `maxCapacity` and `name`
+Como puede ver, hay actualmente tres atributos de propiedad adicionales: `location`, `maxCapacity` y `name`.
 
 ## Creación de una Relación de uno-a-muchos
 
-In databases, foreign keys are often used to designate a one-to-many relationship - for example every shelf is found in
-a single store and a single store can hold many shelving units. In order to remember this information we need to add an
-association relationship similar to a foreign key. Batch processing can again be used to amend the existing the
-**Shelf** entities to add a `refStore` attribute holding the relationship to each store. According to the FIWARE Data
-Modelling Guidelines on
-[linked data](https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data), when an
-entity attribute is used as a link to other entities it should be named with the prefix `ref` plus the name of the
-target (linked) entity type.
+En bases de datos, las claves externas se utilizan a menudo para designar una relación de uno a muchos - por ejemplo, cada estante se encuentra en una sola tienda pero un almacén puede albergar muchos estantes. Para poder recordar esta información necesitamos añadir una
+relación de asociación similar a una clave foránea. El procesamiento por lotes puede utilizarse de nuevo para modificar las
+entidades **Shelf** para añadir un atributo `refStore` que mantiene la relación con cada tienda. De acuerdo con la guía de modelados de datos de FIWARE [datos vinculados](https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data), cuando se utilice un atributo de entidad como vínculo con otras entidades, deberá nombrarse con el prefijo `ref`más el nombre del tipo de entidad de destino (vinculado).
 
-The value of the `refStore` attribute corresponds to a URN associated to a **Store** entity itself.
+El valor del atributo `refStore` corresponde a una URN asociada a la propia entidad **Store**.
 
-The URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`
+La URN sigue un formato estándar: `urn:ngsi-ld:<entity-type>:<entity-id>`
 
 #### :four: Request:
 
-The following request associates three shelves to `urn:ngsi-ld:Store:001` and two shelves to `urn:ngsi-ld:Store:002`
+La siguiente solicitud asocia tres estantes a `urn:ngsi-ld:Store:001` y dos estantes a `urn:ngsi-ld:Store:002`.
 
 ```console
 curl -iX POST \
@@ -435,8 +427,7 @@ curl -iX POST \
 }'
 ```
 
-Now when the shelf information is requested again, the response has changed and includes a new property `refStore`,
-which has been added in the previous step.
+Cuando la información del estante se solicita de nuevo, la respuesta ha cambiado e incluye una nueva propiedad `refStore`, añadida en el paso anterior.
 
 #### :five: Request:
 
@@ -447,7 +438,7 @@ curl -X GET \
 
 #### Response:
 
-The updated response including the `refStore` attribute is shown below:
+La respuesta actualizada que incluye el atributo `refStore` se muestra a continuación:
 
 ```json
 {
@@ -467,8 +458,7 @@ The updated response including the `refStore` attribute is shown below:
 
 ### Lectura desde la Entidad Hijo a la Entidad Padre
 
-We can also make a request to retrieve the `refStore` attribute relationship information from a known **Shelf** entity
-by using the `options=values` setting
+También podemos hacer una solicitud para recuperar la información de la relación de atributos `refStore` de una entidad conocida `Shelf` usando el parámetro "options=values".
 
 #### :six: Request:
 
@@ -483,11 +473,11 @@ curl -X GET \
 ["urn:ngsi-ld:Store:001"]
 ```
 
-This can be interpreted as "I am related to the **Store** entity with the `id=urn:ngsi-ld:Store:001`"
+Esto puede ser interpretado como "Estoy relacionado con la entidad **Store** con el `id=urn:ngsi-ld:Store:001`"
 
 ### Lectura desde la Entidad Padre a la Entidad Hijo
 
-Reading from a parent to a child can be done using the `options=count` setting
+La lectura de un padre a un hijo puede hacerse usando el parámetro `options=count`.
 
 #### :seven: Request:
 
@@ -496,8 +486,7 @@ curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type&type=Shelf'
 ```
 
-This request is asking for the `id` of all **Shelf** entities associated to the URN `urn:ngsi-ld:Store:001`, the
-response is a JSON array as shown.
+Esta solicitud está pidiendo el `id` de todas las entidades de **Shelf** asociadas a la URN `urn:ngsi-ld:Store:001`, la respuesta es un arreglo JSON como se muestra.
 
 #### Response:
 
@@ -518,9 +507,8 @@ response is a JSON array as shown.
 ]
 ```
 
-In plain English, this can be interpreted as "There are three shelves in `urn:ngsi-ld:Store:001`". The request can be
-altered use the `options=values` and `attrs` parameters to return specific properties of the relevant associated
-entities. For example the request:
+En lenguaje coloquial, esto puede interpretarse como "Hay tres estantes en `urn:ngsi-ld:Store:001`". La petición puede ser alterada usando los parámetros `options=values` y `attrs` para devolver propiedades específicas de las entidades asociadas relevantes. Por ejemplo, la solicitud:
+
 
 #### :eight: Request:
 
@@ -529,7 +517,7 @@ curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&type=Shelf&options=values&attrs=name'
 ```
 
-Can be interpreted as request for _Give me the names of all shelves in `urn:ngsi-ld:Store:001`_.
+Puede ser interpretado como una petición de _Dame los nombres de todos los estantes en `urn:ngsi-ld:Store:001`_.
 
 #### Response:
 
@@ -539,16 +527,11 @@ Can be interpreted as request for _Give me the names of all shelves in `urn:ngsi
 
 ## Creando Relaciones de muchos-a-muchos
 
-Bridge Tables are often used to relate many-to-many relationships. For example, every store will sell a different range
-of products, and each product is sold in many different stores.
+Tablas puente se utilizan a menudo para relacionar las relaciones de muchos con muchos. Por ejemplo, cada tienda venderá una gama diferente de productos, y cada producto se vende en muchas tiendas diferentes.
 
-In order to hold the context information to "place a product onto a shelf in a given store" we will need to create a new
-data entity **InventoryItem** which exists to associate data from other entities. It has a foreign key relationship to
-the **Store**, **Shelf** and **Product** entities and therefore requires relationship attributes called `refStore`,
-`refShelf` and `refProduct`.
+A fin de mantener la información de contexto para "colocar un producto en un estante de una tienda determinada", será necesario crear una nueva entidad de datos **InventoryItem** que exista para asociar los datos de otras entidades. Tiene una relación clave ajena a las entidades **Store**, **Shelf** y **Product** y por lo tanto requiere atributos de relación llamados `refStore`, `refShelf` y `refProduct`.
 
-Assigning a product to a shelf is simply done by creating an entity holding the relationship information and any other
-additional properties (such as `stockCount` and `shelfCount`)
+La asignación de un producto a un estante se hace simplemente creando una entidad que contenga la información de la relación y cualquier otra propiedad adicional (como `StockCount` y `ShelfCount`)
 
 #### :nine: Request:
 
@@ -581,10 +564,9 @@ curl -iX POST \
 
 ## Leyendo desde una tabla puente
 
-When reading from a bridge table entity, the `type` of the entity must be known.
+Cuando se lee de una entidad de la tabla puente, el `type` de la entidad debe ser conocido.
 
-After creating at least one **InventoryItem** entity we can query _Which products are sold in `urn:ngsi-ld:Store:001`?_
-by making the following request
+Después de crear al menos una entidad **InventoryItem** podemos consultar _¿Qué productos se venden en `urn:ngsi-ld:Store:001`?_ haciendo la siguiente petición
 
 #### :one::zero: Request:
 
@@ -599,7 +581,7 @@ curl -X GET \
 [["urn:ngsi-ld:Product:prod001"]]
 ```
 
-Similarly we can request _Which stores are selling `urn:ngsi-ld:Product:001`?_ by altering the request as shown:
+Del mismo modo, podemos consultar _¿Qué tiendas están vendiendo `urn:ngsi-ld:Product:001`?_ alterando la petición como se muestra:
 
 #### :one::one: Request:
 
@@ -616,13 +598,9 @@ curl -X GET \
 
 ## Integridad de los datos
 
-Context data relationships should only be set up and maintained between entities that exist - in other words the URN
-`urn:ngsi-ld:<entity-type>:<entity-id>` should link to another existing entity within the context. Therefore we must
-take care when deleting an entity that no dangling references remain. Imagine `urn:ngsi-ld:Store:001` is deleted - what
-should happen to the associated the **Shelf** entities?
+Las relaciones de datos de contexto sólo deben establecerse y mantenerse entre entidades que existan - en otras palabras, la URN `urn:ngsi-ld:<entity-type>:<entity-id>` debe vincularse a otra entidad existente dentro del contexto. Por lo tanto, debemos tener cuidado al borrar una entidad de que no queden referencias colgantes. Imagina que se borra `urn:ngsi-ld:Store:001` - ¿qué debería pasar con las entidades **Shelf** asociadas?
 
-It is possible to make a request to see if any remaining entity relationship exists prior to deletion by making a
-request as follows
+Es posible hacer una solicitud para ver si existe alguna relación de entidad restante antes de la supresión, haciendo una solicitud como la siguiente
 
 #### :one::two: Request:
 
@@ -633,8 +611,7 @@ curl -X GET \
 
 #### :one::three: Request:
 
-The response lists a series of **Shelf** and **InventoryItem** entities - there are no **Product** entities since there
-is no direct relationship between product and store.
+La respuesta enumera una serie de entidades de **Shelf** y **InventoryItem** - no hay entidades de **Product** ya que no hay una relación directa entre el producto y la tienda.
 
 ```json
 [
@@ -657,12 +634,12 @@ is no direct relationship between product and store.
 ]
 ```
 
-If this request returns an empty array, the entity has no associates.
+Si esta solicitud devuelve un arreglo vacío, la entidad no tiene objetos asociados.
 
 # Próximos pasos
 
-Want to learn how to add more complexity to your application by adding advanced features? You can find out by reading
-the other [tutorials in this series](https://fiware-tutorials.rtfd.io)
+¿Quieres aprender a añadir más complejidad a tu aplicación añadiendo funciones avanzadas? Puedes averiguarlo leyendo
+los otros [tutoriales de esta serie](https://fiware-tutorials.rtfd.io)
 
 ---
 
