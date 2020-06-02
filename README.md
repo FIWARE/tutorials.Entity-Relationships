@@ -6,105 +6,111 @@
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/) <br/>
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
-Este tutorial enseña a los usuarios de FIWARE acerca de los comandos por lotes (batch processing) y las relaciones de entidad. El tutorial se basa en los datos creados en el ejemplo anterior [buscador de tiendas](https://github.com/FIWARE/tutorials.Getting-Started/blob/master/README.es.md), agrega y
-asocia una serie de entidades de datos relacionadas para crear un sistema sencillo de gestión inventarios.
+This tutorial teaches FIWARE users about batch commands and entity relationships. The tutorial builds on the data
+created in the previous [store finder example](https://github.com/FIWARE/tutorials.Getting-Started) and creates and
+associates a series of related data entities to create a simple stock management system.
 
-A lo largo de este tutorial se utilizan comandos [cUrl](https://ec.haxx.se/), pero también está disponible como
-[documentación de Postman](https://fiware.github.io/tutorials.Entity-Relationships/).
+The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
+[Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/).
 
-[![Ejecutar en Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0671934f64958d3200b3)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0671934f64958d3200b3)
 
 -   このチュートリアルは[日本語](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/README.ja.md)でも
-    ご覧いただけます。<br/>🇪n This tutorial is also available in [english](README.md)
+    ご覧いただけます。
 
-## Contenido
+## Contents
 
 <details>
-<summary><strong>Detalle</strong></summary>
+<summary><strong>Details</strong></summary>
 
--   [Comprensión de entidades y relaciones](#comprension-de-entidades-y-relaciones)
-    -   [Entidades en un sistema de gestión de inventarios](#entidades-en-un-sistema-de-gestion-de-inventarios)
--   [Arquitectura](#arquitectura)
--   [Pre requisitos](#pre-requisitos)
-    -   [Docker y Docker Compose](#docker-y-docker-compose)
-    -   [Cygwin para Windows](#cygwin-para-windows)
--   [Inicio](#inicio)
--   [Creación y asociación de entidades de datos](#creacion-y-asociacion-de-entidades-de-datos)
-    -   [Creación de varias entidades a la vez](#creacion-de-varias-entidades-a-la-vez)
-    -   [Creación de una Relación de uno-a-muchos](#creacion-de-una-relacion-de-uno-a-muchos)
-    -   [Lectura de una Relación de Clave Foránea](#lectura-de-una-relacion-de-clave-foranea)
-        -   [Lectura desde la Entidad Hijo a la Entidad Padre](#lectura-desde-la-entidad-hijo-a-la-entidad-padre)
-        -   [Lectura desde la Entidad Padre a la Entidad Hijo](#lectura-desde-la-entidad-padre-a-la-entidad-hijo)
-    -   [Creando Relaciones de muchos-a-muchos](#creando-relaciones-de-muchos-a-muchos)
-    -   [Leyendo desde una tabla puente](#leyendo-desde-una-tabla-puente)
-    -   [Integridad de los datos](#Integridad-de-los-datos)
--   [Próximos pasos](#proximos-pasos)
+-   [Understanding Entities and Relationships](#understanding-entities-and-relationships)
+    -   [Entities within a stock management system](#entities-within-a-stock-management-system)
+-   [Architecture](#architecture)
+-   [Prerequisites](#prerequisites)
+    -   [Docker and Docker Compose](#docker-and-docker-compose)
+    -   [Cygwin for Windows](#cygwin-for-windows)
+-   [Start Up](#start-up)
+-   [Creating and Associating Data Entities](#creating-and-associating-data-entities)
+    -   [Creating Several Entities at Once](#creating-several-entities-at-once)
+    -   [Creating a one-to-many Relationship](#creating-a-one-to-many-relationship)
+    -   [Reading a Foreign Key Relationship](#reading-a-foreign-key-relationship)
+        -   [Reading from Child Entity to Parent Entity](#reading-from-child-entity-to-parent-entity)
+        -   [Reading from Parent Entity to Child Entity](#reading-from-parent-entity-to-child-entity)
+    -   [Creating many-to-many Relationships](#creating-many-to-many-relationships)
+    -   [Reading from a bridge table](#reading-from-a-bridge-table)
+    -   [Data Integrity](#data-integrity)
+-   [Next Steps](#next-steps)
 
 </details>
 
-# Comprensión de entidades y relaciones
+# Understanding Entities and Relationships
 
-En la plataforma FIWARE, el contexto de una entidad representa el estado de un objeto físico o conceptual que
-existe en el mundo real.
+Within the FIWARE platform, the context of an entity represents the state of a physical or conceptural object which
+exists in the real world.
 
-## Entidades en un sistema de gestión de inventarios
+## Entities within a stock management system
 
-Para un sistema simple de gestión de inventarios, sólo necesitaremos cuatro tipos de entidades. La relación entre nuestras entidades se define a continuación:
+For a simple stock management system, we will only need four types of entity. The relationship between our entities is
+defined as shown:
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/entities.png)
 
--   Una tinda (store) es un edificio concreto (de ladrillos) del mundo real. Entidades **Store** pueden tener propiedades como:
-    -   Nombre de la tienda, por ejemplo: "Checkpoint Markt"
-    -   Una dirección, por ejemplo: "Friedrichstraße 44, 10969 Kreuzberg, Berlin"
-    -   Una ubicación física, por ejemplo: _52.5075 N, 13.3903 E_
--   Un estante (shelf) es una entidad del mundo real para guardar los objetos que queremos vender. Cada entidad **Shelf** puede tener propiedades como:
-    -   Nombre del estante, por ejemplo: "Wall Unit"
-    -   Una ubicación física, por ejemplo: _52.5075 N, 13.3903 E_
-    -   Una capacidad máxima
-    -   Una asociación a la store (tienda) a la que pertenece
--   Un producto (product) es algo que se desea vender - es un objeto conceptual. Entidades **Product** pueden tener propiedades como:
-    -   Nombre del producto, por ejemplo "Vodka"
-    -   Su precio, por ejemplo: 13.99 Euros
-    -   Un tamaño, por ejemplo: Pequeño
--   Un artículo de inventario (inventory) es otra entidad conceptual, utilizada para asociar productos, tiendas, estantes y objetos físicos.
-    Entidades **Inventory Item** pueden tener propiedades como:
-    -   Una asociación con el producto que se vende
-    -   Una asociación a la tienda en la que se vende el producto
-    -   Una asociación con el estante donde se exhibe el producto
-    -   Un recuento de la cantidad de producto disponible en el almacén
-    -   Un recuento de la cantidad de producto disponible en el estante
+-   A store is a real world bricks and mortar building. **Store** entities would have properties such as:
+    -   A name of the store e.g. "Checkpoint Markt"
+    -   An address "Friedrichstraße 44, 10969 Kreuzberg, Berlin"
+    -   A phyiscal location e.g. _52.5075 N, 13.3903 E_
+-   A shelf is a real world device to hold objects which we wish to sell. Each **Shelf** entity would have properties
+    such as:
+    -   A name of the shelf e.g. "Wall Unit"
+    -   A phyiscal location e.g. _52.5075 N, 13.3903 E_
+    -   A maximum capacity
+    -   An association to the store in which the shelf is present
+-   A product is defined as something that we sell - it is conceptural object. **Product** entities would have
+    properties such as:
+    -   A name of the product e.g. "Vodka"
+    -   A price e.g. 13.99 Euros
+    -   A size e.g. Small
+-   An inventory item is another conceptural entity, used to assocate products, stores, shelves and physical objects.
+    **Inventory Item** entities would have properties such as:
+    -   An association to the product being sold
+    -   An association to the store in which the product is being sold
+    -   An association to the shelf where the product is being displayed
+    -   A stock count of the quantity of the product available in the warehouse
+    -   A stock count of the quantity of the product available on the shelf
 
-Como puede ver, cada una de las entidades definidas anteriormente contienen propiedades que pueden cambiar. Un producto podría
-cambiar su precio, se podrían vender las existencias y reducir el número de existencias en las estanterías, etc.
+As you can see, each of the entities defined above contain some properties which are liable to change. A product could
+change its price, stock could be sold and the shelf count of stock could be reduced and so on.
 
-> **Nota** este tutorial utiliza el siguiente estilo tipográfico:
+> **Note** this tutorial uses the following typographic styling :
 >
-> -   Los tipos de entidades se escriben con **texto en negrita**
-> -   Los atributos de los datos se escriben en `texto de espaciado fijo`
-> -   Los artículos en el mundo real es escriben en texto simple, sin estilo
+> -   Entity types have been made **bold text**
+> -   Data attributes are written in `monospace text`
+> -   Items in the real world use plain text
 >
-> Por lo tanto, una tienda en el mundo real está representada en los datos de contexto por una entidad **Store**, y un estante del mundo
-> real encontrado en una tienda está representado por una entidad **Shelf** con un atributo `refStore`.
+> Therefore a store in the real world is represented in the context data by a **Store** entity, and a real world shelf
+> found in a store is represented in the context data by a **Shelf** entity which has a `refStore` attribute.
 
-# Arquitectura
+# Architecture
 
-Esta aplicación sólo hará uso de un componente FIWARE - el
-[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) (Corredor de Contexto de Orión). El uso del Orion Context Broker es suficiente
-para una aplicación para calificar como _"Powered by FIWARE"_.
+This application will only make use of one FIWARE component - the
+[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker is sufficient
+for an application to qualify as _“Powered by FIWARE”_.
 
-Actualmente, el Orion Context Broker depende de la tecnología de código abierto [MongoDB](https://www.mongodb.com/) para mantener
-la persistencia de los datos de contexto que contiene. Por lo tanto, la arquitectura consistirá en dos elementos:
+Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep
+persistence of the context data it holds. Therefore, the architecture will consist of two elements:
 
--   El [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) recibirá las solicitudes utilizando
+-   The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using
     [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
--   La base de datos subyacente [MongoDB](https://www.mongodb.com/):
-    -   Utilizada por el Orion Context Broker para guardar información de datos de contexto como entidades de datos, suscripciones e inscripciones
+-   The underlying [MongoDB](https://www.mongodb.com/) database :
+    -   Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and
+        registrations
 
-Dado que todas las interacciones entre los dos elementos se inician mediante solicitudes HTTP, las entidades pueden ser aisladas en contenedores y corridas desde puertos expuestos.
+Since all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and
+run from exposed ports.
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/architecture.png)
 
-La información de configuración necesaria se puede ver en la sección de servicios del archivo asociado `docker-compose.yml`:
+The necessary configuration information can be seen in the services section of the associated `docker-compose.yml` file:
 
 ```yaml
 orion:
@@ -136,40 +142,48 @@ mongo-db:
     command: --bind_ip_all --smallfiles
 ```
 
-Ambos contenedores residen en la misma red - Orion Context Broker escucha en el puerto `1026` y MongoDB lo hace por defecto en el puerto `27017`. Ambos contenedores también están exponiendo los mismos puertos externamente - esto es puramente para
-el acceso al tutorial - para que cUrl o Postman puedan acceder a ellos sin ser parte de la misma red.  
-La inicialización por línea de comandos es autoexplicativa.
+Both containers are residing on the same network - the Orion Context Broker is listening on Port `1026` and MongoDB is
+listening on the default port `27017`. Both containers are also exposing the same ports externally - this is purely for
+the tutorial access - so that cUrl or Postman can access them without being part of the same network. The command-line
+initialization should be self explanatory.
 
-# Pre requisitos
+# Prerequisites
 
-## Docker y Docker Compose
+## Docker and Docker Compose
 
-Para mantener las cosas simples ambos componentes se ejecutarán usando [Docker](https://www.docker.com). **Docker** es una tecnología de contenedor que permite aislar diferentes componentes en sus respectivos entornos.
--   Para instalar Docker en Windows siga las instrucciones [aquí](https://docs.docker.com/docker-for-windows/)
--   Para instalar Docker en Mac siga las instrucciones [aquí](https://docs.docker.com/docker-for-mac/)
--   Para instalar Docker en Linux siga las instrucciones [aquí](https://docs.docker.com/install/)
+To keep things simple both components will be run using [Docker](https://www.docker.com). **Docker** is a container
+technology which allows to different components isolated into their respective environments.
 
-**Docker Compose** es una herramienta para definir y ejecutar aplicaciones Docker multi-contenedores. Un
-[archivo YAML](https://raw.githubusercontent.com/Fiware/tutorials.Entity-Relationships/master/docker-compose.yml) se utiliza para configurar los servicios necesarios para la aplicación. Esto significa que todos los servicios de los contenedores pueden ser ejecutados en un solo comando. Docker Compose está instalado por defecto como parte de Docker para Windows y Docker para Mac, sin embargo los usuarios de Linux tendrán que seguir las instrucciones que se encuentran [aquí](https://docs.docker.com/compose/install/)
+-   To install Docker on Windows follow the instructions [here](https://docs.docker.com/docker-for-windows/)
+-   To install Docker on Mac follow the instructions [here](https://docs.docker.com/docker-for-mac/)
+-   To install Docker on Linux follow the instructions [here](https://docs.docker.com/install/)
 
-Puede comprobar sus versiones actuales de **Docker** y **Docker Compose** usando los siguientes comandos:
+**Docker Compose** is a tool for defining and running multi-container Docker applications. A
+[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.Entity-Relationships/master/docker-compose.yml) is used
+configure the required services for the application. This means all container services can be brought up in a single
+command. Docker Compose is installed by default as part of Docker for Windows and Docker for Mac, however Linux users
+will need to follow the instructions found [here](https://docs.docker.com/compose/install/)
+
+You can check your current **Docker** and **Docker Compose** versions using the following commands:
 
 ```console
 docker-compose -v
 docker version
 ```
 
-Por favor, asegúrese de que esté usando la versión 18.03 o superior de Docker y la versión 1.21 o superior de Docker Compose y actualice si es necesario.
+Please ensure that you are using Docker version 18.03 or higher and Docker Compose 1.21 or higher and upgrade if
+necessary.
 
-## Cygwin para Windows
+## Cygwin for Windows
 
-Iniciaremos nuestros servicios usando un simple script de Bash. Los usuarios de Windows deben descargar [cygwin](http://www.cygwin.com/)
-para proporcionar una funcionalidad de línea de comandos similar a la de una distribución de Linux en Windows.
+We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/)
+to provide a command-line functionality similar to a Linux distribution on Windows.
 
-# Inicio
+# Start Up
 
-Todos los servicios pueden ser inicializados desde la línea de comando ejecutando el script Bash proporcionado en el repositorio
-[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/services). Por favor, clone el repositorio y cree las imágenes necesarias ejecutando los comandos como se muestra:
+All services can be initialised from the command-line by running the
+[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/services) Bash script provided within
+the repository. Please clone the repository and create the necessary images by running the commands as shown:
 
 ```console
 git clone https://github.com/FIWARE/tutorials.Entity-Relationships.git
@@ -178,27 +192,30 @@ cd tutorials.Entity-Relationships
 ./services start
 ```
 
-Este comando también importará datos iniciales del ejemplo anterior
-[Tutorial del Buscador de Tiendas](https://github.com/FIWARE/tutorials.Getting-Started/blob/master/README.es.md).
+This command will also import seed data from the previous
+[Store Finder tutorial](https://github.com/FIWARE/tutorials.Getting-Started) on startup.
 
-
-> :information_source: **Nota:** Si quiere limpiar y empezar de nuevo puedes hacerlo con el siguiente comando:
+> :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
 > ```console
 > ./services stop
 > ```
 
-# Creación y asociación de entidades de datos
+# Creating and Associating Data Entities
 
-## Creación de varias entidades a la vez
+## Creating Several Entities at Once
 
-En el tutorial anterior, creamos cada entidad de **Store** individualmente.
+In the previous tutorial, we created each **Store** entity individually,
 
-Vamos a crear cinco unidades de estantes al mismo tiempo. Esta solicitud utiliza el endpoint del procesamiento por lotes para crear cinco entidades de estantes. El procesamiento por lotes utiliza el endpoint "v2/op/update" con un payload con dos atributos - `actionType=APPEND` significa que sobrescribiremos las entidades existentes si existiesen, mientras que el atributo `entities` contiene un conjunto de entidades que deseamos actualizar.
+Lets create five shelf units at the same time. This request uses the convenience batch processing endpoint to create
+five shelf entities. Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes -
+`actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an
+array of entities we wish to update.
 
-Para diferenciar las entidades **Shelf** de las entidades **Store**, a cada estante se le ha asignado "tipo=Shelf". Propiedades como "nombre" y "ubicación" han sido añadidas como propiedades a cada estante.
+To differenciate **Shelf** Entities from **Store** Entities, each shelf has been assigned `type=Shelf`. Real-world
+properties such as `name` and `location` have been added as properties to each shelf.
 
-#### :one: Solicitud:
+#### :one: Request:
 
 ```console
 curl -iX POST \
@@ -271,9 +288,9 @@ curl -iX POST \
 }'
 ```
 
-De manera similar, podemos crear una serie de entidades **Product** utilizando el `type=Product`.
+Similarly, we can create a series of **Product** entities by using the `type=Product`.
 
-#### :two: Solicitud:
+#### :two: Request:
 
 ```console
 curl -iX POST \
@@ -334,19 +351,22 @@ curl -iX POST \
 }'
 ```
 
-En ambos casos hemos codificado cada entidad `id` de acuerdo con la especificació
-[NGSI-LD](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf) - la propuesta es que cada `id` es una URN y sigue un formato estándar: `urn:ngsi-ld:<tipo-de-entidad>:<id-de-la-identidad>`.Esto significará que cada `id` en el sistema será único.
+In both cases we have encoded each entity `id` according to the NGSI-LD
+[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf) - the proposal
+is that each `id` is a URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This will mean that every
+`id` in the system will be unique.
 
-La información de Shelf puede ser solicitada haciendo una petición GET en el endpoint `v2/entities`. Por ejemplo, para devolver los datos de contexto de la entidad **Shelf** con el `id=urn:ngsi-ld:Shelf:unit001`.
+Shelf information can be requested by making a GET request on the `/v2/entities` endpoint. For example to return the
+context data of the **Shelf** entity with the `id=urn:ngsi-ld:Shelf:unit001`.
 
-#### :three: Solicitud:
+#### :three: Request:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=keyValues'
 ```
 
-#### Respuesta:
+#### Response:
 
 ```json
 {
@@ -361,21 +381,26 @@ curl -X GET \
 }
 ```
 
-Como puede ver, hay actualmente tres atributos de propiedad adicionales: `location`, `maxCapacity` y `name`.
+As you can see there are currently three additional property attributes present `location`, `maxCapacity` and `name`
 
-## Creación de una Relación de uno-a-muchos
+## Creating a one-to-many Relationship
 
-En bases de datos, las claves externas se utilizan a menudo para designar una relación de uno a muchos - por ejemplo, cada estante se encuentra en una sola tienda pero un almacén puede albergar muchos estantes. Para poder recordar esta información necesitamos añadir una
-relación de asociación similar a una clave foránea. El procesamiento por lotes puede utilizarse de nuevo para modificar las
-entidades **Shelf** para añadir un atributo `refStore` que mantiene la relación con cada tienda. De acuerdo con la guía de modelados de datos de FIWARE [datos vinculados](https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data), cuando se utilice un atributo de entidad como vínculo con otras entidades, deberá nombrarse con el prefijo `ref`más el nombre del tipo de entidad de destino (vinculado).
+In databases, foreign keys are often used to designate a one-to-many relationship - for example every shelf is found in
+a single store and a single store can hold many shelving units. In order to remember this information we need to add an
+association relationship similar to a foreign key. Batch processing can again be used to amend the existing the
+**Shelf** entities to add a `refStore` attribute holding the relationship to each store. According to the FIWARE Data
+Modelling Guidelines on
+[linked data](https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data), when an
+entity attribute is used as a link to other entities it should be named with the prefix `ref` plus the name of the
+target (linked) entity type.
 
-El valor del atributo `refStore` corresponde a una URN asociada a la propia entidad **Store**.
+The value of the `refStore` attribute corresponds to a URN associated to a **Store** entity itself.
 
-La URN sigue un formato estándar: `urn:ngsi-ld:<tipo-entidad>:<id-entidad>`
+The URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`
 
-#### :four: Solicitud:
+#### :four: Request:
 
-La siguiente solicitud asocia tres estantes a `urn:ngsi-ld:Store:001` y dos estantes a `urn:ngsi-ld:Store:002`.
+The following request associates three shelves to `urn:ngsi-ld:Store:001` and two shelves to `urn:ngsi-ld:Store:002`
 
 ```console
 curl -iX POST \
@@ -423,18 +448,19 @@ curl -iX POST \
 }'
 ```
 
-Cuando la información del estante se solicita de nuevo, la respuesta ha cambiado e incluye una nueva propiedad `refStore`, añadida en el paso anterior.
+Now when the shelf information is requested again, the response has changed and includes a new property `refStore`,
+which has been added in the previous step.
 
-#### :five: Solicitud:
+#### :five: Request:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=keyValues'
 ```
 
-#### Respuesta:
+#### Response:
 
-La respuesta actualizada que incluye el atributo `refStore` se muestra a continuación:
+The updated response including the `refStore` attribute is shown below:
 
 ```json
 {
@@ -450,41 +476,43 @@ La respuesta actualizada que incluye el atributo `refStore` se muestra a continu
 }
 ```
 
-## Lectura de una Relación de Clave Foránea
+## Reading a Foreign Key Relationship
 
-### Lectura desde la Entidad Hijo a la Entidad Padre
+### Reading from Child Entity to Parent Entity
 
-También podemos hacer una solicitud para recuperar la información de la relación de atributos `refStore` de una entidad conocida `Shelf` usando el parámetro "options=values".
+We can also make a request to retrieve the `refStore` attribute relationship information from a known **Shelf** entity
+by using the `options=values` setting
 
-#### :six: Solicitud:
+#### :six: Request:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=values&attrs=refStore'
 ```
 
-#### Respuesta:
+#### Response:
 
 ```json
 ["urn:ngsi-ld:Store:001"]
 ```
 
-Esto puede ser interpretado como "Estoy relacionado con la entidad **Store** con el `id=urn:ngsi-ld:Store:001`"
+This can be interpreted as "I am related to the **Store** entity with the `id=urn:ngsi-ld:Store:001`"
 
-### Lectura desde la Entidad Padre a la Entidad Hijo
+### Reading from Parent Entity to Child Entity
 
-La lectura de un padre a un hijo puede hacerse usando el parámetro `options=count`.
+Reading from a parent to a child can be done using the `options=count` setting
 
-#### :seven: Solicitud:
+#### :seven: Request:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type&type=Shelf'
 ```
 
-Esta solicitud está pidiendo el `id` de todas las entidades de **Shelf** asociadas a la URN `urn:ngsi-ld:Store:001`, la respuesta es un arreglo JSON como se muestra.
+This request is asking for the `id` of all **Shelf** entities associated to the URN `urn:ngsi-ld:Store:001`, the
+response is a JSON array as shown.
 
-#### Respuesta:
+#### Response:
 
 ```json
 [
@@ -503,33 +531,39 @@ Esta solicitud está pidiendo el `id` de todas las entidades de **Shelf** asocia
 ]
 ```
 
-En lenguaje coloquial, esto puede interpretarse como "Hay tres estantes en `urn:ngsi-ld:Store:001`". La petición puede ser alterada usando los parámetros `options=values` y `attrs` para devolver propiedades específicas de las entidades asociadas relevantes. Por ejemplo, la solicitud:
+In plain English, this can be interpreted as "There are three shelves in `urn:ngsi-ld:Store:001`". The request can be
+altered use the `options=values` and `attrs` parameters to return specific properties of the relevant associated
+entities. For example the request:
 
-
-#### :eight: Solicitud:
+#### :eight: Request:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&type=Shelf&options=values&attrs=name'
 ```
 
-Puede ser interpretada como una petición de _Dame los nombres de todos los estantes en `urn:ngsi-ld:Store:001`_.
+Can be interpreted as request for _Give me the names of all shelves in `urn:ngsi-ld:Store:001`_.
 
-#### Respuesta:
+#### Response:
 
 ```json
 [["Corner Unit"], ["Wall Unit 1"], ["Wall Unit 2"]]
 ```
 
-## Creando Relaciones de muchos-a-muchos
+## Creating many-to-many Relationships
 
-Tablas puente se utilizan a menudo para relacionar las relaciones de muchos con muchos. Por ejemplo, cada tienda venderá una gama diferente de productos, y cada producto se vende en muchas tiendas diferentes.
+Bridge Tables are often used to relate many-to-many relationships. For example, every store will sell a different range
+of products, and each product is sold in many different stores.
 
-A fin de mantener la información de contexto para "colocar un producto en un estante de una tienda determinada", será necesario crear una nueva entidad de datos **InventoryItem** que exista para asociar los datos de otras entidades. Tiene una relación clave ajena a las entidades **Store**, **Shelf** y **Product** y por lo tanto requiere atributos de relación llamados `refStore`, `refShelf` y `refProduct`.
+In order to hold the context information to "place a product onto a shelf in a given store" we will need to create a new
+data entity **InventoryItem** which exists to associate data from other entities. It has a foreign key relationship to
+the **Store**, **Shelf** and **Product** entities and therefore requires relationship attributes called `refStore`,
+`refShelf` and `refProduct`.
 
-La asignación de un producto a un estante se hace simplemente creando una entidad que contenga la información de la relación y cualquier otra propiedad adicional (como `StockCount` y `ShelfCount`)
+Assigning a product to a shelf is simply done by creating an entity holding the relationship information and any other
+additional properties (such as `stockCount` and `shelfCount`)
 
-#### :nine: Solicitud:
+#### :nine: Request:
 
 ```console
 curl -iX POST \
@@ -558,56 +592,62 @@ curl -iX POST \
 }'
 ```
 
-## Leyendo desde una tabla puente
+## Reading from a bridge table
 
-Cuando se lee de una entidad de la tabla puente, el `type` de la entidad debe ser conocido.
+When reading from a bridge table entity, the `type` of the entity must be known.
 
-Después de crear al menos una entidad **InventoryItem** podemos consultar _¿Qué productos se venden en `urn:ngsi-ld:Store:001`?_ haciendo la siguiente petición
+After creating at least one **InventoryItem** entity we can query _Which products are sold in `urn:ngsi-ld:Store:001`?_
+by making the following request
 
-#### :one::zero: Solicitud:
+#### :one::zero: Request:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=values&attrs=refProduct&type=InventoryItem'
 ```
 
-#### Respuesta:
+#### Response:
 
 ```json
 [["urn:ngsi-ld:Product:prod001"]]
 ```
 
-Del mismo modo, podemos consultar _¿Qué tiendas están vendiendo `urn:ngsi-ld:Product:001`?_ alterando la petición como se muestra:
+Similarly we can request _Which stores are selling `urn:ngsi-ld:Product:001`?_ by altering the request as shown:
 
-#### :one::one: Solicitud:
+#### :one::one: Request:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem'
 ```
 
-#### Respuesta:
+#### Response:
 
 ```json
 [["urn:ngsi-ld:Store:001"]]
 ```
 
-## Integridad de los datos
+## Data Integrity
 
-Las relaciones de datos de contexto sólo deben establecerse y mantenerse entre entidades que existan - en otras palabras, la URN `urn:ngsi-ld:<tipo-entidad>:<id-entidad>` debe vincularse a otra entidad existente dentro del contexto. Por lo tanto, debemos tener cuidado al borrar una entidad de que no queden referencias colgantes. Imagina que se borra `urn:ngsi-ld:Store:001` - ¿qué debería pasar con las entidades **Shelf** asociadas?
+Context data relationships should only be set up and maintained between entities that exist - in other words the URN
+`urn:ngsi-ld:<entity-type>:<entity-id>` should link to another existing entity within the context. Therefore we must
+take care when deleting an entity that no dangling references remain. Imagine `urn:ngsi-ld:Store:001` is deleted - what
+should happen to the associated the **Shelf** entities?
 
-Es posible hacer una solicitud para ver si existe alguna relación de entidad restante antes de la supresión, haciendo una solicitud como la siguiente
+It is possible to make a request to see if any remaining entity relationship exists prior to deletion by making a
+request as follows
 
-#### :one::two: Solicitud:
+#### :one::two: Request:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type'
 ```
 
-#### :one::three: Solicitud:
+#### :one::three: Request:
 
-La respuesta enumera una serie de entidades de **Shelf** y **InventoryItem** - no hay entidades de **Product** ya que no hay una relación directa entre el producto y la tienda.
+The response lists a series of **Shelf** and **InventoryItem** entities - there are no **Product** entities since there
+is no direct relationship between product and store.
 
 ```json
 [
@@ -630,15 +670,15 @@ La respuesta enumera una serie de entidades de **Shelf** y **InventoryItem** - n
 ]
 ```
 
-Si esta solicitud devuelve un arreglo vacío, la entidad no tiene objetos asociados.
+If this request returns an empty array, the entity has no associates.
 
-# Próximos pasos
+# Next Steps
 
-¿Quieres aprender a añadir más complejidad a tu aplicación añadiendo funciones avanzadas? Puedes averiguarlo leyendo
-los otros [tutoriales de esta serie](https://fiware-tutorials.rtfd.io)
+Want to learn how to add more complexity to your application by adding advanced features? You can find out by reading
+the other [tutorials in this series](https://fiware-tutorials.rtfd.io)
 
 ---
 
-## Licencia
+## License
 
 [MIT](LICENSE) © 2018-2020 FIWARE Foundation e.V.
