@@ -6,7 +6,7 @@
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/) <br/>
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
-Este tutorial enseña a los usuarios de FIWARE acerca de los comandos por lotes (batch processing) y las relaciones de entidad. El tutorial se basa en los datos creados en el anterior [ejemplo del buscador de tiendas](https://github.com/FIWARE/tutorials.Getting-Started/blob/master/README.es.md), agrega y
+Este tutorial enseña a los usuarios de FIWARE acerca de los comandos por lotes (batch processing) y las relaciones de entidad. El tutorial se basa en los datos creados en el ejemplo anterior [buscador de tiendas](https://github.com/FIWARE/tutorials.Getting-Started/blob/master/README.es.md), agrega y
 asocia una serie de entidades de datos relacionadas para crear un sistema sencillo de gestión inventarios.
 
 A lo largo de este tutorial se utilizan comandos [cUrl](https://ec.haxx.se/), pero también está disponible como
@@ -79,12 +79,12 @@ cambiar su precio, se podrían vender las existencias y reducir el número de ex
 
 > **Nota** este tutorial utiliza el siguiente estilo tipográfico:
 >
-> -   Los tipos de entidades se se escriben con **texto en negrita**
+> -   Los tipos de entidades se escriben con **texto en negrita**
 > -   Los atributos de los datos se escriben en `texto de espaciado fijo`
 > -   Los artículos en el mundo real es escriben en texto simple, sin estilo
 >
 > Por lo tanto, una tienda en el mundo real está representada en los datos de contexto por una entidad **Store**, y un estante del mundo
-> real encontrado en una tienda está representado por una entidad **Estante** con un atributo `refStore`.
+> real encontrado en una tienda está representado por una entidad **Shelf** con un atributo `refStore`.
 
 # Arquitectura
 
@@ -98,7 +98,7 @@ la persistencia de los datos de contexto que contiene. Por lo tanto, la arquitec
 -   El [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) recibirá las solicitudes utilizando
     [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   La base de datos subyacente [MongoDB](https://www.mongodb.com/):
-    -   Utilizado por el Orion Context Broker para guardar información de datos de contexto como entidades de datos, suscripciones e inscripciones
+    -   Utilizada por el Orion Context Broker para guardar información de datos de contexto como entidades de datos, suscripciones e inscripciones
 
 Dado que todas las interacciones entre los dos elementos se inician mediante solicitudes HTTP, las entidades pueden ser aisladas en contenedores y corridas desde puertos expuestos.
 
@@ -194,15 +194,11 @@ Este comando también importará datos iniciales del ejemplo anterior
 
 En el tutorial anterior, creamos cada entidad de **Store** individualmente.
 
-Lets create five shelf units at the same time. This request uses the convenience batch processing endpoint to create
-five shelf entities. Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes -
-`actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an
-array of entities we wish to update.
 Vamos a crear cinco unidades de estantes al mismo tiempo. Esta solicitud utiliza el endpoint del procesamiento por lotes para crear cinco entidades de estantes. El procesamiento por lotes utiliza el endpoint "v2/op/update" con un payload con dos atributos - `actionType=APPEND` significa que sobrescribiremos las entidades existentes si existiesen, mientras que el atributo `entities` contiene un conjunto de entidades que deseamos actualizar.
 
 Para diferenciar las entidades **Shelf** de las entidades **Store**, a cada estante se le ha asignado "tipo=Shelf". Propiedades como "nombre" y "ubicación" han sido añadidas como propiedades a cada estante.
 
-#### :one: Request:
+#### :one: Solicitud:
 
 ```console
 curl -iX POST \
@@ -275,9 +271,9 @@ curl -iX POST \
 }'
 ```
 
-De manera similar, podemos crear una serie de entidades **Product** utilizando el `tipo=Product`.
+De manera similar, podemos crear una serie de entidades **Product** utilizando el `type=Product`.
 
-#### :two: Request:
+#### :two: Solicitud:
 
 ```console
 curl -iX POST \
@@ -338,19 +334,19 @@ curl -iX POST \
 }'
 ```
 
-En ambos casos hemos codificado cada entidad `id` de acuerdo con NGSI-LD
-[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf) - la propuesta es que cada `id` es una URN y sigue un formato estándar: `urna:ngsi-ld:<tipo de entidad>:<identidad-id>`.Esto significará que cada `ID` en el sistema será único.
+En ambos casos hemos codificado cada entidad `id` de acuerdo con la especificació
+[NGSI-LD](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf) - la propuesta es que cada `id` es una URN y sigue un formato estándar: `urn:ngsi-ld:<tipo-de-entidad>:<id-de-la-identidad>`.Esto significará que cada `id` en el sistema será único.
 
-La información de Shelf puede ser solicitada haciendo una petición GET en el punto final de `v2/entities`. Por ejemplo, para devolver los datos de contexto de la entidad **Shelf** con el `id=urn:ngsi-ld:Shelf:unit001`.
+La información de Shelf puede ser solicitada haciendo una petición GET en el endpoint `v2/entities`. Por ejemplo, para devolver los datos de contexto de la entidad **Shelf** con el `id=urn:ngsi-ld:Shelf:unit001`.
 
-#### :three: Request:
+#### :three: Solicitud:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=keyValues'
 ```
 
-#### Response:
+#### Respuesta:
 
 ```json
 {
@@ -375,9 +371,9 @@ entidades **Shelf** para añadir un atributo `refStore` que mantiene la relació
 
 El valor del atributo `refStore` corresponde a una URN asociada a la propia entidad **Store**.
 
-La URN sigue un formato estándar: `urn:ngsi-ld:<entity-type>:<entity-id>`
+La URN sigue un formato estándar: `urn:ngsi-ld:<tipo-entidad>:<id-entidad>`
 
-#### :four: Request:
+#### :four: Solicitud:
 
 La siguiente solicitud asocia tres estantes a `urn:ngsi-ld:Store:001` y dos estantes a `urn:ngsi-ld:Store:002`.
 
@@ -429,14 +425,14 @@ curl -iX POST \
 
 Cuando la información del estante se solicita de nuevo, la respuesta ha cambiado e incluye una nueva propiedad `refStore`, añadida en el paso anterior.
 
-#### :five: Request:
+#### :five: Solicitud:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=keyValues'
 ```
 
-#### Response:
+#### Respuesta:
 
 La respuesta actualizada que incluye el atributo `refStore` se muestra a continuación:
 
@@ -460,14 +456,14 @@ La respuesta actualizada que incluye el atributo `refStore` se muestra a continu
 
 También podemos hacer una solicitud para recuperar la información de la relación de atributos `refStore` de una entidad conocida `Shelf` usando el parámetro "options=values".
 
-#### :six: Request:
+#### :six: Solicitud:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=values&attrs=refStore'
 ```
 
-#### Response:
+#### Respuesta:
 
 ```json
 ["urn:ngsi-ld:Store:001"]
@@ -479,7 +475,7 @@ Esto puede ser interpretado como "Estoy relacionado con la entidad **Store** con
 
 La lectura de un padre a un hijo puede hacerse usando el parámetro `options=count`.
 
-#### :seven: Request:
+#### :seven: Solicitud:
 
 ```console
 curl -X GET \
@@ -488,7 +484,7 @@ curl -X GET \
 
 Esta solicitud está pidiendo el `id` de todas las entidades de **Shelf** asociadas a la URN `urn:ngsi-ld:Store:001`, la respuesta es un arreglo JSON como se muestra.
 
-#### Response:
+#### Respuesta:
 
 ```json
 [
@@ -510,16 +506,16 @@ Esta solicitud está pidiendo el `id` de todas las entidades de **Shelf** asocia
 En lenguaje coloquial, esto puede interpretarse como "Hay tres estantes en `urn:ngsi-ld:Store:001`". La petición puede ser alterada usando los parámetros `options=values` y `attrs` para devolver propiedades específicas de las entidades asociadas relevantes. Por ejemplo, la solicitud:
 
 
-#### :eight: Request:
+#### :eight: Solicitud:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&type=Shelf&options=values&attrs=name'
 ```
 
-Puede ser interpretado como una petición de _Dame los nombres de todos los estantes en `urn:ngsi-ld:Store:001`_.
+Puede ser interpretada como una petición de _Dame los nombres de todos los estantes en `urn:ngsi-ld:Store:001`_.
 
-#### Response:
+#### Respuesta:
 
 ```json
 [["Corner Unit"], ["Wall Unit 1"], ["Wall Unit 2"]]
@@ -533,7 +529,7 @@ A fin de mantener la información de contexto para "colocar un producto en un es
 
 La asignación de un producto a un estante se hace simplemente creando una entidad que contenga la información de la relación y cualquier otra propiedad adicional (como `StockCount` y `ShelfCount`)
 
-#### :nine: Request:
+#### :nine: Solicitud:
 
 ```console
 curl -iX POST \
@@ -568,14 +564,14 @@ Cuando se lee de una entidad de la tabla puente, el `type` de la entidad debe se
 
 Después de crear al menos una entidad **InventoryItem** podemos consultar _¿Qué productos se venden en `urn:ngsi-ld:Store:001`?_ haciendo la siguiente petición
 
-#### :one::zero: Request:
+#### :one::zero: Solicitud:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=values&attrs=refProduct&type=InventoryItem'
 ```
 
-#### Response:
+#### Respuesta:
 
 ```json
 [["urn:ngsi-ld:Product:prod001"]]
@@ -583,14 +579,14 @@ curl -X GET \
 
 Del mismo modo, podemos consultar _¿Qué tiendas están vendiendo `urn:ngsi-ld:Product:001`?_ alterando la petición como se muestra:
 
-#### :one::one: Request:
+#### :one::one: Solicitud:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem'
 ```
 
-#### Response:
+#### Respuesta:
 
 ```json
 [["urn:ngsi-ld:Store:001"]]
@@ -598,18 +594,18 @@ curl -X GET \
 
 ## Integridad de los datos
 
-Las relaciones de datos de contexto sólo deben establecerse y mantenerse entre entidades que existan - en otras palabras, la URN `urn:ngsi-ld:<entity-type>:<entity-id>` debe vincularse a otra entidad existente dentro del contexto. Por lo tanto, debemos tener cuidado al borrar una entidad de que no queden referencias colgantes. Imagina que se borra `urn:ngsi-ld:Store:001` - ¿qué debería pasar con las entidades **Shelf** asociadas?
+Las relaciones de datos de contexto sólo deben establecerse y mantenerse entre entidades que existan - en otras palabras, la URN `urn:ngsi-ld:<tipo-entidad>:<id-entidad>` debe vincularse a otra entidad existente dentro del contexto. Por lo tanto, debemos tener cuidado al borrar una entidad de que no queden referencias colgantes. Imagina que se borra `urn:ngsi-ld:Store:001` - ¿qué debería pasar con las entidades **Shelf** asociadas?
 
 Es posible hacer una solicitud para ver si existe alguna relación de entidad restante antes de la supresión, haciendo una solicitud como la siguiente
 
-#### :one::two: Request:
+#### :one::two: Solicitud:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type'
 ```
 
-#### :one::three: Request:
+#### :one::three: Solicitud:
 
 La respuesta enumera una serie de entidades de **Shelf** y **InventoryItem** - no hay entidades de **Product** ya que no hay una relación directa entre el producto y la tienda.
 
