@@ -32,7 +32,7 @@
 						"update"
 					]
 				},
-				"description": "This example uses the convenience batch processing endpoint to re-create the two **Store** entities from the previous tutorial.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nAs you can see each **Store** entity in the payload has been given a unique `id` (according to the NGSI-LD [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)) and assigned `type=Store`."
+				"description": "This example uses the convenience batch processing endpoint to re-create the two **Store** entities from the previous tutorial.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nAs you can see each **Store** entity in the payload has been given a unique `id` (according to the NGSI-LD [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)) and assigned `type=Store`."
 			},
 			"response": []
 		},
@@ -62,7 +62,7 @@
 						"update"
 					]
 				},
-				"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)  and has been assigned `type=Product`."
+				"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)  and has been assigned `type=Product`."
 			},
 			"response": []
 		},
@@ -92,7 +92,7 @@
 						"update"
 					]
 				},
-				"description": "This example uses the convenience batch processing endpoint to create the five shelf entities.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nTo differenciate **Shelf** Entities from **Store** Entities, each shelf has been assigned `type=Shelf`. The `id` of each **Shelf** Entity follows the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf) and is therefore unique.\n\nReal-world properties such as `name` and `location` have been addded as properties to each shelf."
+				"description": "This example uses the convenience batch processing endpoint to create the five shelf entities.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nTo differenciate **Shelf** Entities from **Store** Entities, each shelf has been assigned `type=Shelf`. The `id` of each **Shelf** Entity follows the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) and is therefore unique.\n\nReal-world properties such as `name` and `location` have been addded as properties to each shelf."
 			},
 			"response": []
 		},
@@ -244,7 +244,7 @@
 						}
 					]
 				},
-				"description": "This example returns the `refStore` value associated with a given `Shelf` unit. \n\nIf the `id` and `type` of a data entity are known, a specific field can be requested by combining the `options=values` parameter and the `attrs` parameter. \n\nThe URN returned has a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`, which has been used as the `id` of the **Store** entity itself (based on the NGSI-LD [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)), therefore it is a simple matter to request more information about the linked store by making a query to the `/entities` endpoint.\n\n```\nhttp://{{orion}}/v2/entities/urn:ngsi-ld:Store:001?options=keyValues\n```"
+				"description": "This example returns the `refStore` value associated with a given `Shelf` unit. \n\nIf the `id` and `type` of a data entity are known, a specific field can be requested by combining the `options=values` parameter and the `attrs` parameter. \n\nThe URN returned has a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`, which has been used as the `id` of the **Store** entity itself (based on the NGSI-LD [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)), therefore it is a simple matter to request more information about the linked store by making a query to the `/entities` endpoint.\n\n```\nhttp://{{orion}}/v2/entities/urn:ngsi-ld:Store:001?options=keyValues\n```"
 			},
 			"response": []
 		},
@@ -366,7 +366,7 @@
 						}
 					]
 				},
-				"description": "This example returns the URN of all stores in which the product `id=urn:ngsi-ld:Product:001` is sold. The URN returned has a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`.\n\nBecause we have based the `id` of the **Store** entity on the NGSI-LD [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)), therefore it is a simple matter to request more information about the linked store by making a query to the `/entities` endpoint.\n\n```\nhttp://{{orion}}/v2/entities/urn:ngsi-ld:Store:001?options=keyValues\n```\n\nSince there is no direct relationship between product and store, a query must be made to find all entities which have both `refProduct` and `refStore` attributes.\n\nIn  our current context the `type` parameter is optional since only one type of entity contains the fields requested in the request"
+				"description": "This example returns the URN of all stores in which the product `id=urn:ngsi-ld:Product:001` is sold. The URN returned has a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`.\n\nBecause we have based the `id` of the **Store** entity on the NGSI-LD [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)), therefore it is a simple matter to request more information about the linked store by making a query to the `/entities` endpoint.\n\n```\nhttp://{{orion}}/v2/entities/urn:ngsi-ld:Store:001?options=keyValues\n```\n\nSince there is no direct relationship between product and store, a query must be made to find all entities which have both `refProduct` and `refStore` attributes.\n\nIn  our current context the `type` parameter is optional since only one type of entity contains the fields requested in the request"
 			},
 			"response": []
 		},

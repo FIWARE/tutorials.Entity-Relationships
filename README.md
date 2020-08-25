@@ -15,8 +15,8 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0671934f64958d3200b3)
 
-🇯🇵 このチュートリアルは[日本語](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/README.ja.md)でも
-ご覧いただけます。<br/>🇪🇸 Este tutorial también está disponible en
+🇯🇵 このチュートリアルは[日本語](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/README.ja.md)でもご
+覧いただけます。<br/>🇪🇸 Este tutorial también está disponible en
 [español](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/README.es.md)
 
 ## Contents
@@ -353,7 +353,7 @@ curl -iX POST \
 ```
 
 In both cases we have encoded each entity `id` according to the NGSI-LD
-[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf) - the proposal
+[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) - the proposal
 is that each `id` is a URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This will mean that every
 `id` in the system will be unique.
 

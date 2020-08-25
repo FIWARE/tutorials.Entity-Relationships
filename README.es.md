@@ -137,7 +137,7 @@ mongo-db:
 ```
 
 Ambos contenedores residen en la misma red - Orion Context Broker escucha en el puerto `1026` y MongoDB lo hace por defecto en el puerto `27017`. Ambos contenedores también están exponiendo los mismos puertos externamente - esto es puramente para
-el acceso al tutorial - para que cUrl o Postman puedan acceder a ellos sin ser parte de la misma red.  
+el acceso al tutorial - para que cUrl o Postman puedan acceder a ellos sin ser parte de la misma red.
 La inicialización por línea de comandos es autoexplicativa.
 
 # Pre requisitos
@@ -335,7 +335,7 @@ curl -iX POST \
 ```
 
 En ambos casos hemos codificado cada entidad `id` de acuerdo con la especificació
-[NGSI-LD](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf) - la propuesta es que cada `id` es una URN y sigue un formato estándar: `urn:ngsi-ld:<tipo-de-entidad>:<id-de-la-identidad>`.Esto significará que cada `id` en el sistema será único.
+[NGSI-LD](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) - la propuesta es que cada `id` es una URN y sigue un formato estándar: `urn:ngsi-ld:<tipo-de-entidad>:<id-de-la-identidad>`.Esto significará que cada `id` en el sistema será único.
 
 La información de Shelf puede ser solicitada haciendo una petición GET en el endpoint `v2/entities`. Por ejemplo, para devolver los datos de contexto de la entidad **Shelf** con el `id=urn:ngsi-ld:Shelf:unit001`.
 
