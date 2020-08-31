@@ -174,6 +174,7 @@ Todos los servicios pueden ser inicializados desde la línea de comando ejecutan
 ```console
 git clone https://github.com/FIWARE/tutorials.Entity-Relationships.git
 cd tutorials.Entity-Relationships
+git checkout NGSI-v2
 
 ./services start
 ```
