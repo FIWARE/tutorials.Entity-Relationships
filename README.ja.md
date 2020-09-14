@@ -224,7 +224,7 @@ Docker バージョン 18.03 以降と Docker Compose 1.21 以上を使用して
 # 起動
 
 リポジトリ内で Bash スクリプトが提供する
-[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/services)
+[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/NGSI-v2/services)
 を実行することにより、コマンドラインからすべてのサービスを初期化することができま
 す。リポジトリを複製し、以下のコマンドを実行して必要なイメージを作成してください
 :

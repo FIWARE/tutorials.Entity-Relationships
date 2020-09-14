@@ -184,7 +184,7 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 # Start Up
 
 All services can be initialised from the command-line by running the
-[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/services) Bash script provided within
+[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/NGSI-v2/services) Bash script provided within
 the repository. Please clone the repository and create the necessary images by running the commands as shown:
 
 ```console

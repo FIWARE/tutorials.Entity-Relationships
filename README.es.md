@@ -170,7 +170,7 @@ para proporcionar una funcionalidad de línea de comandos similar a la de una di
 # Inicio
 
 Todos los servicios pueden ser inicializados desde la línea de comando ejecutando el script Bash proporcionado en el repositorio
-[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/services). Por favor, clone el repositorio y cree las imágenes necesarias ejecutando los comandos como se muestra:
+[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/NGSI-v2/services). Por favor, clone el repositorio y cree las imágenes necesarias ejecutando los comandos como se muestra:
 
 ```console
 git clone https://github.com/FIWARE/tutorials.Entity-Relationships.git
