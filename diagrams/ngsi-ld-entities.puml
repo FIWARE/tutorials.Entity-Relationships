@@ -1,0 +1,76 @@
+@startuml
+skinparam object {
+  BackgroundColor #f5f5f5
+  ArrowColor #4c4c4c
+  BorderColor #233c68
+}
+
+object Herbicide
+Herbicide : id 
+Herbicide : ~name 
+Herbicide : ~formula 
+
+
+object Task
+Task : id 
+Task : ~name
+Task : -field
+Task : -herbicide
+Task : -worker
+Task : status
+
+
+object PartField
+PartField : id 
+PartField : ~location
+PartField : ~cropType
+
+
+
+object TemperatureSensor
+
+TemperatureSensor : id 
+TemperatureSensor : ~temperature 
+TemperatureSensor : ~category 
+TemperatureSensor : ~description 
+TemperatureSensor : ~controlledProperty 
+TemperatureSensor : -controllingAsset 
+
+object FillingLevelSensor
+
+FillingLevelSensor : id 
+FillingLevelSensor : ~fillingLevel 
+FillingLevelSensor : ~category 
+FillingLevelSensor : ~description 
+FillingLevelSensor : ~controlledProperty 
+FillingLevelSensor : -controllingAsset 
+
+
+
+object Building
+
+Building : id 
+Building : ~category
+Building : ~name 
+Building : ~address 
+Building : ~location
+Building : ~temperature
+Building : ~fillingLevel
+Building : -owner 
+
+object Person
+
+Person : id 
+Person : ~name 
+Person : ~jobTitle
+Person : -owns 
+
+
+Building "*" *-- "1" Person : owns >
+Building "1" -o " *" TemperatureSensor : > contains
+FillingLevelSensor "*" -o " 1" Building : < contains
+
+Task "*" *-up- "1" Person : assignedTo <
+Task "*" *-right- "1" Herbicide : uses >
+Task "*" *-left- "1" PartField : sprays >
+@enduml
