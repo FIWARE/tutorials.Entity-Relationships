@@ -31,7 +31,20 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
         "type": "GeoProperty",
         "value": { "type": "Point", "coordinates": [13.3505, 52.5144]}
     },
-    "name": {"type": "Property","value": "Victory Farm"}
+    "name": {"type": "Property","value": "Victory Farm"},
+    "owner": {"type": "Relationship", "object": "urn:ngsi-ld:Person:person001"},
+    "fillingLevel": {
+      "type": "Property", 
+      "value": 1, 
+      "unitCode": "C62",
+      "providedBy": {"type": "Relationship", "object": "urn:ngsi-ld:FillingLevelSensor:001"}
+    },
+    "temperature": {
+      "type": "Property", 
+      "value": 20, 
+      "unitCode": "CEL",
+      "providedBy": {"type": "Relationship", "object": "urn:ngsi-ld:TemperatureSensor:001"}
+    }
   },
   {
     "id": "urn:ngsi-ld:Building:barn002",
@@ -46,7 +59,20 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
         "type": "GeoProperty",
         "value": { "type": "Point", "coordinates": [13.3698, 52.5163]}
     },
-    "name": {"type": "Property","value": "Big Red Barn"}
+    "name": {"type": "Property","value": "Big Red Barn"},
+    "owner": {"type": "Relationship", "object": "urn:ngsi-ld:Person:person001"},
+    "fillingLevel": {
+      "type": "Property",
+      "value": 0.9, 
+      "unitCode": "C62",
+      "providedBy": {"type": "Relationship", "object": "urn:ngsi-ld:FillingLevelSensor:002"}
+    },
+    "temperature": {
+      "type": "Property", 
+      "value": 21, 
+      "unitCode": "CEL",
+      "providedBy": {"type": "Relationship", "object": "urn:ngsi-ld:TemperatureSensor:002"}
+    }
   },
   {
     "id": "urn:ngsi-ld:Building:tower003",
@@ -61,7 +87,8 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
         "type": "GeoProperty",
         "value": { "type": "Point", "coordinates": [13.3598, 52.5165]}
     },
-    "name": {"type": "Property","value": "Triton Tower"}
+    "name": {"type": "Property","value": "Triton Tower"},
+    "owner": {"type": "Relationship", "object": "urn:ngsi-ld:Person:person001"}
   },
   {
     "id": "urn:ngsi-ld:Building:farm002",
@@ -76,13 +103,26 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
         "type": "GeoProperty",
         "value": { "type": "Point", "coordinates": [13.3127, 52.4893]}
     },
-    "name": {"type": "Property","value": "Animal Farm"}
+    "name": {"type": "Property","value": "Animal Farm"},
+    "owner": {"type": "Relationship", "object": "urn:ngsi-ld:Person:person002"},
+    "fillingLevel": {
+      "type": "Property", 
+      "value": 0.8, 
+      "unitCode": "C62",
+      "providedBy": {"type": "Relationship", "object": "urn:ngsi-ld:FillingLevelSensor:003"}
+    },
+    "temperature": {
+      "type": "Property",
+      "value": 27, 
+      "unitCode": "CEL",
+      "providedBy": {"type": "Relationship", "object": "urn:ngsi-ld:TemperatureSensor:003"}
+    }
   },
-  ,
   {
     "id": "urn:ngsi-ld:Person:person001",
     "type": "Person",
     "name": {"type": "Property","value": "Old MacDonald"},
+    "owns": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm001"},
     "jobTitle": {"type": "Property","value": {
         "inDefinedTermSet": "https://targetjobs.co.uk/careers-advice/job-descriptions",
         "termCode": "277119-agricultural-manager-job-description",
@@ -104,6 +144,7 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
         "url": "https://targetjobs.co.uk/careers-advice/job-descriptions/https://targetjobs.co.uk/careers-advice/job-descriptions/277119-agricultural-manager-job-description"
         }
     },
+    "owns": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm002"},
     "weight": {
         "type": "Property","value": 270, "unitCode": "KGM"
     }
@@ -142,6 +183,56 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
         "type": "Property","value": 250, "unitCode": "KGM"
     }
   }
+]'
+
+
+#
+# Create three Temperature Gauges.
+#
+curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOperations/upsert' \
+-H 'Content-Type: application/json' \
+-H 'Link: <'"${TUTORIAL_DATA_MODELS_CONTEXT}"'>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-H 'Accept: application/ld+json' \
+--data-raw '[
+    {
+      "id": "urn:ngsi-ld:TemperatureSensor:001",
+      "type": "TemperatureSensor",
+      "category": {
+            "type": "Property",
+            "value": "sensor"
+      },
+      "temperature": {
+            "type": "Property",
+            "value": 20,
+            "unitCode": "CEL"
+      }
+    },
+    {
+      "id": "urn:ngsi-ld:TemperatureSensor:002",
+      "type": "TemperatureSensor",
+      "category": {
+            "type": "Property",
+            "value": "sensor"
+      },
+      "temperature": {
+            "type": "Property",
+            "value": 21,
+            "unitCode": "CEL"
+      }
+    },
+    {
+      "id": "urn:ngsi-ld:TemperatureSensor:003",
+      "type": "TemperatureSensor",
+      "category": {
+            "type": "Property",
+            "value": "sensor"
+      },
+      "temperature": {
+            "type": "Property",
+            "value": 27,
+            "unitCode": "CEL"
+      }
+    }
 ]'
 
 echo -e " \033[1;32mdone\033[0m"

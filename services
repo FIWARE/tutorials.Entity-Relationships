@@ -13,6 +13,15 @@ if (( $# != 1 )); then
     exit 1
 fi
 
+waitForContext () {
+	echo -e "\n⏳ Waiting for \033[1m@context\033[0m to be available\n"
+	while [ `docker run --network fiware_default --rm curlimages/curl -s -o /dev/null -w %{http_code} 'http://context-provider:3000/data-models/ngsi-context.jsonld'` -eq 000 ]
+	do 
+	  echo -e "@context HTTP state: " `curl -s -o /dev/null -w %{http_code} 'http://context-provider:3000/data-models/ngsi-context.jsonld'` " (waiting for 200)"
+	  sleep 1
+	done
+}
+
 waitForOrion () {
 	echo -e "\n⏳ Waiting for \033[1;34mOrion\033[0m to be available\n"
 	while [ `docker run --network fiware_default --rm curlimages/curl -s -o /dev/null -w %{http_code} 'http://orion:1026/version'` -eq 000 ]
@@ -41,8 +50,10 @@ waitForScorpio () {
 	done
 }
 
+
 loadData () {
 	echo ""
+	waitForContext
 	docker run --rm -v $(pwd)/import-data:/import-data \
 		--network fiware_default \
 		-e CONTEXT_BROKER=${CONTEXT_BROKER} \
@@ -70,6 +81,8 @@ addDatabaseIndex () {
 	echo -e " \033[1;32mdone\033[0m"
 }
 
+
+
 stoppingContainers () {
 	echo "Stopping containers"
 	docker-compose --log-level ERROR -f docker-compose/orion-ld.yml -p fiware down -v --remove-orphans
@@ -89,8 +102,9 @@ case "${command}" in
         ;;
 	"orion")
 		stoppingContainers
-		echo -e "Starting two containers \033[1;34mOrion\033[0m and a \033[1mMongoDB\033[0m database."
+		echo -e "Starting three containers \033[1;34mOrion\033[0m,  \033[1mTutorial\033[0m and a \033[1mMongoDB\033[0m database."
 		echo -e "- \033[1;34mOrion\033[0m is the context broker"
+		echo -e "- \033[1mTutorial\033[0m holds the @context"
 		echo ""
 		docker-compose --log-level ERROR -f docker-compose/orion-ld.yml -p fiware up -d --remove-orphans
 		addDatabaseIndex
@@ -101,8 +115,9 @@ case "${command}" in
 		;;
 	"scorpio")
 		stoppingContainers
-		echo -e "Starting two containers \033[1;34mOrion\033[0m and a \033[1mMongoDB\033[0m database."
-		echo -e "- \033[1;34mOrion\033[0m is the context broker"
+		echo -e "Starting six containers \033[1;34mScorpio\033[0m, \033[1mKafka\033[0m, \033[1mZookeeper\033[0m and a \033[1mPostgres\033[0m database, \033[1;36mIoT-Agent\033[0m, \033[1mTutorial\033[0m and a \033[1mMongoDB\033[0m database."
+		echo -e "- \033[1;34mScorpio\033[0m is the context broker"
+		echo -e "- \033[1mTutorial\033[0m holds the @context"
 		echo ""
 		docker-compose --log-level ERROR -f docker-compose/scorpio-aaio.yml -p fiware up -d --remove-orphans
 		displayServices fiware
@@ -124,3 +139,6 @@ case "${command}" in
 		exit 127;
 		;;
 esac
+
+
+
