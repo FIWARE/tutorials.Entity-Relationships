@@ -16,6 +16,8 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0671934f64958d3200b3)
 
+-   このチュートリアルは[日本語](README.ja.md)でもご覧いただけます。
+
 ## Contents
 
 <details>
@@ -37,14 +39,14 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
     -   [Creating many-to-many Relationships](#creating-many-to-many-relationships)
     -   [Reading from a bridge table](#reading-from-a-bridge-table)
     -   [Relationships of Properties](#relationships-of-properties)
-        -   [Retriving the Temperature of a Barn](#retriving-the-temperature-of-a-barn)
+        -   [Retrieving the Temperature of a Barn](#retriving-the-temperature-of-a-barn)
 -   [Next Steps](#next-steps)
 
 </details>
 
 # Understanding Entities and Relationships
 
-Within the FIWARE platform, the context of an entity represents the state of a physical or conceptural object which
+Within the FIWARE platform, the context of an entity represents the state of a physical or conceptual object which
 exists in the real world.
 
 ## Entities within a Farm Management Information System (FMIS)
@@ -72,13 +74,13 @@ shown:
     -   An association to the asset (e.g. building) they are measuring
 -   A **person** is an entity representing a farmer or farm labourer. Each **Person** entity would have properties such
     as:
-    -   A name of the person e.g. "Mr Jones"
+    -   A name of the person e.g. "Mr. Jones"
     -   A job title
     -   An association to the farm buildings they own.
--   A task something we do down on the farm. It is a conceptural entity, used to assocate workers, agricultural products
+-   A task something we do down on the farm. It is a conceptual entity, used to associate workers, agricultural products
     and locations **Task** entities would have properties such as:
     -   The name of the task (e.g. _Spray Herbicide XXX on field Y_)
-    -   The status of the task (e.g _scheduled_, _in progress_, _completed_)
+    -   The status of the task (e.g. _scheduled_, _in progress_, _completed_)
     -   An association to the worker (i.e. a **Person** entity) who performs the task
     -   An association to the product (e.g. **Herbicide** entity) to be used.
     -   An association to the location (e.g. **PartField** entity) to be used.
@@ -192,10 +194,10 @@ This command will also import seed data (**Building**, **Person**, **Temperature
 In the previous tutorial, we created each entity individually,
 
 Lets create several sensors at the same time. This request uses the convenience batch processing endpoint to create five
-shelf entities. Batch processing uses the `/ngsi-ld/v1/entityOperations/`endpoints and the `upsert` endpoints means we
-will create new entities if they are not present and overwrite existing entities if they exist.
+entities. Batch processing uses the `/ngsi-ld/v1/entityOperations/`endpoints and the `upsert` endpoints means we will
+create new entities if they are not present and overwrite existing entities if they exist.
 
-To differenciate different **Device**, each temperature sensor has been assigned `type=TemperatureSensor`. Real-world
+To differentiate different **Device**, each temperature sensor has been assigned `type=TemperatureSensor`. Real-world
 properties such as `category` have been added as properties to each device.
 
 #### :one: Request:
@@ -316,12 +318,11 @@ As you can see there are currently three additional property attributes present 
 
 ## Creating a one-to-many Relationship
 
-In databases, foreign keys are often used to designate a one-to-many relationship - for example every shelf is found in
-a single store and a single store can hold many shelving units. In order to remember this information we need to add an
-association relationship similar to a foreign key. Batch processing can again be used to amend the existing the
-**TemperatureSensor** and **FillingLevelSensor** entities to add a `controllingAsset` attribute holding the relationship
-to each building controlled by the device. According to the Smart Data Model
-[Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)
+In databases, foreign keys are often used to designate a one-to-many relationship - for example a building can hold many
+devices. In order to remember this information we need to add an association relationship similar to a foreign key.
+Batch processing can again be used to amend the existing the **TemperatureSensor** and **FillingLevelSensor** entities
+to add a `controllingAsset` attribute holding the relationship to each building controlled by the device. According to
+the Smart Data Model [Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)
 definition `https://uri.fiware.org/ns/data-models#controllingAsset` is the URI long name to be used for this
 relationship, and the value of the `controllingAsset` attribute corresponds to a URN associated to a **Building** entity
 itself.
@@ -372,7 +373,7 @@ curl -G -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 ]'
 ```
 
-Now when the shelf information is requested again, the response has changed and includes a new property
+Now when the devcie information is requested again, the response has changed and includes a new property
 `controllingAsset`, which has been added in the previous step.
 
 #### :five: Request:
@@ -579,10 +580,10 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
 ## Relationships of Properties
 
 _Properties-of-Properties_ and _Relationships of Properties_ are metadata. The addition of metadata entities such as
-these into the context data allows users to navigate the graph of entities releationshps and gain further insights about
+these into the context data allows users to navigate the graph of entities relationships and gain further insights about
 the state of the system.
 
-### Retriving the Temperature of a Barn
+### Retrieving the Temperature of a Barn
 
 The temperature readings from a temperature sensor have already been discussed. It may also be necessary to duplicate
 this data into another entity. For example, the temperature reading of a sensor in the barn is also the temperature
