@@ -1,137 +1,118 @@
 {
 	"info": {
-		
+		"_postman_id": "c1f2ca70-0f08-4466-bb27-117eadbb7efa",
 		"name": "NGSI-LD Entity Relationships",
-		"description": "This tutorial builds on the data created in the previous [store finder example](http://fiware.github.io/tutorials.Getting-Started/) and creates and associates a series of related data entities to create a simple stock management system.\n\nThe `docker-compose` file for this tutorial can be found on GitHub: \n\n![GitHub](https://fiware.github.io/tutorials.Entity-Relationships/icon/GitHub-Mark-32px.png) [FIWARE 102: Batch Commands and Entity Relationships](https://github.com/Fiware/tutorials.Entity-Relationships)\n\n# Data Entities\n\nWithin the FIWARE platform, an entity represents the state of a physical or conceptural object which exists in the real world.\n\n## Entities within a stock management system\n\nFor a simple stock management system, we will only need four types of entity. The relationship between our entities is defined as shown:\n\n![](https://fiware.github.io/tutorials.Entity-Relationships/img/entities.png)\n\n* A **Store** is a real world bricks and mortar building. Stores would have properties such as:\n  + A name of the store e.g. \"Checkpoint Markt\"\n  + An address \"Friedrichstraße 44, 10969 Kreuzberg, Berlin\"\n  + A phyiscal location  e.g. *52.5075 N, 13.3903 E*\n* A **Shelf** is a real world device to hold objects which we wish to sell. Each shelf would have properties such as:\n  + A name of the shelf e.g. \"Wall Unit\"\n  + A phyiscal location  e.g. *52.5075 N, 13.3903 E*\n  + A maximum capacity\n  + An association to the store in which the shelf is present\n* A **Product** is defined as something that we sell - it is conceptural object. Products would have properties such as:\n  + A name of the product e.g. \"Vodka\"\n  + A price e.g. 13.99 Euros\n  + A size e.g. Small\n* An **Inventory Item** is another conceptural entity, used to assocate products, stores, shelves and physical objects. It would have properties such as:\n  + An assocation to the product being sold\n  + An association to the store in which the product is being sold\n  + An association to the shelf where the product is being displayed\n  + A stock count of the quantity of the product available in the warehouse\n  + A stock count of the quantity of the product available on the shelf\n\n\nAs you can see, each of the entities defined above contain some properties which are liable to change. A product could change its price, stock could be sold and the shelf count of stock could be reduced and so on.\n\n\n# Architecture\n\nThis application will only make use of one FIWARE component - the [Orion Context Broker](https://catalogue.fiware.org/enablers/publishsubscribe-context-broker-orion-context-broker). Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.\n\nCurrently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep persistence of the context data it holds. Therefore, the architecture will consist of two elements:\n\n* The Orion Context Broker server which will receive requests using NGSI\n* The underlying MongoDB database associated to the Orion Context Broker server\n\nSince all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and run from exposed ports. \n\n![](https://fiware.github.io/tutorials.Entity-Relationships/img/architecture.png)\n\nThe necessary configuration information can be seen in the services section of the associated `docker-compose.yml`  file:\n\n```yaml\n  orion:\n    image: fiware/orion:latest\n    hostname: orion\n    container_name: orion\n    depends_on:\n      - context-db\n    networks:\n        - default\n    expose:\n        - \"1026\"\n    ports:\n        - \"1026:1026\"\n    command: -dbhost context-db -logLevel DEBUG\n```\n\n```yaml\n  context-db:\n    image: mongo:3.6\n    hostname: context-db\n    container_name: context-db\n    expose:\n        - \"27017\"\n    ports:\n        - \"27017:27017\"\n    networks:\n        - default\n    command: --bind_ip_all --smallfiles\n```\n\nBoth containers are residing on the same network - the Orion Context Broker is listening on Port `1026` \nand MongoDB is listening on the default port `271071`. Both containers are also exposing the same ports\nexternally - this is purely for the tutorial access - so that cUrl or Postman can access them without\nbeing part of the same network. The command line initialization should be self explanatory.\n\n# Prerequisites\n\n## Docker\n\nTo keep things simple both components will be run using [Docker](https://www.docker.com). **Docker** is a container technology which allows to different components isolated into their respective environments. \n\n* To install Docker on Windows follow the instructions [here](https://docs.docker.com/docker-for-windows/)\n* To install Docker on Mac follow the instructions [here](https://docs.docker.com/docker-for-mac/)\n* To install Docker on Linux follow the instructions [here](https://docs.docker.com/install/)\n\n**Docker Compose** is a tool for defining and running multi-container Docker applications. A [YAML file](https://raw.githubusercontent.com/Fiware/tutorials.Entity-Relationships/master/docker-compose.yml) is used configure the required\nservices for the application. This means all container sevices can be brought up in a single commmand. Docker Compose is installed by default as part of Docker for Windows and  Docker for Mac, however Linux users will need to follow the instructions found [here](https://docs.docker.com/compose/install/)\n\n## Cygwin \n\nWe will start up our services using a simple bash script. Windows users should download [cygwin](www.cygwin.com) to provide a command line functionality similar to a Linux distribution on Windows. \n\n\n# Start Up\n\nAll services can be initialised from the command line by running the bash script provided within the repository:\n\n```bash\n./services start\n```",
+		"description": "This tutorial teaches **NGSI-LD** users about batch commands and entity relationships. The tutorial builds on the data\ncreated in the previous [Smart Farm example](https://github.com/FIWARE/tutorials.Getting-Started/tree/NGSI-LD) and\ncreates and associates a series of related data entities to create add sensors and farm workers to the farm.\n\nThe `docker-compose` file for this tutorial can be found on GitHub: \n\n![GitHub](https://fiware.github.io/tutorials.Entity-Relationships/icon/GitHub-Mark-32px.png) [FIWARE 102: Batch Commands and Entity Relationships](https://github.com/Fiware/tutorials.Entity-Relationships)\n\nThis tutorial teaches **NGSI-LD** users about batch commands and entity relationships. The tutorial builds on the data\ncreated in the previous [Smart Farm example](https://github.com/FIWARE/tutorials.Getting-Started/tree/NGSI-LD) and\ncreates and associates a series of related data entities to create add sensors and farm workers to the farm.\n\n# Understanding Entities and Relationships\n\nWithin the FIWARE platform, the context of an entity represents the state of a physical or conceptual object which\nexists in the real world.\n\n## Entities within a Farm Management Information System (FMIS)\n\nTo illustrate entity relationships within an FMIS system based on NGSI-LD, we will need to create a series of entities.\nFor this simplified FMIS, we will only need a small number entities. The relationship between our entities is defined as\nshown:\n\n![](https://fiware.github.io/tutorials.Entity-Relationships/img/ngsi-ld-entities.png)\n\n-   A building, such as a barn, is a real world bricks and mortar construct. **Building** entities would have properties\n    such as:\n    -   A name of the building e.g. \"The Big Red Barn\"\n    -   The category of the building (e.g. \"barn\")\n    -   An address \"Friedrichstraße 44, 10969 Kreuzberg, Berlin\"\n    -   A physical location e.g. _52.5075 N, 13.3903 E_\n    -   A filling level - the degree to which the building is full.\n    -   A temperature - e.g. _21 °C_\n    -   An association to the owner of the building (a real person)\n-   Smart devices such as **TemperatureSensors** or **FillingLevelSensors** would extend a common **Device** data model.\n    Each **Device** entity would have properties such as:\n    -   A description of the device\n    -   The category of device (e.g. _sensor_, _actuator_, _both_)\n    -   The name of the property they are measuring (e.g. _temperature_)\n    -   An association to the asset (e.g. building) they are measuring\n-   A **person** is an entity representing a farmer or farm labourer. Each **Person** entity would have properties such\n    as:\n    -   A name of the person e.g. \"Mr. Jones\"\n    -   A job title\n    -   An association to the farm buildings they own.\n-   A task something we do down on the farm. It is a conceptual entity, used to associate workers, agricultural products\n    and locations **Task** entities would have properties such as:\n    -   The name of the task (e.g. _Spray Herbicide XXX on field Y_)\n    -   The status of the task (e.g. _scheduled_, _in progress_, _completed_)\n    -   An association to the worker (i.e. a **Person** entity) who performs the task\n    -   An association to the product (e.g. **Herbicide** entity) to be used.\n    -   An association to the location (e.g. **PartField** entity) to be used.\n\nAs you can see, each of the entities defined above contain a mixture of static and dynamic data. Some properties are\nliable to change. A **Herbicide** could change its `formula`, hay could be sold and the `fillingLevel` of the barn could\nbe reduced and so on.\n\n> **Note** this tutorial uses the following typographic styling :\n>\n> -   Entity types have been made **bold text**\n> -   Data attributes are written in `monospace text`\n> -   Items in the real world use plain text\n>\n> Therefore a person in the real world is represented in the context data by a **Person** entity, and a real world barn\n> owned by a person is represented in the context data by a **Building** entity which has a `owner` attribute.\n\n# Architecture\n\nThe demo FMIS application will send and receive NGSI-LD calls to a compliant context broker. Since the standardized\nNGSI-LD interface is available across multiple context brokers, so we only need to pick one - for example the\n[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). The application will therefore only make use of\none FIWARE component.\n\nCurrently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep\npersistence of the context data it holds.\n\nTo promote interoperability of data exchange, NGSI-LD context brokers explicitly expose a\n[JSON-LD `@context` file](https://json-ld.org/spec/latest/json-ld/#the-context) to define the data held within the\ncontext entities. This defines a unique URI for every entity type and every attribute so that other services outside of\nthe NGSI domain are able to pick and choose the names of their data structures. Every `@context` file must be available\non the network. In our case the tutorial application will be used to host a series of static files.\n\nTherefore, the architecture will consist of three elements:\n\n-   The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using\n    [NGSI-LD](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/spec/updated/full_api.json)\n-   The underlying [MongoDB](https://www.mongodb.com/) database :\n    -   Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and\n        registrations\n-   The **Tutorial Application** does the following:\n    -   Offers static `@context` files defining the context entities within the system.\n\nSince all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and\nrun from exposed ports.\n\n![](https://fiware.github.io/tutorials.Entity-Relationships/img/architecture-ld.png)\n\nThe necessary configuration information can be seen in the services section of the associated `docker-compose.yml` file.\nIt has been described in a [previous tutorial](https://github.com/FIWARE/tutorials.Getting-Started/tree/NGSI-LD)\n\n# Prerequisites\n\n## Docker and Docker Compose\n\nTo keep things simple both components will be run using [Docker](https://www.docker.com). **Docker** is a container\ntechnology which allows to different components isolated into their respective environments.\n\n-   To install Docker on Windows follow the instructions [here](https://docs.docker.com/docker-for-windows/)\n-   To install Docker on Mac follow the instructions [here](https://docs.docker.com/docker-for-mac/)\n-   To install Docker on Linux follow the instructions [here](https://docs.docker.com/install/)\n\n**Docker Compose** is a tool for defining and running multi-container Docker applications. A\n[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.Entity-Relationships/master/docker-compose.yml) is used\nconfigure the required services for the application. This means all container services can be brought up in a single\ncommand. Docker Compose is installed by default as part of Docker for Windows and Docker for Mac, however Linux users\nwill need to follow the instructions found [here](https://docs.docker.com/compose/install/)\n\nYou can check your current **Docker** and **Docker Compose** versions using the following commands:\n\n```console\ndocker-compose -v\ndocker version\n```\n\nPlease ensure that you are using Docker version 18.03 or higher and Docker Compose 1.21 or higher and upgrade if\nnecessary.\n\n## Cygwin for Windows\n\nWe will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/)\nto provide a command-line functionality similar to a Linux distribution on Windows.\n\n# Start Up\n\nAll services can be initialised from the command-line by running the\n[services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/NGSI-LD/services) Bash script provided within\nthe repository. Please clone the repository and create the necessary images by running the commands as shown:\n\n```console\ngit clone https://github.com/FIWARE/tutorials.Entity-Relationships.git\ncd tutorials.Entity-Relationships\ngit checkout NGSI-LD\n\n./services start\n```\n\nThis command will also import seed data (**Building**, **Person**, **TemperatureSensor**, **FillingLevelSensor**,\n**Herbicide** and **PartField**) on startup.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Re-create two Stores (optional)",
+			"name": "Create Three Temperature Sensors",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
 						"value": "application/json"
+					},
+					{
+						"key": "Link",
+						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"actionType\": \"APPEND\",\n  \"entities\": [\n    {\n      \"type\": \"Store\",\n      \"id\": \"urn:ngsi-ld:Store:001\",\n      \"address\": {\n        \"type\": \"PostalAddress\",\n        \"value\": {\n            \"streetAddress\": \"Bornholmer Straße 65\",\n            \"addressRegion\": \"Berlin\",\n            \"addressLocality\": \"Prenzlauer Berg\",\n            \"postalCode\": \"10439\"\n          }\n      },\n      \"location\": {\n          \"type\": \"geo:json\",\n          \"value\": {\n             \"type\": \"Point\",\n             \"coordinates\": [13.3986, 52.5547]\n          }\n      },\n      \"name\": {\n          \"type\": \"Text\",\n          \"value\": \"Bösebrücke Einkauf\"\n      }\n    },\n    {\n      \"type\": \"Store\",\n        \"id\": \"urn:ngsi-ld:Store:002\",\n      \"address\": {\n          \"type\": \"PostalAddress\",\n          \"value\": {\n              \"streetAddress\": \"Friedrichstraße 44\",\n              \"addressRegion\": \"Berlin\",\n              \"addressLocality\": \"Kreuzberg\",\n              \"postalCode\": \"10969\"\n          }\n      },\n      \"location\": {\n          \"type\": \"geo:json\",\n          \"value\": {\n               \"type\": \"Point\",\n               \"coordinates\": [13.3903, 52.5075]\n          }\n      },\n      \"name\": {\n          \"type\": \"Text\",\n          \"value\": \"Checkpoint Markt\"\n      }\n    }\n  ]\n}"
+					"raw": "[\n    {\n      \"id\": \"urn:ngsi-ld:TemperatureSensor:001\",\n      \"type\": \"TemperatureSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Temperature Gauge 1\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"temperature\"},\n      \"temperature\": {\"type\": \"Property\", \"value\": 20, \"unitCode\": \"CEL\"}\n    },\n    {\n      \"id\": \"urn:ngsi-ld:TemperatureSensor:002\",\n      \"type\": \"TemperatureSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Temperature Gauge 2\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"temperature\"},\n      \"temperature\": {\"type\": \"Property\", \"value\": 21, \"unitCode\": \"CEL\"}\n    },\n    {\n      \"id\": \"urn:ngsi-ld:TemperatureSensor:003\",\n      \"type\": \"TemperatureSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Temperature Gauge 3\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"temperature\"},\n      \"temperature\": {\"type\": \"Property\", \"value\": 27, \"unitCode\": \"CEL\"}\n    }\n]"
 				},
 				"url": {
-					"raw": "http://{{orion}}/v2/op/update",
+					"raw": "http://{{orion}}/ngsi-ld/v1/entityOperations/upsert",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
 					],
 					"path": [
-						"v2",
-						"op",
-						"update"
+						"ngsi-ld",
+						"v1",
+						"entityOperations",
+						"upsert"
 					]
 				},
-				"description": "This example uses the convenience batch processing endpoint to re-create the two **Store** entities from the previous tutorial.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nAs you can see each **Store** entity in the payload has been given a unique `id` (according to the NGSI-LD [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)) and assigned `type=Store`."
+				"description": "In the previous tutorial, we created each entity individually,\n\nLets create several sensors at the same time. This request uses the convenience batch processing endpoint to create five\nentities. Batch processing uses the `/ngsi-ld/v1/entityOperations/`endpoints and the `upsert` endpoints means we will\ncreate new entities if they are not present and overwrite existing entities if they exist.\n\nTo differentiate different **Device**, each temperature sensor has been assigned `type=TemperatureSensor`. Real-world\nproperties such as `category` have been added as properties to each device."
 			},
 			"response": []
 		},
 		{
-			"name": "Create Four Products",
+			"name": "Create Three Filling Sensors",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
 						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Product:001\", \"type\":\"Product\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Beer\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"S\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 99\n      }\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Product:002\", \"type\":\"Product\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Red Wine\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"M\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 1099\n      }\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Product:003\", \"type\":\"Product\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"White Wine\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"M\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 1499\n      }\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Product:004\", \"type\":\"Product\",\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Vodka\"\n      },\n      \"size\":{\n        \"type\":\"Text\", \"value\": \"XL\"\n      },\n      \"price\":{\n        \"type\":\"Integer\", \"value\": 5000\n      }\n    }\n  ]\n}"
-				},
-				"url": {
-					"raw": "http://{{orion}}/v2/op/update",
-					"protocol": "http",
-					"host": [
-						"{{orion}}"
-					],
-					"path": [
-						"v2",
-						"op",
-						"update"
-					]
-				},
-				"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)  and has been assigned `type=Product`."
-			},
-			"response": []
-		},
-		{
-			"name": "Create Five Shelf Units",
-			"request": {
-				"method": "POST",
-				"header": [
+					},
 					{
-						"key": "Content-Type",
-						"value": "application/json"
+						"key": "Link",
+						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Shelf:unit001\", \"type\":\"Shelf\",\n      \"location\":{\n        \"type\":\"geo:json\", \"value\":{ \"type\":\"Point\",\"coordinates\":[13.3986112, 52.554699]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Corner Unit\"\n      },\n      \"maxCapacity\":{\n        \"type\":\"Integer\", \"value\":50\n      }\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Shelf:unit002\", \"type\":\"Shelf\",\n      \"location\":{\n        \"type\":\"geo:json\",\"value\":{\"type\":\"Point\",\"coordinates\":[13.3987221, 52.5546640]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Wall Unit 1\"\n      },\n      \"maxCapacity\":{\n        \"type\":\"Integer\", \"value\":100\n      }\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Shelf:unit003\", \"type\":\"Shelf\",\n      \"location\":{\n        \"type\":\"geo:json\", \"value\":{\"type\":\"Point\",\"coordinates\":[13.3987221, 52.5546640]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Wall Unit 2\"\n      },\n      \"maxCapacity\":{\n        \"type\":\"Integer\", \"value\":100\n      }\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Shelf:unit004\", \"type\":\"Shelf\",\n      \"location\":{\n        \"type\":\"geo:json\", \"value\":{\"type\":\"Point\",\"coordinates\":[13.390311, 52.507522]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Corner Unit\"\n      },\n      \"maxCapacity\":{\n        \"type\":\"Integer\", \"value\":50\n      }\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Shelf:unit005\", \"type\":\"Shelf\",\n      \"location\":{\n        \"type\":\"geo:json\",\"value\":{\"type\":\"Point\",\"coordinates\":[13.390309, 52.50751]}\n      },\n      \"name\":{\n        \"type\":\"Text\", \"value\":\"Long Wall Unit\"\n      },\n      \"maxCapacity\":{\n        \"type\":\"Integer\", \"value\":200\n      }\n    }\n  ]\n}"
+					"raw": "[\n    {\n      \"id\": \"urn:ngsi-ld:FillingLevelSensor:001\",\n      \"type\": \"FillingLevelSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Filling Level Sensor 1\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"fillingLevel\"},\n      \"fillingLevel\": {\"type\": \"Property\", \"value\": 1, \"unitCode\": \"C62\"}\n    },\n    {\n      \"id\": \"urn:ngsi-ld:FillingLevelSensor:002\",\n      \"type\": \"FillingLevelSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Filling Level Sensor 2\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"fillingLevel\"},\n      \"fillingLevel\": {\"type\": \"Property\", \"value\": 0.9, \"unitCode\": \"C62\"}\n    },\n    {\n      \"id\": \"urn:ngsi-ld:FillingLevelSensor:003\",\n      \"type\": \"FillingLevelSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Filling Gauge 3\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"fillingLevel\"},\n      \"fillingLevel\": {\"type\": \"Property\", \"value\": 0.8, \"unitCode\": \"C62\"}\n    }\n]"
 				},
 				"url": {
-					"raw": "http://{{orion}}/v2/op/update",
+					"raw": "http://{{orion}}/ngsi-ld/v1/entityOperations/upsert",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
 					],
 					"path": [
-						"v2",
-						"op",
-						"update"
+						"ngsi-ld",
+						"v1",
+						"entityOperations",
+						"upsert"
 					]
 				},
-				"description": "This example uses the convenience batch processing endpoint to create the five shelf entities.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nTo differenciate **Shelf** Entities from **Store** Entities, each shelf has been assigned `type=Shelf`. The `id` of each **Shelf** Entity follows the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) and is therefore unique.\n\nReal-world properties such as `name` and `location` have been addded as properties to each shelf."
+				"description": "Similarly, we can create a series of **FillingLevelSensors** entities by using the `type=FillingLevelSensor`.\n\nIn both cases we have encoded each entity `id` according to the NGSI-LD\n[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) - the proposal\nis that each `id` is a URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This will mean that every\n`id` in the system will be unique."
 			},
 			"response": []
 		},
 		{
-			"name": "Obtain Shelf Information",
+			"name": "Obtain Device Information",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"header": [
+					{
+						"key": "Link",
+						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Shelf:unit001/?options=keyValues",
+					"raw": "http://{{orion}}/ngsi-ld/v1/entities/?type=TemperatureSensor,FillingLevelSensor&options=keyValues",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
 					],
 					"path": [
-						"v2",
+						"ngsi-ld",
+						"v1",
 						"entities",
-						"urn:ngsi-ld:Shelf:unit001",
 						""
 					],
 					"query": [
 						{
 							"key": "type",
-							"value": "Shelf",
-							"description": "Entity type",
-							"disabled": true
+							"value": "TemperatureSensor,FillingLevelSensor"
 						},
 						{
 							"key": "options",
-							"value": "keyValues",
-							"description": "* `keyValues` option in order to get a more compact and brief representation, including just attribute values\n* `values` option combined with a list of attribute values  `attrs`  for an ordered list of attributes only"
+							"value": "keyValues"
 						}
 					]
 				},
-				"description": "This example returns the context data of the *Shelf* entity with the `id=urn:ngsi-ld:Shelf:unit001`.\n\nThere are currently three additional property attributes present `location`, `maxCapacity` and `name`"
+				"description": "Device information can be requested by making a GET request on the `/ngsi-ld/v1/entities` endpoint. For example to\nreturn the context data of the devices.\n\nAs you can see there are currently three additional property attributes present `description`, `category` and\n`controlledProperty`"
 			},
 			"response": []
 		},
@@ -143,64 +124,78 @@
 					{
 						"key": "Content-Type",
 						"value": "application/json"
+					},
+					{
+						"key": "Link",
+						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Shelf:unit001\", \"type\":\"Shelf\",\n      \"refStore\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:001\"\n      }\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Shelf:unit002\", \"type\":\"Shelf\",\n      \"refStore\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:001\"\n      }\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Shelf:unit003\", \"type\":\"Shelf\",\n      \"refStore\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:001\"\n      }\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Shelf:unit004\", \"type\":\"Shelf\",\n      \"refStore\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:002\"\n      }\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Shelf:unit005\", \"type\":\"Shelf\",\n      \"refStore\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:002\"\n      }\n    }\n  ]\n}"
+					"raw": "[\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:001\",\n        \"type\": \"TemperatureSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm001\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:002\",\n        \"type\": \"TemperatureSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:barn002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:003\",\n        \"type\": \"FillingLevelSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:001\",\n        \"type\": \"FillingLevelSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm001\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:002\",\n        \"type\": \"FillingLevelSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:barn002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:003\",\n        \"type\": \"TemperatureSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm002\"\n        }\n    }\n]"
 				},
 				"url": {
-					"raw": "http://{{orion}}/v2/op/update",
+					"raw": "http://{{orion}}/ngsi-ld/v1/entityOperations/update?options=update",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
 					],
 					"path": [
-						"v2",
-						"op",
+						"ngsi-ld",
+						"v1",
+						"entityOperations",
 						"update"
+					],
+					"query": [
+						{
+							"key": "options",
+							"value": "update"
+						}
 					]
 				},
-				"description": "This example uses batch processing to amend the existing the **Shelf** entities to add a `refStore` relationship to each shelf. According to the FIWARE Data Modelling Guidelines on [linked data](http://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data), when an entity attribute is used as a link to other entities  it should be named with the prefix `ref` plus the name of the target (linked) entity type. \n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.\n\nThe value corresponds to a URN associated to an existing **Store** entity within the context."
+				"description": "In databases, foreign keys are often used to designate a one-to-many relationship - for example a building can hold many\ndevices. In order to remember this information we need to add an association relationship similar to a foreign key.\nBatch processing can again be used to amend the existing the **TemperatureSensor** and **FillingLevelSensor** entities\nto add a `controllingAsset` attribute holding the relationship to each building controlled by the device. According to\nthe Smart Data Model [Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)\ndefinition `https://uri.fiware.org/ns/data-models#controllingAsset` is the URI long name to be used for this\nrelationship, and the value of the `controllingAsset` attribute corresponds to a URN associated to a **Building** entity\nitself.\n\nThe URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`.\n\nThe following request associates six devices to `urn:ngsi-ld:Building:farm001`, `urn:ngsi-ld:Building:barn002` and\n`urn:ngsi-ld:Building:farm002`.\n\n"
 			},
 			"response": []
 		},
 		{
-			"name": "Obtain Updated Shelf Information",
+			"name": "Obtain Updated Device Information",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"header": [
+					{
+						"key": "Link",
+						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Shelf:unit001/?options=keyValues",
+					"raw": "http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001?options=keyValues",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"localhost"
 					],
+					"port": "1026",
 					"path": [
-						"v2",
+						"ngsi-ld",
+						"v1",
 						"entities",
-						"urn:ngsi-ld:Shelf:unit001",
-						""
+						"urn:ngsi-ld:TemperatureSensor:001"
 					],
 					"query": [
+						{
+							"key": "options",
+							"value": "keyValues"
+						},
 						{
 							"key": "type",
 							"value": "Shelf",
 							"description": "Entity type",
 							"disabled": true
-						},
-						{
-							"key": "options",
-							"value": "keyValues",
-							"description": "* `keyValues` option in order to get a more compact and brief representation, including just attribute values\n* `values` option combined with a list of attribute values  `attrs`  for an ordered list of attributes only"
 						}
 					]
 				},
-				"description": "This example returns the context data of the `Shelf` entity with the `id=urn:ngsi-ld:Shelf:unit001`.\n\nThe response now includes a new relationship property `refStore`, which has been added in the previous step."
+				"description": "Now when the devcie information is requested again, the response has changed and includes a new property\n`controllingAsset`, which has been added in the previous step."
 			},
 			"response": []
 		},
@@ -208,24 +203,37 @@
 			"name": "Obtain a Foreign Key URN",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"header": [
+					{
+						"key": "Link",
+						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"name": "Accept"
+					}
+				],
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Shelf:unit001/?options=values&attrs=refStore",
+					"raw": "http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001?options=keyValues&attrs=controllingAsset",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"localhost"
 					],
+					"port": "1026",
 					"path": [
-						"v2",
+						"ngsi-ld",
+						"v1",
 						"entities",
-						"urn:ngsi-ld:Shelf:unit001",
-						""
+						"urn:ngsi-ld:TemperatureSensor:001"
 					],
 					"query": [
+						{
+							"key": "options",
+							"value": "keyValues"
+						},
 						{
 							"key": "type",
 							"value": "Shelf",
@@ -233,181 +241,233 @@
 							"disabled": true
 						},
 						{
-							"key": "options",
-							"value": "values",
-							"description": "* `keyValues` option in order to get a more compact and brief representation, including just attribute values\n* `values` option combined with a list of attribute values  `attrs`  for an ordered list of attributes only"
-						},
-						{
 							"key": "attrs",
-							"value": "refStore",
-							"description": "Ordered list of attribute names to display"
+							"value": "controllingAsset"
 						}
 					]
 				},
-				"description": "This example returns the `refStore` value associated with a given `Shelf` unit. \n\nIf the `id` and `type` of a data entity are known, a specific field can be requested by combining the `options=values` parameter and the `attrs` parameter. \n\nThe URN returned has a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`, which has been used as the `id` of the **Store** entity itself (based on the NGSI-LD [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)), therefore it is a simple matter to request more information about the linked store by making a query to the `/entities` endpoint.\n\n```\nhttp://{{orion}}/v2/entities/urn:ngsi-ld:Store:001?options=keyValues\n```"
+				"description": "We can also make a request to retrieve the `controllingAsset` attribute relationship information from a known **Device**\nentity by using the `options=keyValues` setting.\n\n\nThis can be interpreted as _\"I am making sensor readings inside the **Building** entity with the\n`id=urn:ngsi-ld:Building:farm001`\"_"
 			},
 			"response": []
 		},
 		{
-			"name": "Obtain all Shelf Units found within a Store",
+			"name": "Reading from Parent Entity to Child Entity",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"header": [
+					{
+						"key": "Link",
+						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&type=Shelf&options=values&attrs=name",
+					"raw": "http://{{orion}}/ngsi-ld/v1/entities?q=controllingAsset==\"urn:ngsi-ld:Building:farm001\"&options=keyValues&attrs=controllingAsset",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
 					],
 					"path": [
-						"v2",
-						"entities",
-						""
+						"ngsi-ld",
+						"v1",
+						"entities"
 					],
 					"query": [
 						{
 							"key": "q",
-							"value": "refStore==urn:ngsi-ld:Store:001"
-						},
-						{
-							"key": "type",
-							"value": "Shelf",
-							"description": "Entity type"
+							"value": "controllingAsset==\"urn:ngsi-ld:Building:farm001\""
 						},
 						{
 							"key": "options",
-							"value": "values",
-							"description": "* `keyValues` option in order to get a more compact and brief representation, including just attribute values\n* `values` option combined with a list of attribute values  `attrs`  for an ordered list of attributes only"
+							"value": "keyValues"
 						},
 						{
 							"key": "attrs",
-							"value": "name",
-							"description": "Ordered list of attribute names to display"
+							"value": "controllingAsset"
 						}
 					]
 				},
-				"description": "This example returns the `name` of all `Shelf` entities associated with the `shop1`.\n\nThe value of the query parameter `q` holds a URN of the form `urn:ngsi-ld:<entity-type>:<entity-id>` which corresponds to the the Relationship URN in order to filter the information returned."
+				"description": "Reading from a parent to a child can be done using the following query.\n\nThis request is asking for the `id` of all **Device** entities associated to the URN `urn:ngsi-ld:Building:farm001`, the\nresponse is a JSON array as shown.\n\nIn plain English, this can be interpreted as _\"There are two devices in `urn:ngsi-ld:Building:farm001`\"_. The request can\nbe altered use the `count=true` to return the number of entities which fulfill the criteria.\n\nThis returns an HTTP Header as part of the response which indicates the number of affected entities."
 			},
 			"response": []
 		},
 		{
-			"name": "Putting a Product onto  a shelf",
+			"name": "Creating many-to-many Relationships",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
 						"value": "application/json"
+					},
+					{
+						"key": "Link",
+						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"urn:ngsi-ld:InventoryItem:001\", \"type\": \"InventoryItem\",\n    \"refStore\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:001\"\n    },\n    \"refShelf\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Shelf:unit001\"\n    },\n    \"refProduct\": { \n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Product:001\"\n    },\n    \"stockCount\":{\n        \"type\":\"Integer\", \"value\": 10000\n    },\n    \"shelfCount\":{\n        \"type\":\"Integer\", \"value\": 50\n    }\n}"
+					"raw": "{\n    \"id\": \"urn:ngsi-ld:Task:001\",\n    \"type\": \"Task\",\n    \"worker\": {\n        \"type\": \"Relationship\",\n        \"object\": \"urn:ngsi-ld:Person:001\"\n    },\n    \"field\": {\n        \"type\": \"Relationship\",\n        \"object\": \"urn:ngsi-ld:PartField:002\"\n    },\n    \"product\": {\n        \"type\": \"Relationship\",\n        \"object\": \"urn:ngsi-ld:Herbicide:001\"\n    },\n    \"description\": {\n        \"type\": \"Property\",\n        \"value\": \"Spray the North Field with Agent Orange\"\n    },\n    \"status\": {\n        \"type\": \"Property\",\n        \"value\": \"scheduled\"\n    },\n    \"dueDate\": {\n        \"type\": \"Property\",\n        \"value\": \"2021-07-16\"\n    }\n}"
 				},
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/",
+					"raw": "http://{{orion}}/ngsi-ld/v1/entities/",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
 					],
 					"path": [
-						"v2",
+						"ngsi-ld",
+						"v1",
 						"entities",
 						""
 					]
 				},
-				"description": "The **InventoryItem** entity exists to associate data from other entities.  It has a foreign key relationship to the **Store**, **Shelf** and **Product** entities and therefore requires relationship attributes called `refStore`, `refShelf` and `refProduct`.\n\nAssigning a product to a shelf is simply a  create an entity holding the relationship information and any other additional properties (such as `stockCount` and `shelfCount`)."
+				"description": "Bridge Tables are often used to relate many-to-many relationships. For example, every spraying activity within the FMIS\nwill need to associate a farm worker, a product to apply, and a location to apply the treatment (known as a\n**PartField**)\n\nIn order to hold the context information to \"direct a worker to spray a herbicide onto a field\" we will need to create a\nnew data entity **Task** which exists to associate data from other entities. It has a foreign key relationship to the\n**Person**, **Herbicide** and **PartField** entities and therefore requires relationship attributes called `field`,\n`herbicide` and `worker`.\n\nAssigning a task is simply done by creating an entity holding the relationship information and any other additional\nproperties (such as `description` and `status`)"
 			},
 			"response": []
 		},
 		{
-			"name": "Find all stores in which a product is sold",
+			"name": "Reading from a bridge table (1)",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"header": [
+					{
+						"key": "Link",
+						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"name": "Accept"
+					}
+				],
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem",
+					"raw": "http://{{orion}}/ngsi-ld/v1/entities/?q=field==\"urn:ngsi-ld:PartField:002\"&options=keyValues&attrs=worker&type=Task",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
 					],
 					"path": [
-						"v2",
+						"ngsi-ld",
+						"v1",
 						"entities",
 						""
 					],
 					"query": [
 						{
 							"key": "q",
-							"value": "refProduct==urn:ngsi-ld:Product:001"
+							"value": "field==\"urn:ngsi-ld:PartField:002\""
 						},
 						{
 							"key": "options",
-							"value": "values",
-							"description": "* `keyValues` option in order to get a more compact and brief representation, including just attribute values\n* `values` option combined with a list of attribute values  `attrs`  for an ordered list of attributes only\n"
+							"value": "keyValues"
 						},
 						{
 							"key": "attrs",
-							"value": "refStore",
-							"description": "Ordered list of attribute names to display"
+							"value": "worker"
 						},
 						{
 							"key": "type",
-							"value": "InventoryItem",
-							"description": "Entity type"
+							"value": "Task"
 						}
 					]
 				},
-				"description": "This example returns the URN of all stores in which the product `id=urn:ngsi-ld:Product:001` is sold. The URN returned has a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`.\n\nBecause we have based the `id` of the **Store** entity on the NGSI-LD [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)), therefore it is a simple matter to request more information about the linked store by making a query to the `/entities` endpoint.\n\n```\nhttp://{{orion}}/v2/entities/urn:ngsi-ld:Store:001?options=keyValues\n```\n\nSince there is no direct relationship between product and store, a query must be made to find all entities which have both `refProduct` and `refStore` attributes.\n\nIn  our current context the `type` parameter is optional since only one type of entity contains the fields requested in the request"
+				"description": "When reading from a bridge table entity, the `type` of the entity must be known.\n\nAfter creating at least one **Task** entity we can query _Which workers are assigned activities in field\n`urn:ngsi-ld:PartField:002`?_ by making the following request:\n\n"
 			},
 			"response": []
 		},
 		{
-			"name": "Find all Entities related to a Store",
+			"name": "Reading from a bridge table (2)",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"actionType\": \"APPEND\",\n  \"entities\": [\n    {\n    \"id\": \"7770\",\n    \"type\": \"Shelf\",\n    \"store\": { \n      \"type\": \"Relationship\",\n      \"value\": \"urn:ngsi-ld:Store:store1\"\n    },\n    \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n           \"type\": \"Point\",\n           \"coordinates\": [13.3986112, 52.554699]\n        }\n    },\n    \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Corner Unit\"\n    },\n    \"maxCapacity\": {\n        \"type\": \"Integer\",\n        \"value\": 50\n    }\n},\n\n {\n      \"id\": \"7771\",\n      \"type\": \"Shelf\",\n      \"store\": {\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:store1\"\n      },\n      \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n          \"type\": \"Point\",\n          \"coordinates\": [\n            13.3987221,\n            52.5546640\n          ]\n        }\n      },\n      \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Wall Unit 1\"\n      },\n      \"maxCapacity\": {\n        \"type\": \"Integer\",\n        \"value\": 100\n      }\n    },\n    \n    {\n      \"id\": \"7772\",\n      \"type\": \"Shelf\",\n      \"store\": {\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:store1\"\n      },\n      \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n          \"type\": \"Point\",\n          \"coordinates\": [\n            13.3987221,\n            52.5546640\n          ]\n        }\n      },\n      \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Wall Unit 2\"\n      },\n      \"maxCapacity\": {\n        \"type\": \"Integer\",\n        \"value\": 100\n      }\n    }\n    \n    \n\n\n\n\n  ]\n}"
-				},
+				"header": [
+					{
+						"key": "Link",
+						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"name": "Accept"
+					}
+				],
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type",
+					"raw": "http://{{orion}}/ngsi-ld/v1/entities/?q=product==\"urn:ngsi-ld:Herbicide:001\"&options=keyValues&attrs=field&type=Task",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
 					],
 					"path": [
-						"v2",
+						"ngsi-ld",
+						"v1",
 						"entities",
 						""
 					],
 					"query": [
 						{
 							"key": "q",
-							"value": "refStore==urn:ngsi-ld:Store:001"
+							"value": "product==\"urn:ngsi-ld:Herbicide:001\""
 						},
 						{
 							"key": "options",
-							"value": "count",
-							"description": "* `keyValues` option in order to get a more compact and brief representation, including just attribute values\n* `values` option combined with a list of attribute values  `attrs`  for an ordered list of attributes only"
+							"value": "keyValues"
 						},
 						{
 							"key": "attrs",
-							"value": "type",
-							"description": "Ordered list of attribute names to display"
+							"value": "field"
+						},
+						{
+							"key": "type",
+							"value": "Task"
 						}
 					]
 				},
-				"description": "This example returns the key of all entities directly associated with the `urn:ngsi-ld:Store:001`.\n\nThe response lists a series of Shelf and InventoryItem entities - there are no products since there is no direct relationship between product and store.\n\nIf this request returns an empty array, the entity has no associates."
+				"description": "Similarly we can request _Which fields are treated using `urn:ngsi-ld:Herbicide:001`?_ by altering the request as shown:"
+			},
+			"response": []
+		},
+		{
+			"name": "Relationships of Properties",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Link",
+						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"name": "Accept"
+					}
+				],
+				"url": {
+					"raw": "http://{{orion}}/ngsi-ld/v1/entities/urn:ngsi-ld:Building:farm001?attrs=temperature",
+					"protocol": "http",
+					"host": [
+						"{{orion}}"
+					],
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities",
+						"urn:ngsi-ld:Building:farm001"
+					],
+					"query": [
+						{
+							"key": "attrs",
+							"value": "temperature"
+						}
+					]
+				},
+				"description": "_Properties-of-Properties_ and _Relationships of Properties_ are metadata. The addition of metadata entities such as\nthese into the context data allows users to navigate the graph of entities relationships and gain further insights about\nthe state of the system.\n\n### Retrieving the Temperature of a Barn\n\nThe temperature readings from a temperature sensor have already been discussed. It may also be necessary to duplicate\nthis data into another entity. For example, the temperature reading of a sensor in the barn is also the temperature\nreading of the barn itself. A dummy reading has already been added into the `urn:ngsi-ld:Building:farm001` Entity and\ncan be retrieved with a GET request.\n\nAs you can see the `temperature` Property holds additional information regarding the provider of the measurement, this\nwill allow additional inferences to be made."
 			},
 			"response": []
 		}
@@ -416,7 +476,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "f1d42f27-1cae-4144-b06e-237fad09b51b",
+				"id": "d4a28867-d4c5-4a78-b632-f15ffb6501a4",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -426,7 +486,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "028325fa-d62b-4d7a-afbf-5b138040015a",
+				"id": "d29eff3f-c9cf-4daa-b241-4dd8e23fed0f",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -436,11 +496,15 @@
 	],
 	"variable": [
 		{
-			"id": "73b7c194-97af-4388-81ee-6dce0839c507",
+			"id": "839ca4bb-4df5-4c68-8ecb-4b83bfa0df59",
 			"key": "orion",
-			"value": "localhost:1026",
-			"type": "string",
-			"description": ""
+			"value": "localhost:1026"
+		},
+		{
+			"id": "ae370c0b-c82a-4ca8-8de2-9d0e348c390f",
+			"key": "ngsi-context.jsonld",
+			"value": "http://context-provider:3000/data-models/ngsi-context.jsonld"
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }

@@ -12,9 +12,9 @@ created in the previous [Smart Farm example](https://github.com/FIWARE/tutorials
 creates and associates a series of related data entities to create add sensors and farm workers to the farm.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
-[Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/).
+[Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/ngsi-ld).
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0671934f64958d3200b3)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d0f2b74c4beb8434595f)
 
 -   このチュートリアルは[日本語](README.ja.md)でもご覧いただけます。
 
@@ -428,8 +428,8 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 }
 ```
 
-This can be interpreted as "I am making sensor readings inside the **Building** entity with the
-`id=urn:ngsi-ld:Building:farm001`"
+This can be interpreted as _"I am making sensor readings inside the **Building** entity with the
+`id=urn:ngsi-ld:Building:farm001`"_
 
 ### Reading from Parent Entity to Child Entity
 
@@ -465,8 +465,8 @@ response is a JSON array as shown.
 ]
 ```
 
-In plain English, this can be interpreted as "There are two devices in `urn:ngsi-ld:Building:farm001`". The request can
-be altered use the `count=true` to return the number of entities which fulfill the criteria
+In plain English, this can be interpreted as _"There are two devices in `urn:ngsi-ld:Building:farm001`"_. The request can
+be altered use the `count=true` to return the number of entities which fulfill the criteria.
 
 #### :eight: Request:
 
@@ -488,7 +488,7 @@ Returns an HTTP Header as part of the response which indicates the number of aff
 NGSILD-Results-Count: 2
 ```
 
-## Creating many-to-many Relationships
+### Creating many-to-many Relationships
 
 Bridge Tables are often used to relate many-to-many relationships. For example, every spraying activity within the FMIS
 will need to associate a farm worker, a product to apply, and a location to apply the treatment (known as a

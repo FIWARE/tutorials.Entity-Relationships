@@ -123,11 +123,13 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
     "type": "Person",
     "name": {"type": "Property","value": "Old MacDonald"},
     "owns": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm001"},
-    "jobTitle": {"type": "Property","value": {
-        "inDefinedTermSet": "https://targetjobs.co.uk/careers-advice/job-descriptions",
-        "termCode": "277119-agricultural-manager-job-description",
-        "name": "Agricultural Manager",
-        "url": "https://targetjobs.co.uk/careers-advice/job-descriptions/https://targetjobs.co.uk/careers-advice/job-descriptions/277119-agricultural-manager-job-description"
+    "jobTitle": {
+        "type": "Property",
+        "value": {
+          "inDefinedTermSet": "https://targetjobs.co.uk/careers-advice/job-descriptions",
+          "termCode": "277119-agricultural-manager-job-description",
+          "name": "Agricultural Manager",
+          "url": "https://targetjobs.co.uk/careers-advice/job-descriptions/https://targetjobs.co.uk/careers-advice/job-descriptions/277119-agricultural-manager-job-description"
         }
     }
   },
@@ -137,11 +139,13 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
     "gender": {"type": "Property","value": "male"},
     "givenName": {"type": "Property","value": "Napoleon"},
     "name": {"type": "Property","value": "Napoleon the Pig"},
-    "jobTitle": {"type": "Property","value": {
-        "inDefinedTermSet": "https://targetjobs.co.uk/careers-advice/job-descriptions",
-        "termCode": "277119-agricultural-manager-job-description",
-        "name": "Agricultural Manager",
-        "url": "https://targetjobs.co.uk/careers-advice/job-descriptions/https://targetjobs.co.uk/careers-advice/job-descriptions/277119-agricultural-manager-job-description"
+    "jobTitle": {
+        "type": "Property",
+        "value": {
+          "inDefinedTermSet": "https://targetjobs.co.uk/careers-advice/job-descriptions",
+          "termCode": "277119-agricultural-manager-job-description",
+          "name": "Agricultural Manager",
+          "url": "https://targetjobs.co.uk/careers-advice/job-descriptions/https://targetjobs.co.uk/careers-advice/job-descriptions/277119-agricultural-manager-job-description"
         }
     },
     "owns": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm002"},
@@ -155,11 +159,13 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
     "gender": {"type": "Property","value": "male"},
     "givenName": {"type": "Property","value": "Squealer"},
     "name": {"type": "Property","value": "Squealer the Pig"},
-    "jobTitle": {"type": "Property","value": {
-        "inDefinedTermSet": "https://targetjobs.co.uk/careers-advice/job-descriptions",
-        "termCode": "276387-broadcasting-presenter-job-description",
-        "name": "Broadcasting Presenter",
-        "url": "https://targetjobs.co.uk/careers-advice/job-descriptions/https://targetjobs.co.uk/careers-advice/job-descriptions/276387-broadcasting-presenter-job-description"
+    "jobTitle": {
+        "type": "Property",
+        "value": {
+          "inDefinedTermSet": "https://targetjobs.co.uk/careers-advice/job-descriptions",
+          "termCode": "276387-broadcasting-presenter-job-description",
+          "name": "Broadcasting Presenter",
+          "url": "https://targetjobs.co.uk/careers-advice/job-descriptions/https://targetjobs.co.uk/careers-advice/job-descriptions/276387-broadcasting-presenter-job-description"
         }
     },
     "weight": {
@@ -172,11 +178,13 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
     "gender": {"type": "Property","value": "male"},
     "givenName": {"type": "Property","value": "Snowball"},
     "name": {"type": "Property","value": "Snowball the Pig"},
-    "jobTitle": {"type": "Property","value": {
-        "inDefinedTermSet": "https://targetjobs.co.uk/careers-advice/job-descriptions",
-        "termCode": "277089-agricultural-consultant-description",
-        "name": "Agricultural Consultant",
-        "url": "https://targetjobs.co.uk/careers-advice/job-descriptions/https://targetjobs.co.uk/careers-advice/job-descriptions/277089-agricultural-consultant"
+    "jobTitle": {
+        "type": "Property",
+        "value": {
+          "inDefinedTermSet": "https://targetjobs.co.uk/careers-advice/job-descriptions",
+          "termCode": "277089-agricultural-consultant-description",
+          "name": "Agricultural Consultant",
+          "url": "https://targetjobs.co.uk/careers-advice/job-descriptions/https://targetjobs.co.uk/careers-advice/job-descriptions/277089-agricultural-consultant"
         }
     },
     "weight": {

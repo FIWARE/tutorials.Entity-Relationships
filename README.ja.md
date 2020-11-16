@@ -13,9 +13,9 @@
 追加センサとファーム・ワーカをファームに作成します。
 
 チュートリアルでは全体で [cUrl](https://ec.haxx.se/) コマンドを使用しますが、
-[Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/) としても利用できます。
+[Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/ngsi-ld) としても利用できます。
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0671934f64958d3200b3)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d0f2b74c4beb8434595f)
 
 ## コンテンツ
 
@@ -137,7 +137,7 @@ NGSI-LD に基づく FMIS システム内のエンティティのリレーショ
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/architecture-ld.png)
 
 必要な構成情報は、関連する `docker-compose.yml` ファイルの services セクションにあります。
-[以前のチュートリアル](https://github.com/FIWARE/tutorials.Getting-Started/tree/NGSI-LD)で説明しています。 
+[以前のチュートリアル](https://github.com/FIWARE/tutorials.Getting-Started/tree/NGSI-LD)で説明しています。
 
 <a name="prerequisites"/>
 
