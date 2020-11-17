@@ -13,7 +13,7 @@
 追加センサとファーム・ワーカをファームに作成します。
 
 チュートリアルでは全体で [cUrl](https://ec.haxx.se/) コマンドを使用しますが、
-[Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/ngsi-ld) としても利用できます。
+[Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/ngsi-ld.html) としても利用できます。
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d0f2b74c4beb8434595f)
 
