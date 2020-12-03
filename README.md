@@ -32,7 +32,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 -   [Start Up](#start-up)
 -   [Creating and Associating Data Entities](#creating-and-associating-data-entities)
     -   [Creating Several Entities at Once](#creating-several-entities-at-once)
-    -   [Creating one-to-one or one-to-many Relationships](#creating-one-to-one-or-one-to-many Relationships)
+    -   [Creating one-to-one or one-to-many Relationships](#creating-one-to-one-or-one-to-many-relationships)
     -   [Reading a Foreign Key Relationship](#reading-a-foreign-key-relationship)
         -   [Reading from Child Entity to Parent Entity](#reading-from-child-entity-to-parent-entity)
         -   [Reading from Parent Entity to Child Entity](#reading-from-parent-entity-to-child-entity)
