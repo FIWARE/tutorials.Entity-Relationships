@@ -31,7 +31,7 @@
 -   [起動](#start-up)
 -   [データ・エンティティの作成と関連付け](#creating-and-associating-data-entities)
     -   [一度に複数のエンティティを作成](#creating-several-entities-at-once)
-    -   [1対多のリレーションシップを作成](#creating-a-one-to-many-relationship)
+    -   [1対1または1対多のリレーションシップの作成](#creating-one-to-one-or-one-to-many-relationships)
     -   [外部キー・リレーションシップ (Foreign Key Relationship) の読み取り](#reading-a-foreign-key-relationship)
         -   [子エンティティから親エンティティへの読み取り](#reading-from-child-entity-to-parent-entity)
         -   [親エンティティから子エンティティへの読み取り](#reading-from-parent-entity-to-child-entity)
@@ -335,15 +335,15 @@ curl -X GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor,F
 
 ご覧のように、現在、`description`, `category`, `controledProperty` の3つの追加プロパティ属性があります。
 
-<a name="creating-a-one-to-many-relationship"/>
+<a name="creating-one-to-one-or-one-to-many-relationships"/>
 
-## 1対多のリレーションシップを作成
+## 1対1または1対多のリレーションシップの作成
 
-データベースでは、外部キー (foreign keys) は1対多のリレーションシップ (one-to-many relationship) を指定するためによく
-使用されます。たとえば、1つの建物に多数のデバイスを収容できます。この情報を記憶するには、
+データベースでは、外部キー (foreign keys) は1対1または1対多のリレーションシップ (one-to-one or one-to-many relationship)
+を指定するためによく使用されます。たとえば、1つの建物に多数のデバイスを収容できます。この情報を記憶するには、
 外部キーと同様の関連付けリレーションシップ (association relationship) を追加する必要があります。バッチ処理を再度使用して、
 既存の **TemperatureSensor** エンティティと **FillingLevelSensor** エンティティを修正し、デバイスによって制御される
-各建物とのリレーションシップを保持する `controllingAsset` 属性を追加できます。Smart Data Model によると、
+各建物との1対1のリレーションシップを保持する `controllingAsset` 属性を追加できます。Smart Data Model によると、
 [Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)
 定義 `https://uri.fiware.org/ns/data-models#controllingAsset` はこのリレーションシップに使用される URI の長い名前であり、
 `controllingAsset` 属性の値は **Building** エンティティ自体に関連付けられた URN に対応します。
