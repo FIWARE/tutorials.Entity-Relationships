@@ -32,7 +32,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 -   [Start Up](#start-up)
 -   [Creating and Associating Data Entities](#creating-and-associating-data-entities)
     -   [Creating Several Entities at Once](#creating-several-entities-at-once)
-    -   [Creating a one-to-many Relationship](#creating-a-one-to-many-relationship)
+    -   [Creating one-to-one or one-to-many Relationships](#creating-one-to-one-or-one-to-many Relationships)
     -   [Reading a Foreign Key Relationship](#reading-a-foreign-key-relationship)
         -   [Reading from Child Entity to Parent Entity](#reading-from-child-entity-to-parent-entity)
         -   [Reading from Parent Entity to Child Entity](#reading-from-parent-entity-to-child-entity)
@@ -316,12 +316,12 @@ curl -X GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor,F
 As you can see there are currently three additional property attributes present `description`, `category` and
 `controlledProperty`
 
-## Creating a one-to-many Relationship
+## Creating one-to-one or one-to-many Relationships
 
-In databases, foreign keys are often used to designate a one-to-many relationship - for example a building can hold many
+In databases, foreign keys are often used to designate one-to-one or  one-to-many relationships - for example a building has a single owner but can hold many
 devices. In order to remember this information we need to add an association relationship similar to a foreign key.
 Batch processing can again be used to amend the existing the **TemperatureSensor** and **FillingLevelSensor** entities
-to add a `controllingAsset` attribute holding the relationship to each building controlled by the device. According to
+to add a `controllingAsset` attribute holding the one-to-one relationship to each building controlled by the device. According to
 the Smart Data Model [Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)
 definition `https://uri.fiware.org/ns/data-models#controllingAsset` is the URI long name to be used for this
 relationship, and the value of the `controllingAsset` attribute corresponds to a URN associated to a **Building** entity
