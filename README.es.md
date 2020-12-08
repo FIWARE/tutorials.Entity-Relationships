@@ -134,7 +134,7 @@ mongo-db:
         - "27017:27017"
     networks:
         - default
-    command: --bind_ip_all --smallfiles
+
 ```
 
 Ambos contenedores residen en la misma red - Orion Context Broker escucha en el puerto `1026` y MongoDB lo hace por defecto en el puerto `27017`. Ambos contenedores también están exponiendo los mismos puertos externamente - esto es puramente para
