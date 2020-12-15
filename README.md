@@ -318,11 +318,12 @@ As you can see there are currently three additional property attributes present 
 
 ## Creating one-to-one or one-to-many Relationships
 
-In databases, foreign keys are often used to designate one-to-one or  one-to-many relationships - for example a building has a single owner but can hold many
-devices. In order to remember this information we need to add an association relationship similar to a foreign key.
-Batch processing can again be used to amend the existing the **TemperatureSensor** and **FillingLevelSensor** entities
-to add a `controllingAsset` attribute holding the one-to-one relationship to each building controlled by the device. According to
-the Smart Data Model [Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)
+In databases, foreign keys are often used to designate one-to-one or one-to-many relationships - for example a building
+has a single owner but can hold many devices. In order to remember this information we need to add an association
+relationship similar to a foreign key. Batch processing can again be used to amend the existing the
+**TemperatureSensor** and **FillingLevelSensor** entities to add a `controllingAsset` attribute holding the one-to-one
+relationship to each building controlled by the device. According to the Smart Data Model
+[Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)
 definition `https://uri.fiware.org/ns/data-models#controllingAsset` is the URI long name to be used for this
 relationship, and the value of the `controllingAsset` attribute corresponds to a URN associated to a **Building** entity
 itself.
@@ -465,8 +466,8 @@ response is a JSON array as shown.
 ]
 ```
 
-In plain English, this can be interpreted as _"There are two devices in `urn:ngsi-ld:Building:farm001`"_. The request can
-be altered use the `count=true` to return the number of entities which fulfill the criteria.
+In plain English, this can be interpreted as _"There are two devices in `urn:ngsi-ld:Building:farm001`"_. The request
+can be altered use the `count=true` to return the number of entities which fulfill the criteria.
 
 #### :eight: Request:
 
