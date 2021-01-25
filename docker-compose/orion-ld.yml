@@ -11,16 +11,16 @@
 # and so on, purely so that a single docker-compose file can be read as an example to build on, 
 # not use directly. 
 # 
-# When deploying to a production environment, please looking at the SmartSDK Recipes
-# in order to scale up to a proper architecture:
+# When deploying to a production environment, please refer to the Helm Repository
+# for FIWARE Components in order to scale up to a proper architecture:
 # 
-# see: https://smartsdk.github.io/smartsdk-recipes/
+# see: https://github.com/FIWARE/helm-charts/
 #
 version: "3.5"
 services:
   # Orion is the context broker
   orion:
-    image: fiware/orion-ld #:${ORION_LD_VERSION}
+    image: fiware/orion-ld:${ORION_LD_VERSION}
     hostname: orion
     container_name: fiware-orion
     depends_on:
@@ -29,7 +29,7 @@ services:
       - default
     ports:
       - "${ORION_LD_PORT}:${ORION_LD_PORT}" # localhost:1026
-    command: -dbhost mongo-db -logLevel DEBUG
+    command: -dbhost mongo-db -logLevel DEBUG -forwarding
     healthcheck:
       test: curl --fail -s http://orion:${ORION_LD_PORT}/version || exit 1
 
