@@ -28,7 +28,7 @@ services:
     networks:
       - default
     ports:
-      - "${ORION_LD_PORT}:${ORION_LD_PORT}" # localhost:1026
+      - ${ORION_LD_PORT}:${ORION_LD_PORT} # localhost:1026
     command: -dbhost mongo-db -logLevel DEBUG -forwarding
     healthcheck:
       test: curl --fail -s http://orion:${ORION_LD_PORT}/version || exit 1
@@ -40,9 +40,9 @@ services:
     hostname: mongo-db
     container_name: db-mongo
     expose:
-      - "${MONGO_DB_PORT}"
+      - ${MONGO_DB_PORT}
     ports:
-      - "${MONGO_DB_PORT}:${MONGO_DB_PORT}" # localhost:27017
+      - ${MONGO_DB_PORT}:${MONGO_DB_PORT} # localhost:27017
     networks:
       - default
     command: --nojournal
@@ -69,11 +69,11 @@ services:
           - context
           - context-provider
     expose:
-      - "${TUTORIAL_APP_PORT}"
-      - "${TUTORIAL_DUMMY_DEVICE_PORT}"
+      - ${TUTORIAL_APP_PORT}
+      - ${TUTORIAL_DUMMY_DEVICE_PORT}
     ports:
-      - "${TUTORIAL_APP_PORT}:${TUTORIAL_APP_PORT}" # localhost:3000
-      - "${TUTORIAL_DUMMY_DEVICE_PORT}:${TUTORIAL_DUMMY_DEVICE_PORT}" # localhost:3001
+      - ${TUTORIAL_APP_PORT}:${TUTORIAL_APP_PORT} # localhost:3000
+      - ${TUTORIAL_DUMMY_DEVICE_PORT}:${TUTORIAL_DUMMY_DEVICE_PORT} # localhost:3001
     environment:
       - "DEBUG=tutorial:*"
       - "WEB_APP_PORT=${TUTORIAL_APP_PORT}" # Port used by the content provider proxy and web-app for viewing data
