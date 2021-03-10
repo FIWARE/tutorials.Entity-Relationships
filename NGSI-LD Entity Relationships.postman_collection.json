@@ -133,7 +133,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:001\",\n        \"type\": \"TemperatureSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm001\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:002\",\n        \"type\": \"TemperatureSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:barn002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:003\",\n        \"type\": \"FillingLevelSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:001\",\n        \"type\": \"FillingLevelSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm001\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:002\",\n        \"type\": \"FillingLevelSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:barn002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:003\",\n        \"type\": \"TemperatureSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm002\"\n        }\n    }\n]"
+					"raw": "[\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:001\",\n        \"type\": \"TemperatureSensor\",\n        \"controlledAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm001\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:002\",\n        \"type\": \"TemperatureSensor\",\n        \"controlledAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:barn002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:003\",\n        \"type\": \"FillingLevelSensor\",\n        \"controlledAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:001\",\n        \"type\": \"FillingLevelSensor\",\n        \"controlledAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm001\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:002\",\n        \"type\": \"FillingLevelSensor\",\n        \"controlledAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:barn002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:003\",\n        \"type\": \"TemperatureSensor\",\n        \"controlledAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm002\"\n        }\n    }\n]"
 				},
 				"url": {
 					"raw": "http://{{orion}}/ngsi-ld/v1/entityOperations/update?options=update",
@@ -154,7 +154,7 @@
 						}
 					]
 				},
-				"description": "In databases, foreign keys are often used to designate a one-to-many relationship - for example a building can hold many\ndevices. In order to remember this information we need to add an association relationship similar to a foreign key.\nBatch processing can again be used to amend the existing the **TemperatureSensor** and **FillingLevelSensor** entities\nto add a `controllingAsset` attribute holding the relationship to each building controlled by the device. According to\nthe Smart Data Model [Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)\ndefinition `https://uri.fiware.org/ns/data-models#controllingAsset` is the URI long name to be used for this\nrelationship, and the value of the `controllingAsset` attribute corresponds to a URN associated to a **Building** entity\nitself.\n\nThe URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`.\n\nThe following request associates six devices to `urn:ngsi-ld:Building:farm001`, `urn:ngsi-ld:Building:barn002` and\n`urn:ngsi-ld:Building:farm002`.\n\n"
+				"description": "In databases, foreign keys are often used to designate a one-to-many relationship - for example a building can hold many\ndevices. In order to remember this information we need to add an association relationship similar to a foreign key.\nBatch processing can again be used to amend the existing the **TemperatureSensor** and **FillingLevelSensor** entities\nto add a `controlledAsset` attribute holding the relationship to each building controlled by the device. According to\nthe Smart Data Model [Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)\ndefinition `https://uri.fiware.org/ns/data-models#controlledAsset` is the URI long name to be used for this\nrelationship, and the value of the `controlledAsset` attribute corresponds to a URN associated to a **Building** entity\nitself.\n\nThe URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`.\n\nThe following request associates six devices to `urn:ngsi-ld:Building:farm001`, `urn:ngsi-ld:Building:barn002` and\n`urn:ngsi-ld:Building:farm002`.\n\n"
 			},
 			"response": []
 		},
@@ -195,7 +195,7 @@
 						}
 					]
 				},
-				"description": "Now when the devcie information is requested again, the response has changed and includes a new property\n`controllingAsset`, which has been added in the previous step."
+				"description": "Now when the devcie information is requested again, the response has changed and includes a new property\n`controlledAsset`, which has been added in the previous step."
 			},
 			"response": []
 		},
@@ -217,7 +217,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001?options=keyValues&attrs=controllingAsset",
+					"raw": "http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001?options=keyValues&attrs=controlledAsset",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -242,11 +242,11 @@
 						},
 						{
 							"key": "attrs",
-							"value": "controllingAsset"
+							"value": "controlledAsset"
 						}
 					]
 				},
-				"description": "We can also make a request to retrieve the `controllingAsset` attribute relationship information from a known **Device**\nentity by using the `options=keyValues` setting.\n\n\nThis can be interpreted as _\"I am making sensor readings inside the **Building** entity with the\n`id=urn:ngsi-ld:Building:farm001`\"_"
+				"description": "We can also make a request to retrieve the `controlledAsset` attribute relationship information from a known **Device**\nentity by using the `options=keyValues` setting.\n\n\nThis can be interpreted as _\"I am making sensor readings inside the **Building** entity with the\n`id=urn:ngsi-ld:Building:farm001`\"_"
 			},
 			"response": []
 		},
@@ -262,7 +262,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://{{orion}}/ngsi-ld/v1/entities?q=controllingAsset==\"urn:ngsi-ld:Building:farm001\"&options=keyValues&attrs=controllingAsset",
+					"raw": "http://{{orion}}/ngsi-ld/v1/entities?q=controlledAsset==\"urn:ngsi-ld:Building:farm001\"&options=keyValues&attrs=controlledAsset",
 					"protocol": "http",
 					"host": [
 						"{{orion}}"
@@ -275,7 +275,7 @@
 					"query": [
 						{
 							"key": "q",
-							"value": "controllingAsset==\"urn:ngsi-ld:Building:farm001\""
+							"value": "controlledAsset==\"urn:ngsi-ld:Building:farm001\""
 						},
 						{
 							"key": "options",
@@ -283,7 +283,7 @@
 						},
 						{
 							"key": "attrs",
-							"value": "controllingAsset"
+							"value": "controlledAsset"
 						}
 					]
 				},

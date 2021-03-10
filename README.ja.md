@@ -342,10 +342,10 @@ curl -X GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor,F
 を指定するためによく使用されます。たとえば、1つの建物に多数のデバイスを収容できます。この情報を記憶するには、
 外部キーと同様の関連付けリレーションシップ (association relationship) を追加する必要があります。バッチ処理を再度使用して、
 既存の **TemperatureSensor** エンティティと **FillingLevelSensor** エンティティを修正し、デバイスによって制御される
-各建物との1対1のリレーションシップを保持する `controllingAsset` 属性を追加できます。Smart Data Model によると、
+各建物との1対1のリレーションシップを保持する `controlledAsset` 属性を追加できます。Smart Data Model によると、
 [Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)
-定義 `https://uri.fiware.org/ns/data-models#controllingAsset` はこのリレーションシップに使用される URI の長い名前であり、
-`controllingAsset` 属性の値は **Building** エンティティ自体に関連付けられた URN に対応します。
+定義 `https://uri.fiware.org/ns/data-models#controlledAsset` はこのリレーションシップに使用される URI の長い名前であり、
+`controlledAsset` 属性の値は **Building** エンティティ自体に関連付けられた URN に対応します。
 
 URN は、標準形式に従います: `urn:ngsi-ld:<entity-type>:<entity-id>`
 
@@ -363,38 +363,38 @@ curl -G -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
     {
         "id": "urn:ngsi-ld:TemperatureSensor:001",
         "type": "TemperatureSensor",
-        "controllingAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm001"}
+        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm001"}
     },
     {
         "id": "urn:ngsi-ld:TemperatureSensor:002",
         "type": "TemperatureSensor",
-        "controllingAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:barn002"}
+        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:barn002"}
     },
     {
         "id": "urn:ngsi-ld:FillingLevelSensor:003",
         "type": "FillingLevelSensor",
-        "controllingAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm002"}
+        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm002"}
     },
     {
         "id": "urn:ngsi-ld:FillingLevelSensor:001",
         "type": "FillingLevelSensor",
-        "controllingAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm001"}
+        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm001"}
     },
     {
         "id": "urn:ngsi-ld:FillingLevelSensor:002",
         "type": "FillingLevelSensor",
-        "controllingAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:barn002"}
+        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:barn002"}
     },
     {
         "id": "urn:ngsi-ld:TemperatureSensor:003",
         "type": "TemperatureSensor",
-        "controllingAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm002"}
+        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm002"}
     }
 ]'
 ```
 
 これで、デバイス情報が再度リクエストされると、レスポンスが変更され、前の手順で追加された新しいプロパティ
-`controllingAsset`が含まれます。
+`controlledAsset`が含まれます。
 
 #### :five: リクエスト:
 
@@ -406,7 +406,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 
 #### レスポンス:
 
-`controllingAsset` 属性を含む更新されたレスポンスを以下に示します:
+`controlledAsset` 属性を含む更新されたレスポンスを以下に示します:
 
 ```jsonld
 {
@@ -417,7 +417,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
     "category": "sensor",
     "controlledProperty": "temperature",
     "temperature": 20,
-    "controllingAsset": "urn:ngsi-ld:Building:farm001"
+    "controlledAsset": "urn:ngsi-ld:Building:farm001"
 }
 ```
 
@@ -437,7 +437,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -d 'options=keyValues' \
--d 'attrs=controllingAsset' \
+-d 'attrs=controlledAsset' \
 -H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json'
 ```
@@ -448,7 +448,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 {
     "id": "urn:ngsi-ld:TemperatureSensor:001",
     "type": "TemperatureSensor",
-    "controllingAsset": "urn:ngsi-ld:Building:farm001"
+    "controlledAsset": "urn:ngsi-ld:Building:farm001"
 }
 ```
 
@@ -465,8 +465,8 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
--d 'q=controllingAsset==%22urn:ngsi-ld:Building:farm001%22' \
--d 'attrs=controllingAsset' \
+-d 'q=controlledAsset==%22urn:ngsi-ld:Building:farm001%22' \
+-d 'attrs=controlledAsset' \
 -d 'options=keyValues' \
 -H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
@@ -498,8 +498,8 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
--d 'q=controllingAsset==%22urn:ngsi-ld:Building:farm001%22' \
--d 'attrs=controllingAsset' \
+-d 'q=controlledAsset==%22urn:ngsi-ld:Building:farm001%22' \
+-d 'attrs=controlledAsset' \
 -d 'options=keyValues' \
 -d 'count=true' \
 -d 'limit=0' \
