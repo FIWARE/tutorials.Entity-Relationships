@@ -452,7 +452,7 @@ curl -X GET \
 リレーションシップを追加する必要があります。バッチ処理を再び使用して、既存の
 **Shelf** エンティティを修正して、各ストアにリレーションシップを保持する
 `refStore` 属性を追加することができます
-。[リンクト・データ](https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data)
+。[リンクト・データ](https://smartdatamodels.org/)
 に関する FIWARE データ・モデリング・ガイドラインによると、エンティティ属性が他の
 エンティティへのリンクとして使用される場合、プレフィックス `ref` と ターゲットの
 リンクト・エンティティ・タイプの名前を付けて名前を付ける必要があります。

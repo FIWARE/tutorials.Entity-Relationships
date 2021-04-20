@@ -369,7 +369,7 @@ Como puede ver, hay actualmente tres atributos de propiedad adicionales: `locati
 
 En bases de datos, las claves externas se utilizan a menudo para designar una relación de uno a muchos - por ejemplo, cada estante se encuentra en una sola tienda pero un almacén puede albergar muchos estantes. Para poder recordar esta información necesitamos añadir una
 relación de asociación similar a una clave foránea. El procesamiento por lotes puede utilizarse de nuevo para modificar las
-entidades **Shelf** para añadir un atributo `refStore` que mantiene la relación con cada tienda. De acuerdo con la guía de modelados de datos de FIWARE [datos vinculados](https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data), cuando se utilice un atributo de entidad como vínculo con otras entidades, deberá nombrarse con el prefijo `ref`más el nombre del tipo de entidad de destino (vinculado).
+entidades **Shelf** para añadir un atributo `refStore` que mantiene la relación con cada tienda. De acuerdo con la guía de modelados de datos de FIWARE [datos vinculados](https://smartdatamodels.org/), cuando se utilice un atributo de entidad como vínculo con otras entidades, deberá nombrarse con el prefijo `ref`más el nombre del tipo de entidad de destino (vinculado).
 
 El valor del atributo `refStore` corresponde a una URN asociada a la propia entidad **Store**.
 
