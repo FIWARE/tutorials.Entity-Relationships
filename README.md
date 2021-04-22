@@ -1,4 +1,4 @@
-# Linked Data Entity Relationships[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />]("https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)[<img src="https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
+# Linked Data Entity Relationships[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)[<img src="https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
@@ -116,7 +116,7 @@ on the network. In our case the tutorial application will be used to host a seri
 Therefore, the architecture will consist of three elements:
 
 -   The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using
-    [NGSI-LD](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/spec/updated/full_api.json)
+    [NGSI-LD](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/spec/updated/generated/full_api.json)
 -   The underlying [MongoDB](https://www.mongodb.com/) database :
     -   Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and
         registrations
@@ -272,7 +272,7 @@ curl -X POST 'http://locahost:1026/ngsi-ld/v1/entityOperations/upsert' \
 ```
 
 In both cases we have encoded each entity `id` according to the NGSI-LD
-[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) - the proposal
+[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf) - the proposal
 is that each `id` is a URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This will mean that every
 `id` in the system will be unique.
 

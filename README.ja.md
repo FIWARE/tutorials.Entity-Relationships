@@ -1,4 +1,4 @@
-# Linked Data Entity Relationships[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />]("https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)[<img src="https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
+# Linked Data Entity Relationships[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)[<img src="https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
@@ -122,7 +122,7 @@ NGSI-LD に基づく FMIS システム内のエンティティのリレーショ
 したがって、アーキテクチャは次の3つの要素で構成されます:
 
 -   [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) は、
-    [NGSI-LD](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/spec/updated/full_api.json)
+    [NGSI-LD](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/spec/updated/generated/full_api.json)
     を使用してリクエストを受信します
 -   基礎となる [MongoDB](https://www.mongodb.com/) データベース:
     -   データ・エンティティ、サブスクリプション、レジストレーションなどのコンテキスト・データ情報を保持するために
@@ -292,7 +292,7 @@ curl -X POST 'http://locahost:1026/ngsi-ld/v1/entityOperations/upsert' \
 ]'
 ```
 
-どちらの場合も、NGSI-LD [仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)
+どちらの場合も、NGSI-LD [仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)
 に従って各エンティティ `id` をエンコードしました - プロポーザルは、各 `id` が標準形式に従う URN であるというものです:
 `urn:ngsi-ld:<entity-type>:<entity-id>`。 これは、システム内のすべての `id` が一意になることを意味します。
 
