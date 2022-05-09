@@ -4,9 +4,7 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.Entity-Relationships.svg)](https://opensource.org/licenses/MIT)
 [![Support badge](https://img.shields.io/badge/tag-fiware-orange.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/fiware)
-
-<br/>
-[![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
+<br/> [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
 <!-- prettier-ignore -->
 
@@ -192,7 +190,7 @@ mongo-db:
 
 **Docker Compose** は、マルチコンテナ Docker アプリケーションを定義して実行する
 ためのツールです
-。[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.Entity-Relationships/master/docker-compose.yml)
+。[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.Entity-Relationships/NGSI-v2/docker-compose.yml)
 ファイルは、アプリケーションのために必要なサービスを構成するために使用します。つ
 まり、すべてのコンテナ・サービスは 1 つのコマンドで呼び出すことができます
 。Docker Compose は、デフォルトで Docker for Windows と D ocker for Mac の一部と
@@ -208,7 +206,7 @@ docker-compose -v
 docker version
 ```
 
-Docker バージョン 18.03 以降と Docker Compose 1.29 以上を使用していることを確認
+Docker バージョン 20.10 以降と Docker Compose 1.29 以上を使用していることを確認
 し、必要に応じてアップグレードしてください。
 
 <a name="cygwin-for-windows"></a>
@@ -453,7 +451,7 @@ curl -X GET \
 **Shelf** エンティティを修正して、各ストアにリレーションシップを保持する
 `refStore` 属性を追加することができます
 。[リンクト・データ](https://smartdatamodels.org/)
-に関する FIWARE データ・モデリング・ガイドラインによると、エンティティ属性が他の
+に関する スマート・データ・モデリング・ガイドラインによると、エンティティ属性が他の
 エンティティへのリンクとして使用される場合、プレフィックス `ref` と ターゲットの
 リンクト・エンティティ・タイプの名前を付けて名前を付ける必要があります。
 
@@ -779,4 +777,4 @@ curl -X GET \
 
 ## License
 
-[MIT](LICENSE) © 2018-2020 FIWARE Foundation e.V.
+[MIT](LICENSE) © 2018-2022 FIWARE Foundation e.V.
