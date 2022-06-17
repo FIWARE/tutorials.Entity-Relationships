@@ -222,7 +222,7 @@ git checkout NGSI-LD
 #### :one: リクエスト:
 
 ```console
-curl -X POST 'http://locahost:1026/ngsi-ld/v1/entityOperations/upsert' \
+curl -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 -H 'Content-Type: application/json' \
 -H 'Link: <'http://context/ngsi-context.jsonld'>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/ld+json' \
@@ -259,7 +259,7 @@ curl -X POST 'http://locahost:1026/ngsi-ld/v1/entityOperations/upsert' \
 #### :two: リクエスト:
 
 ```console
-curl -X POST 'http://locahost:1026/ngsi-ld/v1/entityOperations/upsert' \
+curl -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 -H 'Content-Type: application/json' \
 -H 'Link: <'http://context/ngsi-context.jsonld'>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/ld+json' \
