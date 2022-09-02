@@ -55,7 +55,7 @@ Para un sistema simple de gestión de inventarios, sólo necesitaremos cuatro ti
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/entities.png)
 
--   Una tinda (store) es un edificio concreto (de ladrillos) del mundo real. Entidades **Store** pueden tener propiedades como:
+-   Una tienda (store) es un edificio concreto (de ladrillos) del mundo real. Entidades **Store** pueden tener propiedades como:
     -   Nombre de la tienda, por ejemplo: "Checkpoint Markt"
     -   Una dirección, por ejemplo: "Friedrichstraße 44, 10969 Kreuzberg, Berlin"
     -   Una ubicación física, por ejemplo: _52.5075 N, 13.3903 E_
