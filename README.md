@@ -78,15 +78,15 @@ shown:
     -   An association to the farm buildings they own.
 -   A task something we do down on the farm. It is a conceptual entity, used to associate workers, agricultural products
     and locations **Task** entities would have properties such as:
-    -   The name of the task (e.g. _Spray Herbicide XXX on field Y_)
+    -   The name of the task (e.g. _Spray Fertilizer XXX on field Y_)
     -   The status of the task (e.g. _scheduled_, _in progress_, _completed_)
     -   An association to the worker (i.e. a **Person** entity) who performs the task
-    -   An association to the product (e.g. **Herbicide** entity) to be used.
+    -   An association to the product (e.g. **Fertilizer** entity) to be used.
     -   An association to the location (e.g. **PartField** entity) to be used.
 
 As you can see, each of the entities defined above contain a mixture of static and dynamic data. Some properties are
-liable to change. A **Herbicide** could change its `formula`, hay could be sold and the `fillingLevel` of the barn could
-be reduced and so on.
+liable to change. An organic **Fertilizer** such as a fish hydrolysate could change its `formula`, hay could be sold
+and the `fillingLevel` of the barn could be reduced and so on.
 
 > **Note** this tutorial uses the following typographic styling :
 >
