@@ -15,6 +15,7 @@
 [Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/ngsi-ld.html) としても利用できます。
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d0f2b74c4beb8434595f)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/FIWARE/tutorials.Entity-Relationships/tree/NGSI-LD)
 
 ## コンテンツ
 
