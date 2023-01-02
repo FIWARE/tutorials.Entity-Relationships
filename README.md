@@ -85,7 +85,7 @@ shown:
     -   An association to the location (e.g. **PartField** entity) to be used.
 
 As you can see, each of the entities defined above contain a mixture of static and dynamic data. Some properties are
-liable to change. An organic **Fertilizer** such as a fish hydrolysate could change its `formula`, hay could be sold
+liable to change. An organic **Fertilizer**, such as a fish hydrolysate, could change its `formula`, hay could be sold
 and the `fillingLevel` of the barn could be reduced and so on.
 
 > **Note** this tutorial uses the following typographic styling :
@@ -629,4 +629,4 @@ the other [tutorials in this series](https://ngsi-ld-tutorials.rtfd.io)
 
 ## License
 
-[MIT](LICENSE) © 2020 FIWARE Foundation e.V.
+[MIT](LICENSE) © 2020-2023 FIWARE Foundation e.V.
