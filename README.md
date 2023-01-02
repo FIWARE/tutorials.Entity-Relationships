@@ -86,8 +86,13 @@ shown:
     -   An association to the location (e.g. **PartField** entity) to be used.
 
 As you can see, each of the entities defined above contain a mixture of static and dynamic data. Some properties are
+<<<<<<< Updated upstream
 liable to change. An organic **Fertilizer**, such as a fish hydrolysate, could change its `formula`, hay could be sold
 and the `fillingLevel` of the barn could be reduced and so on.
+=======
+liable to change. An organic **Fertilizer** such as a fish hydrolysate could change its `formula`, hay could be sold and
+the `fillingLevel` of the barn could be reduced and so on.
+>>>>>>> Stashed changes
 
 > **Note** this tutorial uses the following typographic styling :
 >
@@ -156,7 +161,7 @@ docker-compose -v
 docker version
 ```
 
-Please ensure that you are using Docker version 20.10 or higher and Docker Compose 1.29  or higher and upgrade if
+Please ensure that you are using Docker version 20.10 or higher and Docker Compose 1.29 or higher and upgrade if
 necessary.
 
 ## Cygwin for Windows
