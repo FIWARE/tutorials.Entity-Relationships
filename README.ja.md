@@ -1,4 +1,4 @@
-# Linked Data Entity Relationships[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)[<img src="https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
+# Linked Data Entity Relationships[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_CIM009v010601p.pdf)[<img src="https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
@@ -292,7 +292,7 @@ curl -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 ]'
 ```
 
-どちらの場合も、NGSI-LD [仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)
+どちらの場合も、NGSI-LD [仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_CIM009v010601p.pdf)
 に従って各エンティティ `id` をエンコードしました - プロポーザルは、各 `id` が標準形式に従う URN であるというものです:
 `urn:ngsi-ld:<entity-type>:<entity-id>`。 これは、システム内のすべての `id` が一意になることを意味します。
 
