@@ -69,7 +69,7 @@ defined as shown:
     -   An association to the store in which the shelf is present
 -   A product is defined as something that we sell - it is conceptural object. **Product** entities would have
     properties such as:
-    -   A name of the product e.g. "Vodka"
+    -   A name of the product e.g. "Melons"
     -   A price e.g. 13.99 Euros
     -   A size e.g. Small
 -   An inventory item is another conceptural entity, used to assocate products, stores, shelves and physical objects.
@@ -304,7 +304,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:001", "type":"Product",
       "name":{
-        "type":"Text", "value":"Beer"
+        "type":"Text", "value":"Apples"
       },
       "size":{
         "type":"Text", "value": "S"
@@ -316,7 +316,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:002", "type":"Product",
       "name":{
-        "type":"Text", "value":"Red Wine"
+        "type":"Text", "value":"Bananas"
       },
       "size":{
         "type":"Text", "value": "M"
@@ -328,7 +328,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:003", "type":"Product",
       "name":{
-        "type":"Text", "value":"White Wine"
+        "type":"Text", "value":"Coconuts"
       },
       "size":{
         "type":"Text", "value": "M"
@@ -340,7 +340,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:004", "type":"Product",
       "name":{
-        "type":"Text", "value":"Vodka"
+        "type":"Text", "value":"Melons"
       },
       "size":{
         "type":"Text", "value": "XL"

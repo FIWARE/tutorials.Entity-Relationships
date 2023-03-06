@@ -77,7 +77,7 @@ FIWARE プラットフォーム内では、エンティティのコンテキス�
     -   棚(shelf)が存在するストア(store)への関連付け
 -   **Product** : 製品は販売するものとして定義されています。それは概念的なオブジ
     クトです。製品には次のような特性があります :
-    -   name : 製品の名前。例えば、"Vodka"
+    -   name : 製品の名前。例えば、"Melons"
     -   price : 製品の価格。例えば、13.99 ユーロ
     -   size : 製品のサイズ。例えば、小さい
 -   **Inventory Item** : インベントリ項目は製品、店舗、棚、および物理的な物を関
@@ -356,7 +356,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:001", "type":"Product",
       "name":{
-        "type":"Text", "value":"Beer"
+        "type":"Text", "value":"Apples"
       },
       "size":{
         "type":"Text", "value": "S"
@@ -368,7 +368,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:002", "type":"Product",
       "name":{
-        "type":"Text", "value":"Red Wine"
+        "type":"Text", "value":"Bananas"
       },
       "size":{
         "type":"Text", "value": "M"
@@ -380,7 +380,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:003", "type":"Product",
       "name":{
-        "type":"Text", "value":"White Wine"
+        "type":"Text", "value":"Coconuts"
       },
       "size":{
         "type":"Text", "value": "M"
@@ -392,7 +392,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:004", "type":"Product",
       "name":{
-        "type":"Text", "value":"Vodka"
+        "type":"Text", "value":"Melons"
       },
       "size":{
         "type":"Text", "value": "XL"

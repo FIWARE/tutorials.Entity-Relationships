@@ -65,7 +65,7 @@ Para un sistema simple de gestión de inventarios, sólo necesitaremos cuatro ti
     -   Una capacidad máxima
     -   Una asociación a la store (tienda) a la que pertenece
 -   Un producto (product) es algo que se desea vender - es un objeto conceptual. Entidades **Product** pueden tener propiedades como:
-    -   Nombre del producto, por ejemplo "Vodka"
+    -   Nombre del producto, por ejemplo "Melons"
     -   Su precio, por ejemplo: 13.99 Euros
     -   Un tamaño, por ejemplo: Pequeño
 -   Un artículo de inventario (inventory) es otra entidad conceptual, utilizada para asociar productos, tiendas, estantes y objetos físicos.
@@ -288,7 +288,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:001", "type":"Product",
       "name":{
-        "type":"Text", "value":"Beer"
+        "type":"Text", "value":"Apples"
       },
       "size":{
         "type":"Text", "value": "S"
@@ -300,7 +300,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:002", "type":"Product",
       "name":{
-        "type":"Text", "value":"Red Wine"
+        "type":"Text", "value":"Bananas"
       },
       "size":{
         "type":"Text", "value": "M"
@@ -312,7 +312,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:003", "type":"Product",
       "name":{
-        "type":"Text", "value":"White Wine"
+        "type":"Text", "value":"Coconuts"
       },
       "size":{
         "type":"Text", "value": "M"
@@ -324,7 +324,7 @@ curl -iX POST \
     {
       "id":"urn:ngsi-ld:Product:004", "type":"Product",
       "name":{
-        "type":"Text", "value":"Vodka"
+        "type":"Text", "value":"Melons"
       },
       "size":{
         "type":"Text", "value": "XL"
