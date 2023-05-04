@@ -134,7 +134,7 @@ _"Powered by FIWARE"_ と認定するには、Orion Context Broker を使用す�
 
 ```yaml
 orion:
-    image: fiware/orion:latest
+    image: quay.io/fiware/orion:latest
     hostname: orion
     container_name: fiware-orion
     depends_on:
@@ -406,7 +406,7 @@ curl -iX POST \
 ```
 
 どちらの場合も、NGSI-LD
-[ドラフト勧告](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)に
+[ドラフト勧告](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_CIM009v010601p.pdf)に
 従って各エンティティ `id` をエンコードしました。提案は、それぞれの `id` が 標準
 フォーマットに従った URN というものです :
 `urn:ngsi-ld:<entity-type>:<entity-id>`。これは、システム内のすべての `id` がユ
