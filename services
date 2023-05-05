@@ -212,7 +212,7 @@ case "${command}" in
 		${dockerCmd} -f docker-compose/common.yml -f docker-compose/stellio.yml up -d --remove-orphans --renew-anon-volumes
 		waitForMongo
 		waitForStellio
-		export CONTEXT_BROKER=stellio:9090
+		export CONTEXT_BROKER=stellio:8080
 		loadData
 		displayServices fiware
 		;;

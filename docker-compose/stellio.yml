@@ -6,6 +6,7 @@ services:
     labels:
       org.fiware: 'tutorial'
     image: stellio/stellio-api-gateway:${STELLIO_DOCKER_TAG}
+    platform: linux/amd64
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
@@ -16,6 +17,7 @@ services:
     labels:
       org.fiware: 'tutorial'
     image: stellio/stellio-search-service:${STELLIO_DOCKER_TAG}
+    platform: linux/amd64
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_R2DBC_URL=r2dbc:postgresql://postgres/stellio_search
@@ -37,6 +39,7 @@ services:
     labels:
       org.fiware: 'tutorial'
     image: stellio/stellio-subscription-service:${STELLIO_DOCKER_TAG}
+    platform: linux/amd64
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_R2DBC_URL=r2dbc:postgresql://postgres/stellio_subscription
@@ -102,14 +105,13 @@ services:
       retries: 20
       start_period: 10s
 
-
   # Tutorial acts as a series of dummy IoT Sensors over HTTP and connects to the Stellio Broker
   tutorial:
     environment:
       - IOTA_DEFAULT_RESOURCE=/iot/d
       - DUMMY_DEVICES_PORT=${TUTORIAL_DUMMY_DEVICE_PORT} # Port used by the dummy IOT devices to receive commands
       - DUMMY_DEVICES_TRANSPORT=HTTP # Default transport used by dummy Io devices
-      - CONTEXT_BROKER=http://stellio:${STELLIO_PORT}/ngsi-ld/v1 # URL of the context broker to update context
+      - CONTEXT_BROKER=http://api-gateway:${STELLIO_PORT}/ngsi-ld/v1 # URL of the context broker to update context
      
 volumes:
   postgres-db: ~
