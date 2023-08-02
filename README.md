@@ -340,40 +340,57 @@ The following request associates six devices to `urn:ngsi-ld:Building:farm001`, 
 `urn:ngsi-ld:Building:farm002`
 
 ```console
-curl -G -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
--d 'options=update' \
+curl -L 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=update' \
 -H 'Content-Type: application/json' \
 -H 'Link: <http://context/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
---data-raw '[
+-d '[
     {
         "id": "urn:ngsi-ld:TemperatureSensor:001",
         "type": "TemperatureSensor",
-        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm001"}
+        "controllingAsset": {
+            "type": "Relationship",
+            "object": "urn:ngsi-ld:Building:farm001"
+        }
     },
     {
         "id": "urn:ngsi-ld:TemperatureSensor:002",
         "type": "TemperatureSensor",
-        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:barn002"}
+        "controllingAsset": {
+            "type": "Relationship",
+            "object": "urn:ngsi-ld:Building:barn002"
+        }
     },
     {
         "id": "urn:ngsi-ld:FillingLevelSensor:003",
         "type": "FillingLevelSensor",
-        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm002"}
+        "controllingAsset": {
+            "type": "Relationship",
+            "object": "urn:ngsi-ld:Building:farm002"
+        }
     },
     {
         "id": "urn:ngsi-ld:FillingLevelSensor:001",
         "type": "FillingLevelSensor",
-        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm001"}
+        "controllingAsset": {
+            "type": "Relationship",
+            "object": "urn:ngsi-ld:Building:farm001"
+        }
     },
     {
         "id": "urn:ngsi-ld:FillingLevelSensor:002",
         "type": "FillingLevelSensor",
-        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:barn002"}
+        "controllingAsset": {
+            "type": "Relationship",
+            "object": "urn:ngsi-ld:Building:barn002"
+        }
     },
     {
         "id": "urn:ngsi-ld:TemperatureSensor:003",
         "type": "TemperatureSensor",
-        "controlledAsset": {"type": "Relationship", "object": "urn:ngsi-ld:Building:farm002"}
+        "controllingAsset": {
+            "type": "Relationship",
+            "object": "urn:ngsi-ld:Building:farm002"
+        }
     }
 ]'
 ```
