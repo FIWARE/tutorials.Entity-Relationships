@@ -124,9 +124,9 @@ orion:
     networks:
         - default
     expose:
-        - "1026"
+        - '1026'
     ports:
-        - "1026:1026"
+        - '1026:1026'
     command: -dbhost mongo-db -logLevel DEBUG
 ```
 
@@ -136,9 +136,9 @@ mongo-db:
     hostname: mongo-db
     container_name: db-mongo
     expose:
-        - "27017"
+        - '27017'
     ports:
-        - "27017:27017"
+        - '27017:27017'
     networks:
         - default
 ```
