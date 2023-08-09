@@ -190,7 +190,7 @@ git clone https://github.com/FIWARE/tutorials.Entity-Relationships.git
 cd tutorials.Entity-Relationships
 git checkout NGSI-LD
 
-./services start
+./services [orion|scorpio|stellio]
 ```
 
 このコマンドは、起動時にシード・データ (**Building**, **Person**, **TemperatureSensor**, **FillingLevelSensor**,
