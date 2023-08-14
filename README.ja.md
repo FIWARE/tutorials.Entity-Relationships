@@ -344,7 +344,7 @@ curl -X GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor,F
 既存の **TemperatureSensor** エンティティと **FillingLevelSensor** エンティティを修正し、デバイスによって制御される
 各建物との1対1のリレーションシップを保持する `controlledAsset` 属性を追加できます。Smart Data Model によると、
 [Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)
-定義 `https://uri.fiware.org/ns/data-models#controlledAsset` はこのリレーションシップに使用される URI の長い名前であり、
+定義 `https://uri.fiware.org/ns/dataModels#controlledAsset` はこのリレーションシップに使用される URI の長い名前であり、
 `controlledAsset` 属性の値は **Building** エンティティ自体に関連付けられた URN に対応します。
 
 URN は、標準形式に従います: `urn:ngsi-ld:<entity-type>:<entity-id>`
