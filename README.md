@@ -86,20 +86,17 @@ shown:
     -   An association to the location (e.g. **PartField** entity) to be used.
 
 As you can see, each of the entities defined above contain a mixture of static and dynamic data. Some properties are
-<<<<<<< Updated upstream liable to change. An organic **Fertilizer**, such as a fish hydrolysate, could change its
-`formula`, hay could be sold and the `fillingLevel` of the barn could be reduced and so on. ======= liable to change. An
-organic **Fertilizer** such as a fish hydrolysate could change its `formula`, hay could be sold and the `fillingLevel`
-of the barn could be reduced and so on.
-
-> > > > > > > Stashed changes
+liable to change. An organic **Fertilizer**, such as a fish hydrolysate, could change its `formula`, hay could be sold
+and the `fillingLevel` of the barn could be reduced and so on. An organic **Fertilizer** such as a fish hydrolysate
+could change its `formula`, hay could be sold and the `fillingLevel` of the barn could be reduced and so on.
 
 > **Note** this tutorial uses the following typographic styling :
 >
-> -   Entity types have been made **bold text**
-> -   Data attributes are written in `monospace text`
-> -   Items in the real world use plain text
+> -   Entity types have been made **bold text**.
+> -   Data attributes are written in `monospace text`.
+> -   Items in the real world use plain text.
 >
-> Therefore a person in the real world is represented in the context data by a **Person** entity, and a real world barn
+> Therefore, a person in the real world is represented in the context data by a **Person** entity, and a real world barn
 > owned by a person is represented in the context data by a **Building** entity which has a `owner` attribute.
 
 # Architecture
@@ -327,9 +324,8 @@ relationship similar to a foreign key. Batch processing can again be used to ame
 **TemperatureSensor** and **FillingLevelSensor** entities to add a `controlledAsset` attribute holding the one-to-one
 relationship to each building controlled by the device. According to the Smart Data Model
 [Device](https://swagger.lab.fiware.org/?url=https://smart-data-models.github.io/dataModel.Device/Device/swagger.yaml)
-definition `https://uri.fiware.org/ns/dataModels#controlledAsset` is the URI long name to be used for this
-relationship, and the value of the `controlledAsset` attribute corresponds to a URN associated to a **Building** entity
-itself.
+definition `https://uri.fiware.org/ns/dataModels#controlledAsset` is the URI long name to be used for this relationship,
+and the value of the `controlledAsset` attribute corresponds to a URN associated to a **Building** entity itself.
 
 The URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`
 
