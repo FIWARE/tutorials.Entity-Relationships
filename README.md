@@ -342,7 +342,7 @@ curl -L 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=update
     {
         "id": "urn:ngsi-ld:TemperatureSensor:001",
         "type": "TemperatureSensor",
-        "controllingAsset": {
+        "controlledAsset": {
             "type": "Relationship",
             "object": "urn:ngsi-ld:Building:farm001"
         }
@@ -350,7 +350,7 @@ curl -L 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=update
     {
         "id": "urn:ngsi-ld:TemperatureSensor:002",
         "type": "TemperatureSensor",
-        "controllingAsset": {
+        "controlledAsset": {
             "type": "Relationship",
             "object": "urn:ngsi-ld:Building:barn002"
         }
@@ -358,7 +358,7 @@ curl -L 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=update
     {
         "id": "urn:ngsi-ld:FillingLevelSensor:003",
         "type": "FillingLevelSensor",
-        "controllingAsset": {
+        "controlledAsset": {
             "type": "Relationship",
             "object": "urn:ngsi-ld:Building:farm002"
         }
@@ -366,7 +366,7 @@ curl -L 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=update
     {
         "id": "urn:ngsi-ld:FillingLevelSensor:001",
         "type": "FillingLevelSensor",
-        "controllingAsset": {
+        "controlledAsset": {
             "type": "Relationship",
             "object": "urn:ngsi-ld:Building:farm001"
         }
@@ -374,7 +374,7 @@ curl -L 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=update
     {
         "id": "urn:ngsi-ld:FillingLevelSensor:002",
         "type": "FillingLevelSensor",
-        "controllingAsset": {
+        "controlledAsset": {
             "type": "Relationship",
             "object": "urn:ngsi-ld:Building:barn002"
         }
@@ -382,7 +382,7 @@ curl -L 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=update
     {
         "id": "urn:ngsi-ld:TemperatureSensor:003",
         "type": "TemperatureSensor",
-        "controllingAsset": {
+        "controlledAsset": {
             "type": "Relationship",
             "object": "urn:ngsi-ld:Building:farm002"
         }
