@@ -83,7 +83,8 @@ defined as shown:
 As you can see, each of the entities defined above contain some properties which are liable to change. A product could
 change its price, stock could be sold and the shelf count of stock could be reduced and so on.
 
-> **Note** this tutorial uses the following typographic styling :
+> [!NOTE]
+> This tutorial uses the following typographic styling :
 >
 > -   Entity types have been made **bold text**
 > -   Data attributes are written in `monospace text`
