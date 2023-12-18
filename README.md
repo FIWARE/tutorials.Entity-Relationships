@@ -217,7 +217,7 @@ array of entities we wish to update.
 To differenciate **Shelf** Entities from **Store** Entities, each shelf has been assigned `type=Shelf`. Real-world
 properties such as `name` and `location` have been added as properties to each shelf.
 
-#### :one: Request:
+#### 1️⃣ Request:
 
 ```console
 curl -iX POST \
@@ -292,7 +292,7 @@ curl -iX POST \
 
 Similarly, we can create a series of **Product** entities by using the `type=Product`.
 
-#### :two: Request:
+#### 2️⃣ Request:
 
 ```console
 curl -iX POST \
@@ -361,7 +361,7 @@ is that each `id` is a URN follows a standard format: `urn:ngsi-ld:<entity-type>
 Shelf information can be requested by making a GET request on the `/v2/entities` endpoint. For example to return the
 context data of the **Shelf** entity with the `id=urn:ngsi-ld:Shelf:unit001`.
 
-#### :three: Request:
+#### 3️⃣ Request:
 
 ```console
 curl -X GET \
@@ -398,7 +398,7 @@ The value of the `refStore` attribute corresponds to a URN associated to a **Sto
 
 The URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`
 
-#### :four: Request:
+#### 4️⃣ Request:
 
 The following request associates three shelves to `urn:ngsi-ld:Store:001` and two shelves to `urn:ngsi-ld:Store:002`
 
@@ -451,7 +451,7 @@ curl -iX POST \
 Now when the shelf information is requested again, the response has changed and includes a new property `refStore`,
 which has been added in the previous step.
 
-#### :five: Request:
+#### 5️⃣ Request:
 
 ```console
 curl -X GET \
@@ -483,7 +483,7 @@ The updated response including the `refStore` attribute is shown below:
 We can also make a request to retrieve the `refStore` attribute relationship information from a known **Shelf** entity
 by using the `options=values` setting
 
-#### :six: Request:
+#### 6️⃣ Request:
 
 ```console
 curl -X GET \
@@ -502,7 +502,7 @@ This can be interpreted as "I am related to the **Store** entity with the `id=ur
 
 Reading from a parent to a child can be done using the `options=count` setting
 
-#### :seven: Request:
+#### 7️⃣  Request:
 
 ```console
 curl -X GET \
@@ -535,7 +535,7 @@ In plain English, this can be interpreted as "There are three shelves in `urn:ng
 altered use the `options=values` and `attrs` parameters to return specific properties of the relevant associated
 entities. For example the request:
 
-#### :eight: Request:
+#### 8️⃣  Request:
 
 ```console
 curl -X GET \
@@ -563,7 +563,7 @@ the **Store**, **Shelf** and **Product** entities and therefore requires relatio
 Assigning a product to a shelf is simply done by creating an entity holding the relationship information and any other
 additional properties (such as `stockCount` and `shelfCount`)
 
-#### :nine: Request:
+#### 9️⃣ Request:
 
 ```console
 curl -iX POST \
@@ -599,7 +599,7 @@ When reading from a bridge table entity, the `type` of the entity must be known.
 After creating at least one **InventoryItem** entity we can query _Which products are sold in `urn:ngsi-ld:Store:001`?_
 by making the following request
 
-#### :one::zero: Request:
+#### 1️⃣0️⃣ Request:
 
 ```console
 curl -X GET \
@@ -614,7 +614,7 @@ curl -X GET \
 
 Similarly we can request _Which stores are selling `urn:ngsi-ld:Product:001`?_ by altering the request as shown:
 
-#### :one::one: Request:
+#### 1️⃣1️⃣ Request:
 
 ```console
 curl -X GET \
@@ -637,14 +637,14 @@ should happen to the associated the **Shelf** entities?
 It is possible to make a request to see if any remaining entity relationship exists prior to deletion by making a
 request as follows
 
-#### :one::two: Request:
+#### 1️⃣2️⃣ Request:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type'
 ```
 
-#### :one::three: Request:
+#### 1️⃣3️⃣ Request:
 
 The response lists a series of **Shelf** and **InventoryItem** entities - there are no **Product** entities since there
 is no direct relationship between product and store.

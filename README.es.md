@@ -201,7 +201,7 @@ Vamos a crear cinco unidades de estantes al mismo tiempo. Esta solicitud utiliza
 
 Para diferenciar las entidades **Shelf** de las entidades **Store**, a cada estante se le ha asignado "tipo=Shelf". Propiedades como "nombre" y "ubicación" han sido añadidas como propiedades a cada estante.
 
-#### :one: Solicitud:
+#### 1️⃣ Solicitud:
 
 ```console
 curl -iX POST \
@@ -276,7 +276,7 @@ curl -iX POST \
 
 De manera similar, podemos crear una serie de entidades **Product** utilizando el `type=Product`.
 
-#### :two: Solicitud:
+#### 2️⃣ Solicitud:
 
 ```console
 curl -iX POST \
@@ -342,7 +342,7 @@ En ambos casos hemos codificado cada entidad `id` de acuerdo con la especificaci
 
 La información de Shelf puede ser solicitada haciendo una petición GET en el endpoint `v2/entities`. Por ejemplo, para devolver los datos de contexto de la entidad **Shelf** con el `id=urn:ngsi-ld:Shelf:unit001`.
 
-#### :three: Solicitud:
+#### 3️⃣ Solicitud:
 
 ```console
 curl -X GET \
@@ -376,7 +376,7 @@ El valor del atributo `refStore` corresponde a una URN asociada a la propia enti
 
 La URN sigue un formato estándar: `urn:ngsi-ld:<tipo-entidad>:<id-entidad>`
 
-#### :four: Solicitud:
+#### 4️⃣ Solicitud:
 
 La siguiente solicitud asocia tres estantes a `urn:ngsi-ld:Store:001` y dos estantes a `urn:ngsi-ld:Store:002`.
 
@@ -428,7 +428,7 @@ curl -iX POST \
 
 Cuando la información del estante se solicita de nuevo, la respuesta ha cambiado e incluye una nueva propiedad `refStore`, añadida en el paso anterior.
 
-#### :five: Solicitud:
+#### 5️⃣ Solicitud:
 
 ```console
 curl -X GET \
@@ -459,7 +459,7 @@ La respuesta actualizada que incluye el atributo `refStore` se muestra a continu
 
 También podemos hacer una solicitud para recuperar la información de la relación de atributos `refStore` de una entidad conocida `Shelf` usando el parámetro "options=values".
 
-#### :six: Solicitud:
+#### 6️⃣ Solicitud:
 
 ```console
 curl -X GET \
@@ -478,7 +478,7 @@ Esto puede ser interpretado como "Estoy relacionado con la entidad **Store** con
 
 La lectura de un padre a un hijo puede hacerse usando el parámetro `options=count`.
 
-#### :seven: Solicitud:
+#### 7️⃣  Solicitud:
 
 ```console
 curl -X GET \
@@ -509,7 +509,7 @@ Esta solicitud está pidiendo el `id` de todas las entidades de **Shelf** asocia
 En lenguaje coloquial, esto puede interpretarse como "Hay tres estantes en `urn:ngsi-ld:Store:001`". La petición puede ser alterada usando los parámetros `options=values` y `attrs` para devolver propiedades específicas de las entidades asociadas relevantes. Por ejemplo, la solicitud:
 
 
-#### :eight: Solicitud:
+#### 8️⃣  Solicitud:
 
 ```console
 curl -X GET \
@@ -532,7 +532,7 @@ A fin de mantener la información de contexto para "colocar un producto en un es
 
 La asignación de un producto a un estante se hace simplemente creando una entidad que contenga la información de la relación y cualquier otra propiedad adicional (como `StockCount` y `ShelfCount`)
 
-#### :nine: Solicitud:
+#### 9️⃣ Solicitud:
 
 ```console
 curl -iX POST \
@@ -567,7 +567,7 @@ Cuando se lee de una entidad de la tabla puente, el `type` de la entidad debe se
 
 Después de crear al menos una entidad **InventoryItem** podemos consultar _¿Qué productos se venden en `urn:ngsi-ld:Store:001`?_ haciendo la siguiente petición
 
-#### :one::zero: Solicitud:
+#### 1️⃣0️⃣ Solicitud:
 
 ```console
 curl -X GET \
@@ -582,7 +582,7 @@ curl -X GET \
 
 Del mismo modo, podemos consultar _¿Qué tiendas están vendiendo `urn:ngsi-ld:Product:001`?_ alterando la petición como se muestra:
 
-#### :one::one: Solicitud:
+#### 1️⃣1️⃣ Solicitud:
 
 ```console
 curl -X GET \
@@ -601,14 +601,14 @@ Las relaciones de datos de contexto sólo deben establecerse y mantenerse entre 
 
 Es posible hacer una solicitud para ver si existe alguna relación de entidad restante antes de la supresión, haciendo una solicitud como la siguiente
 
-#### :one::two: Solicitud:
+#### 1️⃣2️⃣ Solicitud:
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type'
 ```
 
-#### :one::three: Solicitud:
+#### 1️⃣3️⃣ Solicitud:
 
 La respuesta enumera una serie de entidades de **Shelf** y **InventoryItem** - no hay entidades de **Product** ya que no hay una relación directa entre el producto y la tienda.
 

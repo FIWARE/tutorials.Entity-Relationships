@@ -269,7 +269,7 @@ git checkout NGSI-v2
 `type=Shelf` に割り当てられています。'name' と 'location' のような実世界のプロパ
 ティが各棚にプロパティとして追加されました。
 
-#### :one: リクエスト :
+#### 1️⃣ リクエスト :
 
 ```console
 curl -iX POST \
@@ -344,7 +344,7 @@ curl -iX POST \
 
 同様に、`type=Product` を使用して一連の **Product** エンティティを作成できます。
 
-#### :two: リクエスト :
+#### 2️⃣ リクエスト :
 
 ```console
 curl -iX POST \
@@ -416,7 +416,7 @@ curl -iX POST \
 きます。たとえば、`id=urn:ngsi-ld:Shelf:unit001` を使用すると、その **Shelf** エ
 ンティティのコンテキスト・データが得られます :
 
-#### :three: リクエスト :
+#### 3️⃣ リクエスト :
 
 ```console
 curl -X GET \
@@ -461,7 +461,7 @@ curl -X GET \
 
 URN は標準フォーマットに従います : `urn:ngsi-ld:<entity-type>:<entity-id>`
 
-#### :four: リクエスト :
+#### 4️⃣ リクエスト :
 
 次のリクエストは、3 つの棚を `urn:ngsi-ld:Store:001` に、2 つの棚を
 `urn:ngsi-ld:Store:002` に関連付けます。
@@ -515,7 +515,7 @@ curl -iX POST \
 ここで棚情報が再度リクエストされると、レスポンスが変更され、前の手順で追加された
 新しい `refStore` 属性が含まれます。
 
-#### :five: リクエスト :
+#### 5️⃣ リクエスト :
 
 ```console
 curl -X GET \
@@ -551,7 +551,7 @@ curl -X GET \
 また、`options=values` 設定を使用して、既知の棚エンティティから `refStore` 属性
 のリレーションシップ情報を取得するようリクエストすることもできます :
 
-#### :six: リクエスト :
+#### 6️⃣ リクエスト :
 
 ```console
 curl -X GET \
@@ -573,7 +573,7 @@ curl -X GET \
 
 親から子への読み込みは、`options=count` 設定を使用して行うことができます :
 
-#### :seven: リクエスト :
+#### 7️⃣  リクエスト :
 
 ```console
 curl -X GET \
@@ -608,7 +608,7 @@ curl -X GET \
 を使用して、関連する関連エンティティの特定のプロパティを返すことができます。例え
 ば、次のようなリクエストです :
 
-#### :eight: リクエスト :
+#### 8️⃣  リクエスト :
 
 ```console
 curl -X GET \
@@ -646,7 +646,7 @@ _"`urn:ngsi-ld:Store:001` にあるすべての棚の名前を教えてくださ
 `shelfCount` のようなその他の追加プロパティを保持するエンティティを作成すること
 によって行われます。
 
-#### :nine: リクエスト :
+#### 9️⃣ リクエスト :
 
 ```console
 curl -iX POST \
@@ -686,7 +686,7 @@ curl -iX POST \
 うことで、_"`urn:ngsi-ld:Store:001` の中にどの製品が販売されているか？"_ をクエ
 リすることができます。
 
-#### :one::zero: リクエスト :
+#### 1️⃣0️⃣ リクエスト :
 
 ```console
 curl -X GET \
@@ -702,7 +702,7 @@ curl -X GET \
 同様に、次のようにリクエストを変更することで、どのストアで
 `urn:ngsi-ld:Product:001` が売れているのかを知ることができます :
 
-#### :one::one: リクエスト :
+#### 1️⃣1️⃣ リクエスト :
 
 ```console
 curl -X GET \
@@ -729,14 +729,14 @@ curl -X GET \
 以下のようにリクエストすることにより、削除前に残っているエンティティのリレーショ
 ンシップが存在するかどうかを確認するリクエストを出すことができます :
 
-#### :one::two: リクエスト :
+#### 1️⃣2️⃣ リクエスト :
 
 ```console
 curl -X GET \
   'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type'
 ```
 
-#### :one::three: リクエスト :
+#### 1️⃣3️⃣ リクエスト :
 
 このレスポンスには一連の **Shelf** と **InventoryItem** エンティティがリストされ
 ています。製品とストアの間に直接のリレーションシップがないため、**Product** エン
