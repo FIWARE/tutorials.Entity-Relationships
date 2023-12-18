@@ -90,7 +90,8 @@ liable to change. An organic **Fertilizer**, such as a fish hydrolysate, could c
 and the `fillingLevel` of the barn could be reduced and so on. An organic **Fertilizer** such as a fish hydrolysate
 could change its `formula`, hay could be sold and the `fillingLevel` of the barn could be reduced and so on.
 
-> **Note** this tutorial uses the following typographic styling :
+> [!NOTE]
+> This tutorial uses the following typographic styling :
 >
 > -   Entity types have been made **bold text**.
 > -   Data attributes are written in `monospace text`.
@@ -182,7 +183,8 @@ git checkout NGSI-LD
 This command will also import seed data (**Building**, **Person**, **TemperatureSensor**, **FillingLevelSensor**,
 **Herbicide** and **PartField**) on startup.
 
-> :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> [!NOTE]
+> If you want to clean up and start over again you can do so with the following command:
 >
 > ```console
 > ./services stop
@@ -201,7 +203,7 @@ create new entities if they are not present and overwrite existing entities if t
 To differentiate different **Device**, each temperature sensor has been assigned `type=TemperatureSensor`. Real-world
 properties such as `category` have been added as properties to each device.
 
-#### :one: Request:
+#### 1️⃣ Request:
 
 ```console
 curl -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
@@ -238,7 +240,7 @@ curl -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 
 Similarly, we can create a series of **FillingLevelSensors** entities by using the `type=FillingLevelSensor`.
 
-#### :two: Request:
+#### 2️⃣ Request:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
@@ -280,7 +282,7 @@ is that each `id` is a URN follows a standard format: `urn:ngsi-ld:<entity-type>
 Device information can be requested by making a GET request on the `/ngsi-ld/v1/entities` endpoint. For example to
 return the context data of the devices
 
-#### :three: Request:
+#### 3️⃣ Request:
 
 ```console
 curl -X GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor,FillingLevelSensor&options=keyValues' \
@@ -329,7 +331,7 @@ and the value of the `controlledAsset` attribute corresponds to a URN associated
 
 The URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`
 
-#### :four: Request:
+#### 4️⃣ Request:
 
 The following request associates six devices to `urn:ngsi-ld:Building:farm001`, `urn:ngsi-ld:Building:barn002` and
 `urn:ngsi-ld:Building:farm002`
@@ -393,7 +395,7 @@ curl -L 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=update
 Now when the devcie information is requested again, the response has changed and includes a new property
 `controlledAsset`, which has been added in the previous step.
 
-#### :five: Request:
+#### 5️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
@@ -425,7 +427,7 @@ The updated response including the `controlledAsset` attribute is shown below:
 We can also make a request to retrieve the `controlledAsset` attribute relationship information from a known **Device**
 entity by using the `options=keyValues` setting
 
-#### :six: Request:
+#### 6️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
@@ -452,7 +454,7 @@ This can be interpreted as _"I am making sensor readings inside the **Building**
 
 Reading from a parent to a child can be done using the following query:
 
-#### :seven: Request:
+#### 7️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
@@ -485,7 +487,7 @@ response is a JSON array as shown.
 In plain English, this can be interpreted as _"There are two devices in `urn:ngsi-ld:Building:farm001`"_. The request
 can be altered use the `count=true` to return the number of entities which fulfill the criteria.
 
-#### :eight: Request:
+#### 8️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
@@ -519,7 +521,7 @@ new data entity **Task** which exists to associate data from other entities. It 
 Assigning a task is simply done by creating an entity holding the relationship information and any other additional
 properties (such as `description` and `status`)
 
-#### :nine: Request:
+#### 9️⃣ Request:
 
 ```console
 curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entities/' \
@@ -544,7 +546,7 @@ When reading from a bridge table entity, the `type` of the entity must be known.
 After creating at least one **Task** entity we can query _Which workers are assigned activities in field
 `urn:ngsi-ld:PartField:002`?_ by making the following request
 
-#### :one::zero: Request:
+#### 1️⃣0️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
@@ -570,7 +572,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
 
 Similarly we can request _Which fields are treated using `urn:ngsi-ld:Herbicide:001`?_ by altering the request as shown:
 
-#### :one::one: Request:
+#### 1️⃣1️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
@@ -607,7 +609,7 @@ this data into another entity. For example, the temperature reading of a sensor 
 reading of the barn itself. A dummy reading has already been added into the `urn:ngsi-ld:Building:farm001` Entity and
 can be retrieved with a GET request:
 
-#### :one::two: Request:
+#### 1️⃣2️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:farm001' \

@@ -220,7 +220,7 @@ git checkout NGSI-LD
 さまざまなデバイスを区別するために、各温度センサには `type=TemperatureSensor` が割り当てられています。`category`
 などの実際のプロパティは、各デバイスにプロパティとして追加されています。
 
-#### :one: リクエスト:
+#### 1️⃣ リクエスト:
 
 ```console
 curl -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
@@ -257,7 +257,7 @@ curl -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 
 同様に、`type=FillingLevelSensor` を使用して一連の **FillingLevelSensors** エンティティを作成できます。
 
-#### :two: リクエスト:
+#### 2️⃣ リクエスト:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
@@ -298,7 +298,7 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 デバイス情報は、`/ngsi-ld/v1/entities` エンドポイントで GET リクエストを行うことでリクエストできます。たとえば、
 デバイスのコンテキスト・データを返すためです。
 
-#### :three: リクエスト:
+#### 3️⃣ リクエスト:
 
 ```console
 curl -X GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor,FillingLevelSensor&options=keyValues' \
@@ -348,7 +348,7 @@ curl -X GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor,F
 
 URN は、標準形式に従います: `urn:ngsi-ld:<entity-type>:<entity-id>`
 
-#### :four: リクエスト:
+#### 4️⃣ リクエスト:
 
 次のリクエストは、6つのデバイスを `urn:ngsi-ld:Building:farm001`, `urn:ngsi-ld:Building:barn002` および
 `urn:ngsi-ld:Building:farm002` に6つのデバイスを関連付けます。
@@ -395,7 +395,7 @@ curl -G -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 これで、デバイス情報が再度リクエストされると、レスポンスが変更され、前の手順で追加された新しいプロパティ
 `controlledAsset`が含まれます。
 
-#### :five: リクエスト:
+#### 5️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor001' \
@@ -431,7 +431,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 `options=keyValues` 設定を使用して、既知の **Device** エンティティから属性リレーションシップ情報を取得するように
 リクエストすることもできます。
 
-#### :six: リクエスト:
+#### 6️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
@@ -460,7 +460,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 
 親から子への読み取りは、次のクエリを使用して実行できます:
 
-#### :seven: リクエスト:
+#### 7️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
@@ -493,7 +493,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
 平易な英語では、これは "`urn:ngsi-ld:Building:farm001` に2つのデバイスがあります" と解釈できます。
 リクエストは、`count=true` を使用して変更でき、基準を満たすエンティティの数を返します。
 
-#### :eight: リクエスト:
+#### 8️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
@@ -529,7 +529,7 @@ NGSILD-Results-Count: 2
 タスクの割り当ては、リレーションシップ情報とその他の追加プロパティ (`description` および `status` など) を保持する
 エンティティを作成するだけで実行できます。
 
-#### :nine: リクエスト:
+#### 9️⃣ リクエスト:
 
 ```console
 curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entities/' \
@@ -557,7 +557,7 @@ curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entities/' \
 "フィールド `urn:ngsi-ld:PartField:002` でアクティビティが割り当てられているワーカーはどれですか？"
 というクエリを実行できます。
 
-#### :one::zero: リクエスト:
+#### 1️⃣0️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
@@ -584,7 +584,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
 同様に、次に示されているようにリクエストを変更することによって、"どのフィールドが `urn:ngsi-ld:Herbicide:001`
 を使用して処理されるか？” をリクエストできます。
 
-#### :one::one: リクエスト:
+#### 1️⃣1️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
@@ -624,7 +624,7 @@ _Properties-of-Properties_ および _Relationships of Properties_ はメタデ�
 あります。たとえば、納屋 (barn) のセンサの温度測定値は、納屋自体の温度測定値でもあります。ダミーの読み取り値は
 すでに `urn:ngsi-ld:Building:farm001` エンティティに追加されており、GET リクエストで取得できます:
 
-#### :one::two: リクエスト:
+#### 1️⃣2️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:farm001' \
