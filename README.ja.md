@@ -663,4 +663,4 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:
 
 ## License
 
-[MIT](LICENSE) © 2020-2023 FIWARE Foundation e.V.
+[MIT](LICENSE) © 2020-2024 FIWARE Foundation e.V.
