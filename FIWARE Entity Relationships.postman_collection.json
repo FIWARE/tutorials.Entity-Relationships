@@ -101,10 +101,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Shelf:unit001/?options=keyValues",
 					"protocol": "http",
@@ -170,10 +166,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Shelf:unit001/?options=keyValues",
 					"protocol": "http",
@@ -209,10 +201,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Shelf:unit001/?options=values&attrs=refStore",
 					"protocol": "http",
@@ -253,10 +241,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://{{orion}}/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&type=Shelf&options=values&attrs=name",
 					"protocol": "http",
@@ -329,10 +313,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://{{orion}}/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem",
 					"protocol": "http",
@@ -375,10 +355,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://{{orion}}/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type",
 					"protocol": "http",
