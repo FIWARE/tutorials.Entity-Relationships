@@ -1,4 +1,4 @@
-# Linked Data Entity Relationships[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.07.01_60/gs_cim009v010701p.pdf)[<img src="https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
+# Linked Data Entity Relationships[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.08.01_60/gs_cim009v010801p.pdf)[<img src="https://fiware.github.io/tutorials.Entity-Relationships/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
@@ -275,7 +275,7 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 ```
 
 In both cases we have encoded each entity `id` according to the NGSI-LD
-[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.07.01_60/gs_cim009v010701p.pdf) - the proposal
+[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.08.01_60/gs_cim009v010801p.pdf) - the proposal
 is that each `id` is a URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This will mean that every
 `id` in the system will be unique.
 
@@ -291,7 +291,7 @@ curl -X GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor,F
 
 #### Response:
 
-```jsonld
+```json
 [
     {
         "@context": "http://context/ngsi-context.jsonld",
@@ -407,7 +407,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 
 The updated response including the `controlledAsset` attribute is shown below:
 
-```jsonld
+```json
 {
     "@context": "http://context/ngsi-context.jsonld",
     "id": "urn:ngsi-ld:TemperatureSensor:001",
@@ -469,7 +469,7 @@ response is a JSON array as shown.
 
 #### Response:
 
-```jsonld
+```json
 [
     {
         "@context": "http://context/ngsi-context.jsonld",
@@ -560,7 +560,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
 
 #### Response:
 
-```jsonld
+```json
 [
     {
         "id": "urn:ngsi-ld:Task:001",
