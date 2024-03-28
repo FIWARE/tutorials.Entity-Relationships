@@ -46,8 +46,13 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 # Understanding Entities and Relationships
 
+>  “The essence of philosophy is a sense of wonder at the interconnectedness of human beings to one another and to the universe that encompasses them.”
+>
+>  ― Marcus Tullius Cicero, On Living and Dying Well 
+
 Within the FIWARE platform, the context of an entity represents the state of a physical or conceptual object which
-exists in the real world.
+exists in the real world. The connection from one entity to another is expressed using a **Relationship**, enabling users
+to make inferences across the whole knowledge graph of the system.
 
 ## Entities within a Farm Management Information System (FMIS)
 
