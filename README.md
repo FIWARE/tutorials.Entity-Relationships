@@ -47,8 +47,13 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 # Understanding Entities and Relationships
 
-Within the FIWARE platform, the context of an entity represents the state of a physical or conceptural object which
-exists in the real world.
+>  “It is not the amount of knowledge that makes a brain. It is not even the distribution of knowledge. It is the interconnectedness.”
+>
+>  ― James Gleick, The Information: A History, a Theory, a Flood 
+
+Within the FIWARE platform, the context of an entity represents the state of a physical or conceptual object which
+exists in the real world. The connection from one entity to another is expressed using a **Relationship**, enabling users
+to make inferences across the whole knowledge graph of the system.
 
 ## Entities within a stock management system
 
