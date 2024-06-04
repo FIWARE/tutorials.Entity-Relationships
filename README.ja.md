@@ -166,7 +166,7 @@ docker-compose -v
 docker version
 ```
 
-Docker version 20.10 以降および Docker Compose 1.29 以降を使用していることを確認し、
+Docker version 24.0.x 以降および Docker Compose 2.24.x 以降を使用していることを確認し、
 必要に応じてアップグレードしてください。
 
 ## WSL
