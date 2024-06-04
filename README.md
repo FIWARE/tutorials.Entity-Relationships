@@ -51,13 +51,14 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 # Understanding Entities and Relationships
 
->  “It is not the amount of knowledge that makes a brain. It is not even the distribution of knowledge. It is the interconnectedness.”
+> “It is not the amount of knowledge that makes a brain. It is not even the distribution of knowledge. It is the
+> interconnectedness.”
 >
->  ― James Gleick, The Information: A History, a Theory, a Flood 
+> ― James Gleick, The Information: A History, a Theory, a Flood
 
 Within the FIWARE platform, the context of an entity represents the state of a physical or conceptual object which
-exists in the real world. The connection from one entity to another is expressed using a **Relationship**, enabling users
-to make inferences across the whole knowledge graph of the system.
+exists in the real world. The connection from one entity to another is expressed using a **Relationship**, enabling
+users to make inferences across the whole knowledge graph of the system.
 
 ## Entities within a stock management system
 
@@ -93,6 +94,7 @@ As you can see, each of the entities defined above contain some properties which
 change its price, stock could be sold and the shelf count of stock could be reduced and so on.
 
 > [!NOTE]
+>
 > This tutorial uses the following typographic styling :
 >
 > -   Entity types have been made **bold text**
@@ -208,6 +210,7 @@ This command will also import seed data from the previous
 [Store Finder tutorial](https://github.com/FIWARE/tutorials.Getting-Started) on startup.
 
 > [!NOTE]
+>
 > If you want to clean up and start over again you can do so with the following command:
 >
 > ```console
@@ -513,7 +516,7 @@ This can be interpreted as "I am related to the **Store** entity with the `id=ur
 
 Reading from a parent to a child can be done using the `options=count` setting
 
-#### 7️⃣  Request:
+#### 7️⃣ Request:
 
 ```console
 curl -X GET \
@@ -546,7 +549,7 @@ In plain English, this can be interpreted as "There are three shelves in `urn:ng
 altered use the `options=values` and `attrs` parameters to return specific properties of the relevant associated
 entities. For example the request:
 
-#### 8️⃣  Request:
+#### 8️⃣ Request:
 
 ```console
 curl -X GET \
