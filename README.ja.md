@@ -31,7 +31,7 @@
 -   [アーキテクチャ](#architecture)
 -   [前提条件](#prerequisites)
     -   [Docker と Docker Compose](#docker-and-docker-compose)
-    -   [Cygwin for Windows](#cygwin-for-windows)
+    -   [WSL](#wsl)
 -   [起動](#start-up)
 -   [データ・エンティティの作成と関連付け](#creating-and-associating-data-entities)
     -   [一度に複数のエンティティを作成](#creating-several-entities-at-once)
@@ -210,12 +210,10 @@ docker version
 Docker バージョン 20.10 以降と Docker Compose 1.29 以上を使用していることを確認
 し、必要に応じてアップグレードしてください。
 
-<a name="cygwin-for-windows"></a>
-
-## Cygwin for Windows
+## WSL
 
 シンプルな Bash スクリプトを使用してサービスを開始します。Windows ユーザは
-[cygwin](http://www.cygwin.com/) をダウンロードして、Windows の Linux ディストリ
+[を使用して Windows に Linux をインストールする方法](https://learn.microsoft.com/ja-jp/windows/wsl/install) をダウンロードして、Windows の Linux ディストリ
 ビューションに似たコマンドライン機能を提供する必要があります。
 
 <a name="start-up"></a>

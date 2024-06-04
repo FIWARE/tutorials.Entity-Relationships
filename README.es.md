@@ -29,7 +29,7 @@ A lo largo de este tutorial se utilizan comandos [cUrl](https://ec.haxx.se/), pe
 -   [Arquitectura](#arquitectura)
 -   [Pre requisitos](#pre-requisitos)
     -   [Docker y Docker Compose](#docker-y-docker-compose)
-    -   [Cygwin para Windows](#cygwin-para-windows)
+    -   [WSL para Windows](#wsl-para-windows)
 -   [Inicio](#inicio)
 -   [Creación y asociación de entidades de datos](#creacion-y-asociacion-de-entidades-de-datos)
     -   [Creación de varias entidades a la vez](#creacion-de-varias-entidades-a-la-vez)
@@ -163,9 +163,9 @@ docker version
 
 Por favor, asegúrese de que esté usando la versión 18.03 o superior de Docker y la versión 1.21 o superior de Docker Compose y actualice si es necesario.
 
-## Cygwin para Windows
+## WSL para Windows
 
-Iniciaremos nuestros servicios usando un simple script de Bash. Los usuarios de Windows deben descargar [cygwin](http://www.cygwin.com/)
+Iniciaremos nuestros servicios usando un simple script de Bash. Los usuarios de Windows deben descargar the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install)
 para proporcionar una funcionalidad de línea de comandos similar a la de una distribución de Linux en Windows.
 
 # Inicio
