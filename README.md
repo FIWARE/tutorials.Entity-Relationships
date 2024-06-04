@@ -51,13 +51,14 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 # Understanding Entities and Relationships
 
->  “The essence of philosophy is a sense of wonder at the interconnectedness of human beings to one another and to the universe that encompasses them.”
+> “The essence of philosophy is a sense of wonder at the interconnectedness of human beings to one another and to the
+> universe that encompasses them.”
 >
->  ― Marcus Tullius Cicero, On Living and Dying Well 
+> ― Marcus Tullius Cicero, On Living and Dying Well
 
 Within the FIWARE platform, the context of an entity represents the state of a physical or conceptual object which
-exists in the real world. The connection from one entity to another is expressed using a **Relationship**, enabling users
-to make inferences across the whole knowledge graph of the system.
+exists in the real world. The connection from one entity to another is expressed using a **Relationship**, enabling
+users to make inferences across the whole knowledge graph of the system.
 
 ## Entities within a Farm Management Information System (FMIS)
 
@@ -101,6 +102,7 @@ and the `fillingLevel` of the barn could be reduced and so on. An organic **Fert
 could change its `formula`, hay could be sold and the `fillingLevel` of the barn could be reduced and so on.
 
 > [!NOTE]
+>
 > This tutorial uses the following typographic styling :
 >
 > -   Entity types have been made **bold text**.
@@ -194,6 +196,7 @@ This command will also import seed data (**Building**, **Person**, **Temperature
 **Herbicide** and **PartField**) on startup.
 
 > [!NOTE]
+>
 > If you want to clean up and start over again you can do so with the following command:
 >
 > ```console
@@ -484,12 +487,12 @@ response is a JSON array as shown.
     {
         "@context": "http://context/ngsi-context.jsonld",
         "id": "urn:ngsi-ld:TemperatureSensor:001",
-        "type": "TemperatureSensor",
+        "type": "TemperatureSensor"
     },
     {
         "@context": "http://context/ngsi-context.jsonld",
         "id": "urn:ngsi-ld:FillingLevelSensor:001",
-        "type": "FillingLevelSensor",
+        "type": "FillingLevelSensor"
     }
 ]
 ```
