@@ -17,7 +17,7 @@
 					},
 					{
 						"key": "Link",
-						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 						"type": "text"
 					}
 				],
@@ -26,10 +26,10 @@
 					"raw": "[\n    {\n      \"id\": \"urn:ngsi-ld:TemperatureSensor:001\",\n      \"type\": \"TemperatureSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Temperature Gauge 1\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"temperature\"},\n      \"temperature\": {\"type\": \"Property\", \"value\": 20, \"unitCode\": \"CEL\"}\n    },\n    {\n      \"id\": \"urn:ngsi-ld:TemperatureSensor:002\",\n      \"type\": \"TemperatureSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Temperature Gauge 2\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"temperature\"},\n      \"temperature\": {\"type\": \"Property\", \"value\": 21, \"unitCode\": \"CEL\"}\n    },\n    {\n      \"id\": \"urn:ngsi-ld:TemperatureSensor:003\",\n      \"type\": \"TemperatureSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Temperature Gauge 3\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"temperature\"},\n      \"temperature\": {\"type\": \"Property\", \"value\": 27, \"unitCode\": \"CEL\"}\n    }\n]"
 				},
 				"url": {
-					"raw": "http://{{orion}}/ngsi-ld/v1/entityOperations/upsert",
+					"raw": "http://{{context-broker}}/ngsi-ld/v1/entityOperations/upsert",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"{{context-broker}}"
 					],
 					"path": [
 						"ngsi-ld",
@@ -53,7 +53,7 @@
 					},
 					{
 						"key": "Link",
-						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 						"type": "text"
 					}
 				],
@@ -62,10 +62,10 @@
 					"raw": "[\n    {\n      \"id\": \"urn:ngsi-ld:FillingLevelSensor:001\",\n      \"type\": \"FillingLevelSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Filling Level Sensor 1\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"fillingLevel\"},\n      \"fillingLevel\": {\"type\": \"Property\", \"value\": 1, \"unitCode\": \"C62\"}\n    },\n    {\n      \"id\": \"urn:ngsi-ld:FillingLevelSensor:002\",\n      \"type\": \"FillingLevelSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Filling Level Sensor 2\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"fillingLevel\"},\n      \"fillingLevel\": {\"type\": \"Property\", \"value\": 0.9, \"unitCode\": \"C62\"}\n    },\n    {\n      \"id\": \"urn:ngsi-ld:FillingLevelSensor:003\",\n      \"type\": \"FillingLevelSensor\",\n      \"description\" : {\"type\": \"Property\", \"value\": \"Filling Gauge 3\"},\n      \"category\": {\"type\": \"Property\", \"value\": \"sensor\"},\n      \"controlledProperty\" : {\"type\": \"Property\", \"value\": \"fillingLevel\"},\n      \"fillingLevel\": {\"type\": \"Property\", \"value\": 0.8, \"unitCode\": \"C62\"}\n    }\n]"
 				},
 				"url": {
-					"raw": "http://{{orion}}/ngsi-ld/v1/entityOperations/upsert",
+					"raw": "http://{{context-broker}}/ngsi-ld/v1/entityOperations/upsert",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"{{context-broker}}"
 					],
 					"path": [
 						"ngsi-ld",
@@ -85,15 +85,15 @@
 				"header": [
 					{
 						"key": "Link",
-						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://{{orion}}/ngsi-ld/v1/entities/?type=TemperatureSensor,FillingLevelSensor&options=keyValues",
+					"raw": "http://{{context-broker}}/ngsi-ld/v1/entities/?type=TemperatureSensor,FillingLevelSensor&options=keyValues",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"{{context-broker}}"
 					],
 					"path": [
 						"ngsi-ld",
@@ -127,7 +127,7 @@
 					},
 					{
 						"key": "Link",
-						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 						"type": "text"
 					}
 				],
@@ -136,10 +136,10 @@
 					"raw": "[\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:001\",\n        \"type\": \"TemperatureSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm001\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:002\",\n        \"type\": \"TemperatureSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:barn002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:003\",\n        \"type\": \"FillingLevelSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:001\",\n        \"type\": \"FillingLevelSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm001\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:FillingLevelSensor:002\",\n        \"type\": \"FillingLevelSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:barn002\"\n        }\n    },\n    {\n        \"id\": \"urn:ngsi-ld:TemperatureSensor:003\",\n        \"type\": \"TemperatureSensor\",\n        \"controllingAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:farm002\"\n        }\n    }\n]"
 				},
 				"url": {
-					"raw": "http://{{orion}}/ngsi-ld/v1/entityOperations/update?options=update",
+					"raw": "http://{{context-broker}}/ngsi-ld/v1/entityOperations/update?options=update",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"{{context-broker}}"
 					],
 					"path": [
 						"ngsi-ld",
@@ -165,7 +165,7 @@
 				"header": [
 					{
 						"key": "Link",
-						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 						"type": "text"
 					}
 				],
@@ -206,7 +206,7 @@
 				"header": [
 					{
 						"key": "Link",
-						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 						"type": "text"
 					},
 					{
@@ -257,15 +257,15 @@
 				"header": [
 					{
 						"key": "Link",
-						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://{{orion}}/ngsi-ld/v1/entities?q=controllingAsset==\"urn:ngsi-ld:Building:farm001\"&options=keyValues&attrs=controllingAsset",
+					"raw": "http://{{context-broker}}/ngsi-ld/v1/entities?q=controllingAsset==\"urn:ngsi-ld:Building:farm001\"&options=keyValues&attrs=controllingAsset",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"{{context-broker}}"
 					],
 					"path": [
 						"ngsi-ld",
@@ -302,7 +302,7 @@
 					},
 					{
 						"key": "Link",
-						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 						"type": "text"
 					}
 				],
@@ -311,10 +311,10 @@
 					"raw": "{\n    \"id\": \"urn:ngsi-ld:Task:001\",\n    \"type\": \"Task\",\n    \"worker\": {\n        \"type\": \"Relationship\",\n        \"object\": \"urn:ngsi-ld:Person:001\"\n    },\n    \"field\": {\n        \"type\": \"Relationship\",\n        \"object\": \"urn:ngsi-ld:PartField:002\"\n    },\n    \"product\": {\n        \"type\": \"Relationship\",\n        \"object\": \"urn:ngsi-ld:Herbicide:001\"\n    },\n    \"description\": {\n        \"type\": \"Property\",\n        \"value\": \"Spray the North Field with Agent Orange\"\n    },\n    \"status\": {\n        \"type\": \"Property\",\n        \"value\": \"scheduled\"\n    },\n    \"dueDate\": {\n        \"type\": \"Property\",\n        \"value\": \"2021-07-16\"\n    }\n}"
 				},
 				"url": {
-					"raw": "http://{{orion}}/ngsi-ld/v1/entities/",
+					"raw": "http://{{context-broker}}/ngsi-ld/v1/entities/",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"{{context-broker}}"
 					],
 					"path": [
 						"ngsi-ld",
@@ -334,7 +334,7 @@
 				"header": [
 					{
 						"key": "Link",
-						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 						"type": "text"
 					},
 					{
@@ -345,10 +345,10 @@
 					}
 				],
 				"url": {
-					"raw": "http://{{orion}}/ngsi-ld/v1/entities/?q=field==\"urn:ngsi-ld:PartField:002\"&options=keyValues&attrs=worker&type=Task",
+					"raw": "http://{{context-broker}}/ngsi-ld/v1/entities/?q=field==\"urn:ngsi-ld:PartField:002\"&options=keyValues&attrs=worker&type=Task",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"{{context-broker}}"
 					],
 					"path": [
 						"ngsi-ld",
@@ -386,7 +386,7 @@
 				"header": [
 					{
 						"key": "Link",
-						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 						"type": "text"
 					},
 					{
@@ -397,10 +397,10 @@
 					}
 				],
 				"url": {
-					"raw": "http://{{orion}}/ngsi-ld/v1/entities/?q=product==\"urn:ngsi-ld:Herbicide:001\"&options=keyValues&attrs=field&type=Task",
+					"raw": "http://{{context-broker}}/ngsi-ld/v1/entities/?q=product==\"urn:ngsi-ld:Herbicide:001\"&options=keyValues&attrs=field&type=Task",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"{{context-broker}}"
 					],
 					"path": [
 						"ngsi-ld",
@@ -438,7 +438,7 @@
 				"header": [
 					{
 						"key": "Link",
-						"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 						"type": "text"
 					},
 					{
@@ -449,10 +449,10 @@
 					}
 				],
 				"url": {
-					"raw": "http://{{orion}}/ngsi-ld/v1/entities/urn:ngsi-ld:Building:farm001?attrs=temperature",
+					"raw": "http://{{context-broker}}/ngsi-ld/v1/entities/urn:ngsi-ld:Building:farm001?attrs=temperature",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"{{context-broker}}"
 					],
 					"path": [
 						"ngsi-ld",
@@ -494,11 +494,15 @@
 	],
 	"variable": [
 		{
-			"key": "orion",
+			"key": "context-broker",
 			"value": "localhost:1026"
 		},
 		{
 			"key": "ngsi-context.jsonld",
+			"value": "http://context/ngsi-context.jsonld"
+		},
+		{
+			"key": "user-context.jsonld",
 			"value": "http://context/ngsi-context.jsonld"
 		}
 	]
