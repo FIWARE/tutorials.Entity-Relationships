@@ -503,7 +503,7 @@
 		},
 		{
 			"key": "user-context.jsonld",
-			"value": "http://context/ngsi-context.jsonld"
+			"value": "http://context/user-context.jsonld"
 		}
 	]
 }

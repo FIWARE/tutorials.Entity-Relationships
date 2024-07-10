@@ -406,7 +406,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 ```json
 {
     "@context": [
-            "http://context/ngsi-context.jsonld",
+            "http://context/user-context.jsonld",
             "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.7.jsonld"
         ],
     "id": "urn:ngsi-ld:TemperatureSensor:001",
