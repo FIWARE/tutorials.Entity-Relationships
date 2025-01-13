@@ -206,8 +206,8 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
       "id": "urn:ngsi-ld:TemperatureSensor:001",
       "type": "TemperatureSensor",
       "category": {
-            "type": "Property",
-            "value": "sensor"
+            "type": "VocabProperty",
+            "vocab": "sensor"
       },
       "temperature": {
             "type": "Property",
@@ -219,8 +219,8 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
       "id": "urn:ngsi-ld:TemperatureSensor:002",
       "type": "TemperatureSensor",
       "category": {
-            "type": "Property",
-            "value": "sensor"
+            "type": "VocabProperty",
+            "vocab": "sensor"
       },
       "temperature": {
             "type": "Property",
@@ -232,8 +232,8 @@ curl -s -o /dev/null -X POST 'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entityOper
       "id": "urn:ngsi-ld:TemperatureSensor:003",
       "type": "TemperatureSensor",
       "category": {
-            "type": "Property",
-            "value": "sensor"
+            "type": "VocabProperty",
+            "vocab": "sensor"
       },
       "temperature": {
             "type": "Property",
