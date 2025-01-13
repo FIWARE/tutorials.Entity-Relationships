@@ -231,7 +231,7 @@ curl -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
       "id": "urn:ngsi-ld:TemperatureSensor:001",
       "type": "TemperatureSensor",
       "description" : {"type": "Property", "value": "Temperature Gauge 1"},
-      "category": {"type": "Property", "value": "sensor"},
+      "category": {"type": "VocabProperty", "vocab": "sensor"},
       "controlledProperty" : {"type": "Property", "value": "temperature"},
       "temperature": {"type": "Property", "value": 20, "unitCode": "CEL"}
     },
@@ -239,7 +239,7 @@ curl -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
       "id": "urn:ngsi-ld:TemperatureSensor:002",
       "type": "TemperatureSensor",
       "description" : {"type": "Property", "value": "Temperature Gauge 2"},
-      "category": {"type": "Property", "value": "sensor"},
+      "category": {"type": "VocabProperty", "vocab": "sensor"},
       "controlledProperty" : {"type": "Property", "value": "temperature"},
       "temperature": {"type": "Property", "value": 21, "unitCode": "CEL"}
     },
@@ -247,7 +247,7 @@ curl -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
       "id": "urn:ngsi-ld:TemperatureSensor:003",
       "type": "TemperatureSensor",
       "description" : {"type": "Property", "value": "Temperature Gauge 3"},
-      "category": {"type": "Property", "value": "sensor"},
+      "category": {"type": "VocabProperty", "vocab": "sensor"},
       "controlledProperty" : {"type": "Property", "value": "temperature"},
       "temperature": {"type": "Property", "value": 27, "unitCode": "CEL"}
     }
@@ -267,7 +267,7 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
       "id": "urn:ngsi-ld:FillingLevelSensor:001",
       "type": "FillingLevelSensor",
       "description" : {"type": "Property", "value": "Filling Level Sensor 1"},
-      "category": {"type": "Property", "value": "sensor"},
+      "category": {"type": "VocabProperty", "vocab": "sensor"},
       "controlledProperty" : {"type": "Property", "value": "fillingLevel"},
       "fillingLevel": {"type": "Property", "value": 1, "unitCode": "C62"}
     },
@@ -275,7 +275,7 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
       "id": "urn:ngsi-ld:FillingLevelSensor:002",
       "type": "FillingLevelSensor",
       "description" : {"type": "Property", "value": "Filling Level Sensor 2"},
-      "category": {"type": "Property", "value": "sensor"},
+      "category": {"type": "VocabProperty", "vocab": "sensor"},
       "controlledProperty" : {"type": "Property", "value": "fillingLevel"},
       "fillingLevel": {"type": "Property", "value": 0.9, "unitCode": "C62"}
     },
@@ -283,7 +283,7 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
       "id": "urn:ngsi-ld:FillingLevelSensor:003",
       "type": "FillingLevelSensor",
       "description" : {"type": "Property", "value": "Filling Gauge 3"},
-      "category": {"type": "Property", "value": "sensor"},
+      "category": {"type": "VocabProperty", "vocab": "sensor"},
       "controlledProperty" : {"type": "Property", "value": "fillingLevel"},
       "fillingLevel": {"type": "Property", "value": 0.8, "unitCode": "C62"}
     }
