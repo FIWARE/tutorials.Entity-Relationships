@@ -404,7 +404,7 @@ curl -iX POST \
 ```
 
 どちらの場合も、NGSI-LD
-[ドラフト勧告](https://cim.etsi.org/NGSI-LD/official/0--1.html)に
+[ドラフト勧告](https://cim.etsi.org/NGSI-LD/official/front-page.html)に
 従って各エンティティ `id` をエンコードしました。提案は、それぞれの `id` が 標準
 フォーマットに従った URN というものです :
 `urn:ngsi-ld:<entity-type>:<entity-id>`。これは、システム内のすべての `id` がユ

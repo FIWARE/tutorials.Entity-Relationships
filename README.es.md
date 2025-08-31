@@ -338,7 +338,7 @@ curl -iX POST \
 ```
 
 En ambos casos hemos codificado cada entidad `id` de acuerdo con la especificació
-[NGSI-LD](https://cim.etsi.org/NGSI-LD/official/0--1.html) - la propuesta es que cada `id` es una URN y sigue un formato estándar: `urn:ngsi-ld:<tipo-de-entidad>:<id-de-la-identidad>`.Esto significará que cada `id` en el sistema será único.
+[NGSI-LD](https://cim.etsi.org/NGSI-LD/official/front-page.html) - la propuesta es que cada `id` es una URN y sigue un formato estándar: `urn:ngsi-ld:<tipo-de-entidad>:<id-de-la-identidad>`.Esto significará que cada `id` en el sistema será único.
 
 La información de Shelf puede ser solicitada haciendo una petición GET en el endpoint `v2/entities`. Por ejemplo, para devolver los datos de contexto de la entidad **Shelf** con el `id=urn:ngsi-ld:Shelf:unit001`.
 
