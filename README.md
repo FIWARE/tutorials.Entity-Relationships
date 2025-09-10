@@ -20,7 +20,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 [Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0671934f64958d3200b3)
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/FIWARE/tutorials.Entity-Relationships/tree/NGSI-v2)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?repo=FIWARE/tutorials.Entity-Relationships&ref=NGSI-v2)
 
 🇯🇵 このチュートリアルは[日本語](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/README.ja.md)でもご
 覧いただけます。<br/>🇪🇸 Este tutorial también está disponible en
