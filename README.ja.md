@@ -299,8 +299,11 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 #### 3️⃣ リクエスト:
 
 ```console
-curl -X GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor,FillingLevelSensor&options=keyValues' \
--H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
+curl -G -X GET \
+ 'http://localhost:1026/ngsi-ld/v1/entities/' \
+-H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-d 'type=TemperatureSensor,FillingLevelSensor' \
+-d 'format=simplified'
 ```
 
 #### レスポンス:
@@ -394,8 +397,9 @@ curl -G -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 #### 5️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor001' \
--d 'options=keyValues' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor001' \
+-d 'format=simplified' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
@@ -427,15 +431,16 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 
 ### 子エンティティから親エンティティへの読み取り
 
-`options=keyValues` 設定を使用して、既知の **Device** エンティティから属性リレーションシップ情報を取得するように
+`format=simplified` 設定を使用して、既知の **Device** エンティティから属性リレーションシップ情報を取得するように
 リクエストすることもできます。
 
 #### 6️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
--d 'options=keyValues' \
--d 'attrs=controlledAsset' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+-d 'format=simplified' \
+-d 'pick=id,type,controlledAsset' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json'
 ```
@@ -462,10 +467,11 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 #### 7️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities' \
 -d 'q=controlledAsset==%22urn:ngsi-ld:Building:farm001%22' \
--d 'attrs=controlledAsset' \
--d 'options=keyValues' \
+-d 'pick=id,type,controlledAsset' \
+-d 'format=simplified' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
@@ -493,10 +499,11 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
 #### 8️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities' \
 -d 'q=controlledAsset==%22urn:ngsi-ld:Building:farm001%22' \
--d 'attrs=controlledAsset' \
--d 'options=keyValues' \
+-d 'pick=id,type,controlledAsset' \
+-d 'format=simplified' \
 -d 'count=true' \
 -d 'limit=0' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
@@ -529,7 +536,8 @@ NGSILD-Results-Count: 2
 #### 9️⃣ リクエスト:
 
 ```console
-curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entities/' \
+curl -L -X POST \
+  'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Content-Type: application/json' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 --data-raw '{
@@ -557,10 +565,11 @@ curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entities/' \
 #### 1️⃣0️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities' \
 -d 'q=field==%22urn:ngsi-ld:PartField:002%22' \
--d 'options=keyValues' \
--d 'attrs=worker' \
+-d 'format=simplified' \
+-d 'pick=id,type,worker' \
 -d 'type=Task' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json'
@@ -584,10 +593,11 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
 #### 1️⃣1️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities' \
 -d 'q=product==%22urn:ngsi-ld:Herbicide:001%22' \
--d 'options=keyValues' \
--d 'attrs=field' \
+-d 'format=simplified' \
+-d 'pick=id,type,field' \
 -d 'type=Task' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json'
@@ -624,8 +634,9 @@ _Properties-of-Properties_ および _Relationships of Properties_ はメタデ�
 #### 1️⃣2️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:farm001' \
--d 'attrs=temperature' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:farm001' \
+-d 'pick=id,type,temperature' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json'
 ```

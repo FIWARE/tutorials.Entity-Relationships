@@ -301,8 +301,11 @@ return the context data of the devices
 #### 3️⃣ Request:
 
 ```console
-curl -X GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor,FillingLevelSensor&options=keyValues' \
--H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
+curl -X GET \
+  'http://localhost:1026/ngsi-ld/v1/entities' \
+-H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-d 'type=TemperatureSensor,FillingLevelSensor' \
+-d 'format=simplified'
 ```
 
 #### Response:
@@ -351,7 +354,8 @@ The following request associates six devices to `urn:ngsi-ld:Building:farm001`, 
 `urn:ngsi-ld:Building:farm002`
 
 ```console
-curl -L 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=update' \
+curl -X POST \
+  'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=update' \
 -H 'Content-Type: application/json' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -d '[
@@ -412,8 +416,9 @@ Now when the devcie information is requested again, the response has changed and
 #### 5️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
--d 'options=keyValues' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+-d 'format=simplified' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
@@ -439,14 +444,15 @@ The updated response including the `controlledAsset` attribute is shown below:
 ### Reading from Child Entity to Parent Entity
 
 We can also make a request to retrieve the `controlledAsset` attribute relationship information from a known **Device**
-entity by using the `options=keyValues` setting
+entity by using the `format=simplified` setting
 
 #### 6️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
--d 'options=keyValues' \
--d 'attrs=controlledAsset' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+-d 'format=simplified' \
+-d 'pick=id,type,controlledAsset' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json'
 ```
@@ -471,10 +477,11 @@ Reading from a parent to a child can be done using the following query:
 #### 7️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities' \
 -d 'q=controlledAsset==%22urn:ngsi-ld:Building:farm001%22' \
--d 'attrs=controlledAsset' \
--d 'options=keyValues' \
+-d 'pick=id,type,controlledAsset' \
+-d 'format=simplified' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
@@ -502,10 +509,11 @@ can be altered use the `count=true` to return the number of entities which fulfi
 #### 8️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities' \
 -d 'q=controlledAsset==%22urn:ngsi-ld:Building:farm001%22' \
--d 'attrs=controlledAsset' \
--d 'options=keyValues' \
+-d 'pick=id,type,controlledAsset' \
+-d 'format=simplified' \
 -d 'count=true' \
 -d 'limit=0' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
@@ -536,7 +544,8 @@ properties (such as `description` and `status`)
 #### 9️⃣ Request:
 
 ```console
-curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entities/' \
+curl -L -X POST \
+  'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Content-Type: application/json' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 --data-raw '{
@@ -561,10 +570,11 @@ After creating at least one **Task** entity we can query _Which workers are assi
 #### 1️⃣0️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities' \
 -d 'q=field==%22urn:ngsi-ld:PartField:002%22' \
--d 'options=keyValues' \
--d 'attrs=worker' \
+-d 'format=simplified' \
+-d 'pick=id,type,worker' \
 -d 'type=Task' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json'
@@ -587,10 +597,11 @@ Similarly we can request _Which fields are treated using `urn:ngsi-ld:Herbicide:
 #### 1️⃣1️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities' \
 -d 'q=product==%22urn:ngsi-ld:Herbicide:001%22' \
--d 'options=keyValues' \
--d 'attrs=field' \
+-d 'format=simplified' \
+-d 'pick=id,type,field' \
 -d 'type=Task' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json'
@@ -624,8 +635,9 @@ can be retrieved with a GET request:
 #### 1️⃣2️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:farm001' \
--d 'attrs=temperature' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:farm001' \
+-d 'pick=id,type,temperature' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json'
 ```
