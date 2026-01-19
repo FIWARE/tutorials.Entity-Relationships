@@ -291,9 +291,8 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 ```
 
 In both cases we have encoded each entity `id` according to the NGSI-LD
-[specification](https://cim.etsi.org/NGSI-LD/official/front-page.html) - the proposal
-is that each `id` is a URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This will mean that every
-`id` in the system will be unique.
+[specification](https://cim.etsi.org/NGSI-LD/official/front-page.html) - the proposal is that each `id` is a URN follows
+a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This will mean that every `id` in the system will be unique.
 
 Device information can be requested by making a GET request on the `/ngsi-ld/v1/entities` endpoint. For example to
 return the context data of the devices
@@ -428,7 +427,6 @@ The updated response including the `controlledAsset` attribute is shown below:
 
 ```json
 {
-
     "id": "urn:ngsi-ld:TemperatureSensor:001",
     "type": "TemperatureSensor",
     "description": "Temperature Gauge 1",
@@ -672,4 +670,4 @@ the other [tutorials in this series](https://ngsi-ld-tutorials.rtfd.io)
 
 ## License
 
-[MIT](LICENSE) © 2020-2025 FIWARE Foundation e.V.
+[MIT](LICENSE) © 2020-2026 FIWARE Foundation e.V.
