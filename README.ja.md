@@ -694,7 +694,7 @@ curl -X GET \
 #### レスポンス :
 
 ```json
-[["urn:ngsi-ld:Product:prod001"]]
+[["urn:ngsi-ld:Product:001"]]
 ```
 
 同様に、次のようにリクエストを変更することで、どのストアで
