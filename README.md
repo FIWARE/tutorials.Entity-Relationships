@@ -315,7 +315,9 @@ curl -X GET \
         "id": "urn:ngsi-ld:TemperatureSensor:001",
         "type": "TemperatureSensor",
         "description": "Temperature Gauge 1",
-        "category": "sensor",
+        "category": {
+            "vocab": "sensor"
+        },
         "controlledProperty": "temperature",
         "temperature": 20
     },
@@ -323,7 +325,9 @@ curl -X GET \
         "id": "urn:ngsi-ld:TemperatureSensor:002",
         "type": "TemperatureSensor",
         "description": "Temperature Gauge 2",
-        "category": "sensor",
+        "category": {
+            "vocab": "sensor"
+        },
         "controlledProperty": "temperature",
         "temperature": 21
     },
@@ -430,7 +434,9 @@ The updated response including the `controlledAsset` attribute is shown below:
     "id": "urn:ngsi-ld:TemperatureSensor:001",
     "type": "TemperatureSensor",
     "description": "Temperature Gauge 1",
-    "category": "sensor",
+    "category": {
+        "vocab": "sensor"
+    },
     "controlledProperty": "temperature",
     "temperature": 20,
     "controlledAsset": "urn:ngsi-ld:Building:farm001"
