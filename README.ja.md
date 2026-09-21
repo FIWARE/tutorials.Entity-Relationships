@@ -314,7 +314,9 @@ curl -G -X GET \
         "id": "urn:ngsi-ld:TemperatureSensor:001",
         "type": "TemperatureSensor",
         "description": "Temperature Gauge 1",
-        "category": "sensor",
+        "category": {
+            "vocab": "sensor"
+        },
         "controlledProperty": "temperature",
         "temperature": 20
     },
@@ -322,7 +324,9 @@ curl -G -X GET \
         "id": "urn:ngsi-ld:TemperatureSensor:002",
         "type": "TemperatureSensor",
         "description": "Temperature Gauge 2",
-        "category": "sensor",
+        "category": {
+            "vocab": "sensor"
+        },
         "controlledProperty": "temperature",
         "temperature": 21
     },
@@ -416,7 +420,9 @@ curl -G -iX GET \
     "id": "urn:ngsi-ld:TemperatureSensor:001",
     "type": "TemperatureSensor",
     "description": "Temperature Gauge 1",
-    "category": "sensor",
+    "category": {
+        "vocab": "sensor"
+    },
     "controlledProperty": "temperature",
     "temperature": 20,
     "controlledAsset": "urn:ngsi-ld:Building:farm001"
